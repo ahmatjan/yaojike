@@ -1,0 +1,271 @@
+<script>
+	$(function() {
+		$('#rbac_user_datagrid').datagrid({
+			url : '{:U(GROUP_NAME.'/Authority/getUser')}',
+			border : false,
+			fit : true,
+			striped : true,
+			fitColumns : false,
+			singleSelect : false,
+			rownumbers : true,
+			animate : false,
+			idField : 'id',
+			checkbox : true,
+			pagination : true,
+			pageSize : 15,
+			pageList : [ 15, 30, 45, 60 ],
+			frozenColumns : [ [ {
+				field : 'id',
+				title : 'id',
+				checkbox : true
+			}, {
+				field : 'uid',
+				title : '用户ID',
+				width : 100
+			}, {
+				field : 'name',
+				title : '用户名',
+				width : 100
+			} ] ],
+			columns : [ [ {
+				field : 'groupName',
+				title : '所属角色',
+				width : 150
+			}, {
+				field : 'count',
+				title : '登录数',
+				width : 60,
+				align : 'right'
+			}, {
+				field : 'status',
+				title : '状态',
+				width : 60,
+				align : 'center'
+			}, {
+				field : 'lastIp',
+				title : '上次登录IP',
+				width : 120,
+				align : 'right'
+			}, {
+				field : 'lastTime',
+				title : '上次登录时间',
+				width : 150,
+				align : 'right'
+			}, {
+				field : 'createTime',
+				title : '创建时间',
+				width : 150,
+				align : 'right'
+			}, {
+				field : 'remark',
+				title : '备注',
+				width : 200
+			} ] ],
+			toolbar : [ {
+				iconCls : 'icon-add',
+				text : '添加',
+				handler : function() {
+					addUser();
+				}
+			}, {
+				iconCls : 'icon-edit',
+				text : '编辑',
+				handler : function() {
+					editUser();
+				}
+			}, {
+				iconCls : 'icon-remove',
+				text : '删除',
+				handler : function() {
+					delUser();
+				}
+			}, {
+				iconCls : 'Keygo',
+				text : '重置密码',
+				handler : function() {
+					resetPwd();
+				}
+			}, '-', {
+				iconCls : 'icon-reload',
+				text : '刷新',
+				handler : function() {
+					$('#rbac_user_datagrid').datagrid('unselectAll');
+					$('#rbac_user_datagrid').datagrid('reload');
+				}
+			} ]
+		});
+
+	});
+	//编辑用户
+	function editUser() {
+		var row = $('#rbac_user_datagrid').datagrid('getSelected');
+		if (row) {
+			var selectNum = $('#rbac_user_datagrid').datagrid('getSelections');
+			if (selectNum.length > 1) {
+				$.messager.alert('警告', 'bi哩哔li,只能编辑一条用户数据哦!');
+			} else {
+				//作编辑操作
+				var editUserDialog = $('<div/>').dialog({
+					title : '用户编辑',
+					width : 600,
+					height : 240,
+					modal : true,
+					href : '{:U(GROUP_NAME.'/Authority/editUser')}/id/' + selectNum[0]['id'],
+					buttons : [ {
+						iconCls : 'Bullettick',
+						text : '更新',
+						handler : function() {
+							$.post("{:U(GROUP_NAME.'/Authority/editUserSubmit')}", $('#rbac_user_editForm').serialize(), function(data) {
+								if (data.status) {
+									editUserDialog.dialog('destroy');
+									$('#rbac_user_datagrid').datagrid('reload');
+									$('#rbac_user_datagrid').datagrid('unselectAll');
+									msgBox('成功', data.info);
+								} else {
+									msgBox('失败', data.info);
+								}
+							}, "json");
+						}
+					}, {
+						iconCls : 'Bulletleft',
+						text : '重置',
+						handler : function() {
+							editUserDialog.dialog('refresh');
+						}
+					} ],
+					onClose : function() {
+						editUserDialog.dialog('destroy');
+					}
+				});
+			}
+		} else {
+			$.messager.alert('提示', '您还没有选择所要编辑的用户数据!');
+		}
+	}
+
+	//重置密码
+	function resetPwd() {
+		$.messager.confirm('确认', '您确实要初始化当前用户密码吗?', function(r) {
+			if (r) {
+				var row = $('#rbac_user_datagrid').datagrid('getSelected');
+				if (row) {
+					var selectNum = $('#rbac_user_datagrid').datagrid('getSelections');
+					if (selectNum.length > 1) {
+						$.messager.alert('警告', '您多选了,只能重置一位用户密码!');
+					} else {
+						$.post("__URL__/resetPwd/", {
+							id : row.id
+						}, function(data) {
+							if (data.status) {
+								$('#rbac_user_datagrid').datagrid('reload');
+								$('#rbac_user_datagrid').datagrid('unselectAll');
+								msgBox('成功', data.info);
+							} else {
+								msgBox('失败', data.info);
+							}
+						}, "json");
+					}
+				} else {
+					$.messager.alert('提示', '您还没有选择所要初始密码的用户数据!');
+				}
+			}
+		});
+	}
+
+	//添加用户
+	function addUser() {
+		var addUserDialog = $('<div/>').dialog({
+			title : '用户添加',
+			width : 600,
+			height : 280,
+			modal : true,
+			href : '{:U(GROUP_NAME.'/Authority/addUser')}',
+			buttons : [ {
+				iconCls : 'Bullettick',
+				text : '保存',
+				handler : function() {
+					$.post("{:U(GROUP_NAME.'/Authority/addUserSubmit')}", $('#rbac_user_addForm').serialize(), function(data) {
+						if (data.status) {
+							addUserDialog.dialog('destroy');
+							$('#rbac_user_datagrid').datagrid('reload');
+							$('#rbac_user_datagrid').datagrid('unselectAll');
+							msgBox('成功', data.info);
+						} else {
+							msgBox('失败', data.info);
+						}
+					}, "json");
+				}
+			}, {
+				iconCls : 'Bulletleft',
+				text : '重置',
+				handler : function() {
+					addUserDialog.dialog('refresh');
+				}
+			} ],
+			onClose : function() {
+				addUserDialog.dialog('destroy');
+			}
+		});
+	}
+
+	//删除用户
+	function delUser() {
+		var row = $('#rbac_user_datagrid').datagrid('getSelections');
+		if (row.length) {
+			var parm;
+			$.each(row, function(i, n) {
+				if (i == 0) {
+					parm = "id=" + n.id;
+				} else {
+					parm += "," + n.id;
+				}
+			});
+			$.messager.confirm('确认', '您确实要删除所选的记录吗?', function(r) {
+				if (r) {
+					$.post("__URL__/delUser", parm, function(data) {
+						if (data.status) {
+							$('#rbac_user_datagrid').datagrid('load');
+							$('#rbac_user_datagrid').datagrid('unselectAll');
+							msgBox('成功', data.info);
+						} else {
+							msgBox('失败', data.info);
+						}
+					}, "json");
+				}
+			});
+		} else {
+			$.messager.alert('提示信息', '请选择所要删除的行!');
+		}
+	}
+	//组合搜索
+	function searchUser() {
+		$('#rbac_user_datagrid').datagrid('load', {
+			uid : $("input[name='searchUid']").val(),
+			name : $("input[name='name']").val()
+		});
+	}
+	//组合查询重置
+	function searchReset() {
+		$('#rbac_user_datagrid').datagrid('load', {});
+	}
+</script>
+<div class="easyui-layout" data-options="fit:true,border:false">
+	<div data-options="region:'north',title:'组合查询',border:false,collapsed:false" style="height: 65px;" class="datagrid-toolbar">
+		<form id="searchForm" name="searchForm">
+			<table>
+				<tr>
+					<th width="50" align="right">帐号:</th>
+					<td width="150"><input id="searchUid" name="searchUid" class="easyui-validatebox" style="width: 120px;" /></td>
+					<th width="50" align="right">姓名:</th>
+					<td width="150"><input id="name" name="name" class="easyui-validatebox" style="width: 120px;" /></td>
+					<td width="80"><a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true" onclick="searchUser();">查询</a></td>
+					<td width="80"><a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-reload',plain:true" onclick="searchReset();">重置</a></td>
+					<td></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+	<div data-options="region:'center',border:false">
+		<table id="rbac_user_datagrid"></table>
+	</div>
+</div>

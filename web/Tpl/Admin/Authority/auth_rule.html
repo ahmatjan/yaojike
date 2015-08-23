@@ -1,0 +1,232 @@
+<script type="text/javascript" charset="utf-8">
+	var rbac_node_datagrid;
+	$(function() {
+		rbac_node_datagrid = $('#rbac_node_datagrid');//树形表格
+		//初始Treegrid
+		rbac_node_datagrid.treegrid({
+			url : "{:U(GROUP_NAME.'/Authority/get_auth_rule_json')}",
+			border : false,
+			fit : true,
+			striped : true,
+			fitColumns : false,
+			singleSelect : true,
+			rownumbers : true,
+			animate : false,
+			idField : 'id',
+			treeField : 'name',
+			onLoadSuccess : function() {
+				rbac_node_datagrid.treegrid('collapseAll', [ 1 ]);
+				rbac_node_datagrid.treegrid('expand', [ 1 ]);
+			},
+			frozenColumns : [ [ {
+				field : 'id',
+				title : 'ID',
+				align : 'right',
+				checkbox : true,
+				width : 50
+			},  {				field : 'action',				title : 'Action',				width : 220			},{
+				field : 'title',
+				title : '标题',
+				width : 180
+			} ] ],
+			columns : [ [ {
+				field : 'level',
+				title : '节点类型',
+				hidden : true,
+				width : 80
+			}, {
+				field : 'tree',
+				title : '目录树',
+				align : 'center',
+				formatter : function(value, row, index) {
+					if (value == 1) {
+						return '显示';
+					} else {
+						return '';
+					}
+				},
+				width : 50
+			}, {
+				field : 'sort',
+				title : '排序',
+				align : 'right',
+				width : 50
+			}, {
+				field : 'iconCls',
+				title : '图标',
+				width : 100
+			}, {
+				field : 'name',
+				title : '链接地址',
+				width : 200
+			}, {
+				field : 'status',
+				title : '状态',
+				align : 'center',
+				formatter : function(value, row, index) {
+					if (value == 1) {
+						return '正常';
+					} else {
+						return '停用';
+					}
+				},
+				width : 50
+			}, {
+				field : 'condition',
+				title : '规则',
+				width : 350
+			} ] ],
+			toolbar : [ {
+				iconCls : 'icon-add',
+				text : '添加',
+				handler : function() {
+					addNode();
+				}
+			}, {
+				iconCls : 'icon-edit',
+				text : '编辑',
+				handler : function() {
+					editNode();
+				}
+			}, {
+				iconCls : 'icon-remove',
+				text : '删除',
+				handler : function() {
+					delNode();
+				}
+			}, '-', {
+				iconCls : 'icon-reload',
+				text : '刷新',
+				handler : function() {
+					rbac_node_datagrid.treegrid('reload');
+				}
+			}, '-', {
+				iconCls : 'icon-reload',
+				text : '折叠所有',
+				handler : function() {
+					rbac_node_datagrid.treegrid('collapseAll', [ 1 ]);
+				}
+			} ],
+			onDblClickRow : function(row) {
+				if (row.state == 'closed') {
+					rbac_node_datagrid.treegrid('expand', [ row.id ]);
+				} else {
+					rbac_node_datagrid.treegrid('collapse', [ row.id ]);
+				}
+			}
+		});
+
+	});
+	//删除指定Node记录
+	function delNode() {
+		var row = rbac_node_datagrid.treegrid('getSelected');
+		if (row) {
+			$.messager.confirm('注意', '您确实要彻底删除选定的记录吗?', function(r) {
+				if (r) {
+					$.post("{:U(GROUP_NAME.'/Authority/del_auth_rule')}", {
+						id : row.id
+					}, function(data) {
+						if (data.status) {
+							rbac_node_datagrid.treegrid('remove', row.id);
+							msgBox('操作成功', data.info);
+						} else {
+							msgBox('操作失败', data.info);
+						}
+					}, "json");
+				}
+			});
+		} else {
+			$.messager.alert('信息提示', '请选择所要删除的记录！');
+		}
+	}
+	//编辑节点界面
+	function editNode() {
+		var row = rbac_node_datagrid.treegrid('getSelected');
+		if (row) {
+			var editNodeDatagrid = $('<div/>').dialog({
+				title : '资源节点编辑',
+				width : 600,
+				height : 300,
+				iconCls : 'icon-edit',
+				resizable : true,
+				modal : true,
+				href : '{:U(GROUP_NAME.'/Authority/edit_auth_rule')}/id/' + row.id,
+				buttons : [ {
+					iconCls : 'Bullettick',
+					text : '保存',
+					handler : function() {
+						var formData = $('#rbac_node_editForm').serialize();
+						$.post("{:U(GROUP_NAME.'/Authority/edit_auth_rule_Submit')}", formData, function(data) {
+							if (data.status) {
+								editNodeDatagrid.dialog('destroy');
+								rbac_node_datagrid.treegrid('reload');
+								msgBox('成功', '资源节点更新成功!');
+							} else {
+								msgBox('失败', '资源节点更新失败!');
+							}
+						}, "json");
+					}
+				}, {
+					iconCls : 'Bulletleft',
+					text : '重置',
+					handler : function() {
+						editNodeDatagrid.dialog('refresh');
+					}
+				} ]
+			});
+		} else {
+			$.messager.alert('信息提示', '请选择要编辑的资源节点!');
+		}
+	}
+	//添加节点操作
+	function addNode() {
+		var row = rbac_node_datagrid.treegrid('getSelected');
+		if (row) {			
+			var level = parseInt(Number(row.level)) + 1;			
+			var id = row.id;
+			if (level <= 3) {
+				var addNodeDialog = $('<div/>').dialog({
+					title : '规则添加',
+					width : 600,
+					height : 300,
+					iconCls : 'icon-add',
+					resizable : true,
+					modal : true,
+					href : '{:U(GROUP_NAME.'/Authority/add_auth_rule')}/pid/' + row.id + '/level/' + level,
+					buttons : [ {
+						iconCls : 'Bullettick',
+						text : '保存',
+						handler : function() {
+							rbac_node_addForm = $('#rbac_node_addForm');
+							$.post("{:U(GROUP_NAME.'/Authority/add_auth_rule_Submit')}", rbac_node_addForm.serialize(), function(data) {
+								if (data.status) {
+									rbac_node_datagrid.treegrid('reload');
+									addNodeDialog.dialog('destroy');
+									msgBox('成功', data.info);
+								} else {
+									msgBox('失败', data.info);
+								}
+							}, "json");
+						}
+					}, {
+						iconCls : 'Bulletleft',
+						text : '重置',
+						handler : function() {
+							$('#rbac_node_addForm').form('clear');
+						}
+					} ],
+					onClose : function() {
+						addNodeDialog.dialog('destroy');
+					}
+				});
+			} else {
+				$.messager.alert('信息提示', '资源节点最多添加至3级！');
+			}
+		} else {
+			$.messager.alert('信息提示', '请选定添加所要参考的父节点！');
+		}
+	}
+</script>
+
+<table id="rbac_node_datagrid"></table>
+

@@ -1,0 +1,1 @@
+<?php if (!defined('THINK_PATH')) exit();?><div class="copyright"><?php echo ($site_copyright); ?></div>

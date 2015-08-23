@@ -1,0 +1,72 @@
+<style type="text/css">
+
+<!--
+
+label {
+
+	float: left;
+
+	width: 80px;
+
+	text-align: right;
+
+	padding: 2px;
+
+	margin: 1px;
+
+}
+
+
+
+.row {
+
+	margin-top: 10px;
+
+}
+
+-->
+
+</style>
+
+<form id="datalib_addDatalib_addFormsex" method="post">
+
+	<div style="clear: both; overflow: hidden; padding: 10px;">
+
+		<div style="float: left; width: 270px; margin-right: 20px;">
+
+			<div class="row">
+
+				<label for="text">性别:</label><input id="sex_name" type="text" name="sex_name" value="{$sel.sex_name}" style="width: 150px;"><span style="color: red;">&nbsp;*</span>
+
+			</div>
+
+		</div>
+
+		<div style="float: left; width: 270px;">
+
+			<div class="row">
+
+				<label for="sort">排序:</label><input id="sex_sort" type="text" name="sex_sort" value="{$sel.sex_sort}" style="width: 110px;">
+
+			</div>
+
+		</div>
+
+	</div>
+
+	<div class="row" style="padding-left: 10px;">
+
+		<label for="remark">描述:</label><input id="sex_remark" type="text" name="sex_remark" value="{$sel.sex_remark}" style="width: 400px;">
+		<input id="sex_pid" name="sex_pid" type="hidden" value="<?php if($_GET['pid']){echo $_GET['pid'];}else{echo $sel['sex_pid'];}?>">
+		<php>
+		if(isset($sel)){
+			echo "<input id='sex_id' name='sex_id' type='hidden' value='$sel[sex_id]'>";
+		}
+		</php>
+
+		
+
+	</div>
+
+</form>
+

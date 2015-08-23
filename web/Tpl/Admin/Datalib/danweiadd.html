@@ -1,0 +1,73 @@
+<style type="text/css">
+
+<!--
+
+label {
+
+	float: left;
+
+	width: 80px;
+
+	text-align: right;
+
+	padding: 2px;
+
+	margin: 1px;
+
+}
+
+
+
+.row {
+
+	margin-top: 10px;
+
+}
+
+-->
+
+</style>
+
+<form id="datalib_addDatalib_addFormdanwei" method="post">
+
+	<div style="clear: both; overflow: hidden; padding: 10px;">
+
+		<div style="float: left; width: 270px; margin-right: 20px;">
+
+			<div class="row">
+
+				<label for="danweiu_text">名称:</label><input id="danwei_name" type="text" name="danwei_name" value="{$sel.danwei_name}" style="width: 150px;"><span style="color: red;">&nbsp;*</span>
+
+			</div>
+
+		</div>
+		
+
+		<div style="float: left; width: 270px;">
+
+			<div class="row">
+
+				<label for="danweiu_sort">排序:</label><input id="danweiu_sort" type="text" name="danwei_sort" value="{$sel.danwei_sort}" style="width: 110px;">
+
+			</div>
+
+		</div>
+
+	</div>
+
+	<div class="row" style="padding-left: 10px;">
+
+		<label for="danwei_remark">描述:</label><input id="danwei_remark" type="text" name="danwei_remark" value="{$sel.danwei_remark}" style="width: 400px;">
+		<input id="danwei_pid" name="danwei_pid" type="hidden" value="<?php if($_GET['pid']){echo $_GET['pid'];}else{echo $sel['danwei_pid'];}?>">
+		<php>
+		if(isset($sel)){
+			echo "<input id='danwei_id' name='danwei_id' type='hidden' value='$sel[danwei_id]'>";
+		}
+		</php>
+
+		
+
+	</div>
+
+</form>
+
