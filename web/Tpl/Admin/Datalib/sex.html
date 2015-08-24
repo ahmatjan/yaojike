@@ -1,0 +1,172 @@
+<script type="text/javascript" charset="utf-8">
+	$(function() {
+		$('#datalib_index_treegrid').treegrid({
+			url : '{:U(GROUP_NAME.'/Datalib/getdatalibjson',array('action'=>ACTION_NAME))}',
+			animate : false,
+			fit : true,
+			border : false,
+			singleSelect : true,
+			rownumbers : true,						pagination : true,			pageSize : 15,			pageList : [ 15, 30, 45, 60 ],
+			idField : 'sex_id',
+			treeField : 'sex_name',
+			columns : [ [ {
+				field : 'sex_id',
+				title : 'sex_id',
+				checkbox : true,
+				width : 50
+			}, {
+				field : 'sex_name',
+				title : '名称',
+				align : 'right',
+				width : 150
+			}, {				field : 'sex_remark',				title : '描述',				width : 300			} , {				field : 'wusuowei',				formatter:function (val,row,index){			        return '<a href="#" onclick="editUser('+row.sex_id+')">修改</a>';			    },				title : '操作',				width : 300			} ] ],
+			toolbar : [ <if condition="authcheck(MODULE_NAME.'/sexadd')">{
+				text : '添加',
+				iconCls : 'icon-add',
+				handler : function() {
+					addDatalibsex();
+				}
+			}, </if><if condition="authcheck(MODULE_NAME.'/editdatalib')">{
+				text : '编辑',
+				iconCls : 'icon-edit',
+				handler : function() {
+					editDatalibsex();
+				}
+			},</if><if condition="authcheck(MODULE_NAME.'/delDatalib')"> {
+				text : '删除',
+				iconCls : 'icon-remove',
+				handler : function() {
+					delDatalibsex();
+				}
+			},</if> {
+				iconCls : 'Checkerror',
+				text : '取消选择',
+				handler : function() {
+					$('#datalib_index_treegrid').treegrid('unselectAll');
+				}
+			}, {
+				iconCls : 'icon-reload',
+				text : '刷新',
+				handler : function() {
+					$('#datalib_index_treegrid').treegrid('reload');
+				}
+			}, {
+				iconCls : 'Bulletarrowup',
+				text : '折叠所有',
+				handler : function() {
+					$('#datalib_index_treegrid').treegrid('collapseAll');
+				}
+			} ],
+			onDblClickRow : function(row) {
+				if (row.state == 'closed') {
+					$('#datalib_index_treegrid').treegrid('expand', [ row.id ]);
+				} else {
+					$('#datalib_index_treegrid').treegrid('collapse', [ row.id ]);
+				}
+			},			onLoadError : function(arguments){				//alert(111)			},			onLoadSuccess :function(row, data){				//alert(222)			}
+		});
+	});		        function editUser(index){alert(index);        $('#datalib_index_treegrid').datagrid('selectRow',index);// 关键在这里          var row = $('#datalib_index_treegrid').datagrid('getSelected');          if (row){              $('#dlg').dialog('open').dialog('setTitle','修改学生信息');              $('#fm').form('load',row);              url = '${ctx}updateStudent.do?id='+row.id;          }      } 
+	//add
+	function addDatalibsex() {
+		var row = $('#datalib_index_treegrid').treegrid('getSelections');
+		if (row.length <= 1) {
+			var pid = row.length == 0 ? 0 : row[0].sex_id;			
+			//弹出添加dialog对话框
+			var addDatalibDialog = $('<div/>').dialog({
+				href : '{:U(GROUP_NAME.'/Datalib/sexadd')}/pid/' + pid,
+				title : '添加数据字典',
+				width : 600,
+				height : 220,
+				modal : true,
+				buttons : [ {
+					iconCls : 'Bullettick',
+					text : '添加',
+					handler : function() {						if($('#sex_name').val()==''){							msgBox('失败', '性别不能为空，遇缓存时，请刷新页面重试。');						}else{
+							//作添加动作							
+							$.post("{:U(GROUP_NAME.'/Datalib/adddatalib',array('action'=>ACTION_NAME))}", $('#datalib_addDatalib_addFormsex').serialize(), function(data) {	
+								if (data.status) {	
+									addDatalibDialog.dialog('destroy');	
+									$('#datalib_index_treegrid').treegrid('reload');	
+									$('#datalib_index_treegrid').treegrid('unselectAll');	
+									msgBox(data.data, data.data);	
+								} else {	
+									msgBox(data.data, data.data);	
+								}	
+							}, "json");						}
+					}
+				}, {
+					iconCls : 'Bulletleft',
+					text : '重置',
+					handler : function() {
+						addDatalibDialog.dialog('refresh');
+					}
+				} ]
+			});			addDatalibDialog.dialog({			    onClose:function(){			    	addDatalibDialog.dialog('destroy');			    }			});
+		} else {
+			$.messager.alert('提示', '需要添加顶级栏目请不要选择行,向已有的栏目添加只需要选择对应的栏目且每次只能选择一行来做添加数据字典操作.');
+		}
+	}
+	//del
+	function delDatalibsex() {
+		var row = $('#datalib_index_treegrid').treegrid('getSelections');
+		if (row.length == 0) {
+			$.messager.alert('提示', '您还没有选定要删除的行!');
+		} else {
+			$.messager.confirm('警告', '你确实要彻底删除此项吗?<br>删除之后可能会影响到其它模块的正常显示!', function(r) {
+				if (r) {
+					$.post("{:U(GROUP_NAME.'/Datalib/delDatalib',array('action'=>ACTION_NAME))}", {
+						id : row[0]['sex_id']
+					}, function(data) {
+						if (data.status) {
+							$('#datalib_index_treegrid').treegrid('reload');
+							$('#datalib_index_treegrid').treegrid('unselectAll');
+							msgBox('成功', data.info);
+						} else {
+							msgBox('失败', data.info);
+						}
+					}, "json");
+				}
+			});
+		}
+	}
+	//edit
+	function editDatalibsex() {
+		var row = $('#datalib_index_treegrid').treegrid('getSelections');
+		if (row.length == 0) {
+			$.messager.alert('提示', '您还没有选定要编辑的行!');
+		} else {
+			//弹出添加dialog对话框
+			var editDatalibDialog = $('<div/>').dialog({
+				href : '{:U(GROUP_NAME.'/Datalib/editdatalib',array('action'=>ACTION_NAME))}/id/' + row[0]['sex_id'],
+				title : '编辑数据字典',
+				width : 600,
+				height : 220,
+				modal : true,
+				buttons : [ {
+					iconCls : 'Bullettick',
+					text : '编辑',
+					handler : function() {
+						//作编辑动作
+						$.post("{:U(GROUP_NAME.'/Datalib/editDatalibSubmit',array('action'=>ACTION_NAME))}", $('#datalib_addDatalib_addFormsex').serialize(), function(data) {
+							if (data.status) {
+								editDatalibDialog.dialog('destroy');
+								$('#datalib_index_treegrid').treegrid('reload');
+								$('#datalib_index_treegrid').treegrid('unselectAll');
+								msgBox('成功', data.info);
+							} else {
+								msgBox('失败', data.info);
+							}
+						}, "json");
+					}
+				}, {
+					iconCls : 'Bulletleft',
+					text : '重置',
+					handler : function() {
+						editDatalibDialog.dialog('refresh');
+					}
+				} ]
+			});			editDatalibDialog.dialog({			    onClose:function(){			    editDatalibDialog.dialog('destroy');			    }			});
+		}
+	}
+</script>
+<table id="datalib_index_treegrid"></table>

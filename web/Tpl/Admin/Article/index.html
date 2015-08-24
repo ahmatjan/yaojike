@@ -1,0 +1,213 @@
+<script type="text/javascript">
+	$(function() {
+		//栏目列表
+		$('#article-column-tree').treegrid({
+			url : '{:U(GROUP_NAME.'/Column/getColumnJson')}',
+			fit : true,
+			border : false,
+			idField : 'id',
+			treeField : 'text',
+			rownumbers : true,
+			columns : [ [ {
+				field : 'id',
+				title : '序号',
+				width : 50,
+				checkbox : true
+			}, {
+				field : 'text',
+				title : '栏目名称',
+				width : 220
+			} ] ],
+			onClickRow : function(row) {
+				$('#article-article-tree').datagrid('load', {
+					columnId : row.id
+				});
+			}
+		});
+		//文章列表
+		$('#article-article-tree').datagrid({
+			url : '{:U(GROUP_NAME.'/Article/getArticleJson')}',
+			fit : true,
+			border : false,
+			idField : 'id',
+			rownumbers : true,
+			pagination : true,
+			frozenColumns : [ [ {
+				field : 'id',
+				title : '序号',
+				width : 50,
+				checkbox : true
+			}, {
+				field : 'title',
+				title : '文章标题',
+				width : 400
+			} ] ],
+			columns : [ [ {
+				field : 'source',
+				title : '来源',
+				width : 100
+			}, {
+				field : 'hot',
+				title : '阅读数',
+				width : 50
+			}, {
+				field : 'status',
+				title : '状态',
+				width : 60
+			}, {
+				field : 'createTime',
+				title : '起草时间',
+				width : 130
+			} ] ],
+			toolbar : [ {
+				iconCls : 'icon-add',
+				text : '起草',
+				handler : function() {
+					var row = $('#article-column-tree').treegrid('getSelected');
+					if (row == null) {
+						$.messager.alert('提示', '未选择所属栏目!');
+					} else {
+						var qcArticleDialog = $('<div/>').dialog({
+							href : '{:U(GROUP_NAME.'/Article/qcArticleDialog')}',
+							title : '起草文章',
+							modal : true,
+							width : 750,
+							height : 600,
+							onClose : function() {
+								qcArticleDialog.dialog('destroy');
+							},
+							buttons : [ {
+								text : '保存',
+								handler : function() {
+									$.post("{:U(GROUP_NAME.'/Article/addArticleSubmit')}", {
+										title : $('#title').val(),
+										source : $('#source').val(),
+										cid : row.id,
+										content : $(window.frames[0].frames[0].document.body).html()
+									}, function(data) {
+										if (data.status) {
+											qcArticleDialog.dialog('destroy');
+											$('#article-article-tree').datagrid('reload');
+											msgBox('成功', data.info);
+										} else {
+											msgBox('失败', data.info);
+										}
+									}, "json");
+								}
+							}, {
+								text : '取消',
+								handler : function() {
+									qcArticleDialog.dialog('destroy');
+								}
+							} ]
+						});
+					}
+				}
+			}, {
+				iconCls : 'icon-edit',
+				text : '编辑',
+				handler : function() {
+					var rows = $('#article-article-tree').datagrid('getChecked');
+					if(rows.length>1){
+						$.messager.alert('提示','编辑文章只能选择一条记录！');
+					}else if(rows.length==''){
+						$.messager.alert('提示','未选择要编辑的文章记录！');
+					}else {
+						var qcArticleDialog = $('<div/>').dialog({
+							href : '{:U(GROUP_NAME.'/Article/change')}?id='+rows[0].id,
+							title : '起草文章',
+							modal : true,
+							width : 750,
+							height : 600,
+							onClose : function() {
+								qcArticleDialog.dialog('destroy');
+							},
+							buttons : [ {
+								text : '保存',
+								handler : function() {
+									$.post("{:U(GROUP_NAME.'/Article/changeArticleSubmit')}", {
+										title : $('#title').val(),
+										source : $('#source').val(),
+										id : $('#id').val(),
+										content : $(window.frames[0].frames[0].document.body).html()
+									}, function(data) {
+										//alert($(window.frames[0].frames[0].document.body).html());
+										if (data.status) {
+											qcArticleDialog.dialog('destroy');
+											$('#article-article-tree').datagrid('reload');
+											msgBox('成功', data.info);
+										} else {
+											msgBox('失败', data.info);
+										}
+									}, "json");
+								}
+							}, {
+								text : '取消',
+								handler : function() {
+									qcArticleDialog.dialog('destroy');
+								}
+							} ]
+						});
+					}
+				}
+			}, {
+				iconCls : 'Bookopen',
+				text : '查看',
+				handler : function() {
+					var rows = $('#article-article-tree').datagrid('getChecked');
+					if(rows.length>1){
+						$.messager.alert('提示','查看文章只能选择一条记录！');
+					}else if(rows.length==''){
+						$.messager.alert('提示','未选择要查看的文章记录！');
+					}else{
+						//弹窗，查看文章内容
+						//console.info(rows[0].id);
+						var dispDialog=$('<div/>').dialog({
+							title:'查看文章:'+rows[0].title,
+							href:'{:U(GROUP_NAME.'/Article/dispArticle')}?id='+rows[0].id,
+							width:1000,
+							height:500,
+							buttons:[{
+								text:'关闭',
+								handler:function(){
+									$('#article-article-tree').datagrid('unselectAll');
+									dispDialog.dialog('destroy');	
+								}
+							}]
+						});
+					}
+				} 
+			}, {
+				iconCls : 'icon-remove',
+				text : '删除',
+				handler : function() {
+					var rows = $('#article-article-tree').datagrid('getChecked');
+					if(rows.length==0){
+						$.messager.alert('提示','未选择要删除的数据!');
+					}else{
+						$.post('{:U(GROUP_NAME.'/Article/delArticleSubmit')}', {
+							rows : rows
+						}, function(data) {
+							if (data.status) {
+								msgBox(data.data, data.info);
+								$('#article-article-tree').datagrid('uncheckAll');
+								$('#article-article-tree').datagrid('reload');
+							} else {
+								$.messager.alert(data.data, data.info);
+							}
+						}, "json");
+					}
+				}
+			} ]
+
+		});
+	});
+</script>
+<div class="easyui-layout" data-options="fit:true,border:false">
+	<div data-options="region:'west',title:'栏目列表',split:true,width:300">
+		<table id="article-column-tree"></table>
+	</div>
+	<div data-options="region:'center',title:'文章列表'">
+		<table id="article-article-tree"></table>
+	</div>
+</div>

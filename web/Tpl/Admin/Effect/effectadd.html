@@ -1,0 +1,692 @@
+<style type="text/css">
+input.error { border: 1px solid red; }
+label.checked {
+  background:url("./demo/images/checked.gif") no-repeat 0px 0px;
+}
+
+label {
+
+	float: left;
+	
+	text-align: right;
+
+	padding: 2px;
+
+	margin: 1px;
+
+}
+
+.row {
+
+	margin-top: 10px;
+
+}
+
+</style>
+<script>
+/*添加和删除按钮*/
+var inputid=1;
+var inputbyid=1;
+function bbfgdivadd(){
+	var new_div = $("#copydiv").clone(true);
+	new_div.find('div').find('div').find('#hz_pzwh').attr('id','hz_pzwh'+inputid);
+	new_div.find('div').find('div').find('#hz_spmc').attr('id','hz_spmc'+inputid);
+	new_div.find('div').find('div').find('#hz_tymc').attr('id','hz_tymc'+inputid);
+	new_div.find('div').find('div').find('#hz_sccj').attr('id','hz_sccj'+inputid);
+	new_div.find('div').find('div').find('#hz_hyyaopinpihao').attr('id','hz_hyyaopinpihao'+inputid);
+	new_div.find('div').find('div').find('#hz_hyyaopinyongfaliang').attr('id','hz_hyyaopinyongfaliang'+inputid);
+	new_div.find('div').find('div').find('#hz_hyyyqzsj').attr('id','hz_hyyyqzsj'+inputid);
+	new_div.find('div').find('div').find('#hz_hyyyyuanyin').attr('id','hz_hyyyyuanyin'+inputid);
+	
+	new_div.find('div').find('#adddel').find('.bbfgdivdel').attr('id','fg'+inputid);
+	new_div.find('#fg').attr('id','fg'+inputid);
+	
+	new_div.find('input').val('');
+	
+	 $("#bbbbbbbbbbb").append(new_div.html());
+
+	 inputid++;
+}
+function bydivadd(){
+	var new_div = $("#copydivby").clone(true);
+	new_div.find('div').find('div').find('#hz_bypzwh').attr('id','hz_bypzwh'+inputbyid);
+	new_div.find('div').find('div').find('#hz_byspmc').attr('id','hz_byspmc'+inputbyid);
+	new_div.find('div').find('div').find('#hz_bytymc').attr('id','hz_bytymc'+inputbyid);
+	new_div.find('div').find('div').find('#hz_bysccj').attr('id','hz_bysccj'+inputbyid);
+	new_div.find('div').find('div').find('#hz_byyaopinpihao').attr('id','hz_byyaopinpihao'+inputbyid);
+	new_div.find('div').find('div').find('#hz_byyaopinyongfaliang').attr('id','hz_byyaopinyongfaliang'+inputbyid);
+	new_div.find('div').find('div').find('#hz_byyyqzsj').attr('id','hz_byyyqzsj'+inputbyid);
+	new_div.find('div').find('div').find('#hz_byyyyuanyin').attr('id','hz_byyyyuanyin'+inputbyid);
+	
+	new_div.find('div').find('#adddel').find('.bydivdel').attr('id','bydiv'+inputbyid);
+	new_div.find('#bydiv').attr('id','bydiv'+inputbyid);
+	
+	new_div.find('input').val('');
+	
+	 $("#aaaaaaaaaaaa").append(new_div.html());
+
+	 inputid++;
+}
+
+
+
+function bbfgdivdel(i){
+	var id= $(i).attr('id');
+	$('#'+id).remove();
+}
+function bydivdel(i){
+	var id= $(i).attr('id');
+	$('#'+id).remove();
+}
+$("#hz_chushengtime").datebox({
+    required: "true",
+    missingMessage: "日期必填",
+});
+$("#hz_blfysjfssj").datebox({
+    required: "true",
+    missingMessage: "日期必填",
+});
+$("#hz_blfysiwangshijian").datebox({
+    required: "true",
+    missingMessage: "日期必填",
+});
+
+</script>
+
+<form id="effect_addForm" method="post">
+
+	<div style="clear: both; overflow: hidden; padding: 10px;">
+		<div style="float: left; width: 360px; margin-right: 20px;">
+			<div class="row">
+			  <label class="control-label" for="">报告类型：</label>
+			  <div class="controls">
+			    <label class="radio inline" for="baogaotype-0"><input name="hz_baogaotype[]" id="baogaotype-0" value="0" required="required" type="checkbox">新的</label>
+			    <label class="radio inline" for="baogaotype-1"><input name="hz_baogaotype[]" id="baogaotype-1" value="1" required="required" type="checkbox">严重</label>
+			    <label class="radio inline" for="baogaotype-2"><input name="hz_baogaotype[]" id="baogaotype-2" value="2" required="required" type="checkbox">一般</label>
+			  </div>
+			 </div>
+		</div>
+		
+		<div style="float: left; width: 270px; margin-right: 20px;">
+			<div class="row">
+				<label for="keshi">科室：</label><input id="keshi" name="hz_keshi" placeholder="请填写科室" class="input-xlarge"  type="text">
+			</div>
+		</div>
+		
+		<div style="float: left; width: 270px; margin-right: 20px;">
+			<div class="row">
+				<label for="baogaoren">报告人：</label><input id="baogaoren" name="hz_baogaoren" placeholder="请填写报告人" class="input-xlarge" type="text">
+			</div>
+		</div>
+	</div>
+
+
+
+<hr color="#D4D4D4">
+
+	<div style="clear: both; overflow: hidden; padding: 2px;">
+		
+		<div style="float: left; width: 200px; margin-right: 2px;">
+			<div class="row">
+				<label for="hz_name">患者姓名：</label><input id="hz_name" size="12" name="hz_name" placeholder="请输入患者姓名" class="input-xlarge"  type="text">
+			</div>
+		</div>
+		
+		<div style="float: left; width: 160px; margin-right: 2px;">
+			<div class="row">
+				<label for="baogaoren">患者性别：</label>
+			      <input name="hz_sex" id="hz_sex-0" value="0" required="required" type="radio">男
+			      <input name="hz_sex" id="hz_sex-1" value="1" required="required" type="radio">女
+			</div>
+			
+		</div>
+		<div style="float: left; width: 200px; margin-right: 2px;">
+			<div class="row">
+				<label for="hz_chushengtime">出生日期：</label><input id="hz_chushengtime" size="12" name="hz_chushengtime" placeholder="请输入出生日期" class="easyui-validatebox" type="text">
+			</div>
+		</div>
+		<div style="float: left; width: 200px; margin-right: 2px;">
+			<div class="row">
+				<label for="hz_minzu">民族：</label>
+				<select id="hz_minzu" name="hz_minzu" class="input-xlarge {required:true,minlength:1}">
+					<volist name="minzu" id='v'>
+						<option value="{$v.minzu_id}">{$v.minzu_name}</option>
+					</volist>
+			    </select>
+			</div>
+		</div>
+		
+		<div style="float: left; width: 200px; margin-right: 2px;">
+			<div class="row">
+				<label for="hz_tizhong">体重(kg)：</label><input id="hz_tizhong" name="hz_tizhong" size="12" placeholder="请输入体重" class="input-xlarge"  type="text">
+			</div>
+		</div>
+		<div style="float: left; width: 200px; margin-right: 2px;">
+			<div class="row">
+				<label for="hz_lxfs">联系方式：</label><input id="hz_lxfs" name="hz_lxfs" size="12" placeholder="请输入联系方式" class="input-xlarge"type="text">
+			</div>
+		</div>
+		
+	</div>
+	
+	<hr color="#D4D4D4">
+	
+	<div style="clear: both; overflow: hidden; padding: 10px;">
+
+		
+		<div style="float: left; width: 270px; margin-right: 20px;">
+			<div class="row">
+				<label for="hz_lastjibing">原患疾病：</label><input id="hz_lastjibing" name="hz_lastjibing" placeholder="请输入原患疾病" class="input-xlarge" required="" type="text">
+			</div>
+		</div>
+		
+		<div style="float: left; width: 400px; margin-right: 20px;">
+			<div class="row">
+				<label for="hz_blmzno" style="width:150px">病历号/门诊号：</label><input id="hz_blmzno" name="hz_blmzno" placeholder="病历号/门诊号" class="input-xlarge" type="text">
+			</div>
+		</div>
+	</div>
+	<hr color="#D4D4D4">
+	
+	
+	<div style="clear: both; overflow: hidden; padding: 10px;">
+		
+		<div style="float: left; width: 900px; margin-right: 20px;">
+			<div class="row">
+				<label for="hz_jiwangyaopinbuliangfanyingt">既往药品不良反应/事件：</label>
+				<input type="radio" id="hz_jiwangyaopinbuliangfanying-0" name="hz_jiwangyaopinbuliangfanying"required="required" class="{required:true}" value="1">有
+				<input id="hz_jiwangyaopinbuliangfanying" name="hz_jiwangyaopinbuliangfanyingt" size="50" class="input-xlarge"value="" type="text">
+				<input name="hz_jiwangyaopinbuliangfanying" id="hz_jiwangyaopinbuliangfanying0" value="0" required="required" type="radio">无
+				<input name="hz_jiwangyaopinbuliangfanying" id="hz_jiwangyaopinbuliangfanying2" value="2" required="required" type="radio">不详
+				
+			</div>
+		</div>
+		
+	</div>
+	<hr color="#D4D4D4">
+	
+	
+	<div style="clear: both; overflow: hidden; padding: 10px;">
+		
+		<div style="float: left; width: 900px; margin-right: 20px;">
+			<div class="row">
+				<label for="prependedcheckbox-11">家族药品不良反应/事件：</label>
+				<input type="radio" name="hz_jiazuyaopinbuliangfanying" value="1" class="{required:true}">有
+				<input id="prependedcheckbox-11" name="hz_jiazuyaopinbuliangfanyingt" size="50" class="input-xlarge"value=""required="required" class="{required:true}" placeholder="" type="text">
+				<input name="hz_jiazuyaopinbuliangfanying" id="hz_jiazuyaopinbuliangfanying0" value="0" required="required" type="radio">无
+				<input name="hz_jiazuyaopinbuliangfanying" id="hz_jiazuyaopinbuliangfanying2" value="2" required="required" type="radio">不详
+				
+			</div>
+		</div>
+		
+	</div>
+	<hr color="#D4D4D4">
+	
+	
+	<div style="clear: both; overflow: hidden; padding: 10px;">
+		
+		<div style="float: left; width: 900px; margin-right: 20px;">
+			<div class="row">
+				<label for="prependedcheckbox-11">相关重要信息：</label>
+				<input name="hz_zhongyaoxinxi[]" id="hz_zhongyaoxinxi-0" value="0" type="checkbox" class="{required:true}">吸烟史
+				<input name="hz_zhongyaoxinxi[]" id="hz_zhongyaoxinxi-1" value="1" type="checkbox">饮酒史
+				<input name="hz_zhongyaoxinxi[]" id="hz_zhongyaoxinxi-2" value="2" type="checkbox">妊娠期
+				<input name="hz_zhongyaoxinxi[]" id="hz_zhongyaoxinxi-3" value="3" type="checkbox">肝病史
+				<input name="hz_zhongyaoxinxi[]" id="hz_zhongyaoxinxi-4" value="4" type="checkbox">肾病史
+				<input type="checkbox" name="hz_zhongyaoxinxi[]" value="5">过敏史
+				<input id="hz_zhongyaoxinxiguominshi" name="hz_zhongyaoxinxiguominshi" class="input-xlarge"value=""required="required" placeholder="过敏史" type="text">
+				<input type="checkbox" name="hz_zhongyaoxinxi[]" value="6">其它
+				<input id="hz_zhongyaoxinxiqita" name="hz_zhongyaoxinxiqita" class="input-xlarge"value=""required="required" placeholder="其它" type="text">
+			</div>
+		</div>
+		
+	</div>
+	<hr color="#D4D4D4">
+	
+	<h1>怀疑药品</h1>
+	<div style="clear: both; overflow: hidden; padding: 10px;">
+		
+			<div id="ddd" style="float: left; width: 150px;">
+				<div class="row" id="rowsss">
+					<label for="yp_pzwh" style="text-align:left;">批准文号</label>
+					
+				</div>
+			</div>
+			<div style="float: left; width: 150px;">
+				<div class="row">
+					<label for="yp_spmc" style="text-align:left;">商品名称</label>
+				</div>
+			</div>
+			<div style="float: left; width: 150px;">
+				<div class="row">
+					<label for="yp_tymc" style="text-align:left;">通用名称</label>
+				</div>
+			</div>
+			<div style="float: left; width: 150px;">
+				<div class="row">
+					<label for="yp_sccj" style="text-align:left;">生产厂家</label>
+				</div>
+			</div>
+			<div style="float: left; width: 150px;">
+				<div class="row">
+					<label for="yp_hyyaopinpihao" style="text-align:left;">药品生产批号</label>
+				</div>
+			</div>
+			<div style="float: left; width: 150px;">
+				<div class="row">
+					<label for="yp_hyyaopinyongfaliang" style="text-align:left;">药品用法用量</label>
+				</div>
+			</div>
+			<div style="float: left; width: 150px;">
+				<div class="row">
+					<label for="yp_hyyyqzsj" style="text-align:left;width:100px">药品用药起止时间</label>
+				</div>
+			</div>
+			<div style="float: left; width: 150px;">
+				<div class="row">
+					<label for="yp_hyyyyuanyin" style="text-align:left;">用药原因</label>
+				</div>
+			</div>
+			
+			
+			<div style="coear:both"></div>
+			</div>
+	
+
+	
+	<div style="clear: both; overflow: hidden; padding: 10px;">
+		
+		<!-- 复制部分开始 -->
+	<div id="copydiv">
+		<div id="fg">
+			<div id="ddd" style="float: left; width: 150px;">
+				<div class="row" id="rowsss">
+					<!--  <label for="yp_pzwh">批准文号:</label>--><input id="yp_pzwh" class="autocompleteclass" name="yp_hypzwh[]" type="text"  value="{$sel.ybgs_biaobenlx}" style="width: 100px;">
+					<div id="biaobenlxsubmit"></div>
+					
+				</div>
+			</div>
+			<div style="float: left; width: 150px;">
+				<div class="row">
+					<!-- <label for="yp_spmc">商品名称:</label> --><input id="yp_spmc" class="easyui-validatebox" name="yp_hyspmc[]" type="text"  value="{$sel.ybgs_biaobengs}" style="width: 100px;">
+				</div>
+			</div>
+			<div style="float: left; width: 150px;">
+				<div class="row">
+					<!-- <label for="yp_tymc">通用名称:</label> --><input id="yp_tymc"  class="easyui-validatebox"   name="yp_hytymc[]" type="text" value="{$sel.ybgs_biaobenliang}" style="width: 100px;"><span id="danwei"></span>
+				</div>
+			</div>
+			<div style="float: left; width: 150px;">
+				<div class="row">
+					<!--  <label for="yp_sccj">生产厂家:</label> --><input id="yp_sccj"  class="autocompleteclass " name="yp_hysccj[]"  type="text"  value="{$sel.ybgs_yunsongtj}" style="width: 100px;">
+					<div id="yunsongtjsubmit"></div>
+				</div>
+			</div>
+			<div style="float: left; width: 150px;">
+				<div class="row">
+					<!--  <label for="yp_hyyaopinpihao">药品生产批号：</label> --><input id="yp_hyyaopinpihao" name="yp_hyyaopinpihao[]"  type="text" value="{$sel.ybgs_biaobenzt}" style="width: 100px;">
+					<div id="biaobenztsubmit"></div>
+				</div>
+			</div>
+			<div style="float: left; width: 150px;">
+				<div class="row">
+					<!--  <label for="yp_hyyaopinyongfaliang">药品用法用量：</label> --><input id="yp_hyyaopinyongfaliang" name="yp_hyyaopinyongfaliang[]"   type="text" value="{$sel.ybgs_biaobenzt}" style="width: 100px;">
+					<div id="biaobenztsubmit"></div>
+				</div>
+			</div>
+			<div style="float: left; width: 150px;">
+				<div class="row">
+					<!--  <label for="yp_hyyyqzsj">药品用药起止时间：</label> --><input id="yp_hyyyqzsj" name="yp_hyyyqzsj[]"  type="text" value="{$sel.ybgs_biaobenzt}" style="width: 100px;">
+					<div id="biaobenztsubmit"></div>
+				</div>
+			</div>
+			<div style="float: left; width: 150px;">
+				<div class="row">
+					<!-- <label for="yp_hyyyyuanyin">用药原因：</label> --><input id="yp_hyyyyuanyin" name="yp_hyyyyuanyin[]" type="text" value="{$sel.ybgs_biaobenzt}" style="width: 100px;">
+					<div id="biaobenztsubmit"></div>
+				</div>
+			</div>
+			
+			<div style="float: left; width: 120px;" id="adddel">
+				<div class="row">
+					<a href="javascript:void(0);" class="easyui-linkbutton bbfgdivadd" plain="true" id="btn1" onclick="bbfgdivadd()" iconCls="icon-add">添加</a>
+					<a href="javascript:void(0);" class="easyui-linkbutton bbfgdivdel" plain="true"  onclick="bbfgdivdel(this)" iconCls="icon-remove">删除</a>
+				</div>
+			</div>
+			<div style="coear:both"></div>
+			</div>
+	</div>
+	<div id="bbbbbbbbbbb"></div>
+	<!-- 复制部分结束 -->
+		
+	</div>
+	<hr color="#D4D4D4">
+	
+	
+	
+	
+	<hr color="#D4D4D4">
+	
+	<h1>并用药品</h1>
+	<div style="clear: both; overflow: hidden; padding: 10px;">
+		
+			<div id="ddd" style="float: left; width: 150px;">
+				<div class="row" id="rowsss">
+					<label for="yp_pzwh" style="text-align:left;">批准文号</label>
+					
+				</div>
+			</div>
+			<div style="float: left; width: 150px;">
+				<div class="row">
+					<label for="yp_spmc" style="text-align:left;">商品名称</label>
+				</div>
+			</div>
+			<div style="float: left; width: 150px;">
+				<div class="row">
+					<label for="yp_tymc" style="text-align:left;">通用名称</label>
+				</div>
+			</div>
+			<div style="float: left; width: 150px;">
+				<div class="row">
+					<label for="yp_sccj" style="text-align:left;">生产厂家</label>
+				</div>
+			</div>
+			<div style="float: left; width: 150px;">
+				<div class="row">
+					<label for="yp_hyyaopinpihao" style="text-align:left;">药品生产批号</label>
+				</div>
+			</div>
+			<div style="float: left; width: 150px;">
+				<div class="row">
+					<label for="yp_hyyaopinyongfaliang" style="text-align:left;">药品用法用量</label>
+				</div>
+			</div>
+			<div style="float: left; width: 150px;">
+				<div class="row">
+					<label for="yp_hyyyqzsj" style="text-align:left;width:100px">药品用药起止时间</label>
+				</div>
+			</div>
+			<div style="float: left; width: 150px;">
+				<div class="row">
+					<label for="yp_hyyyyuanyin" style="text-align:left;">用药原因</label>
+				</div>
+			</div>
+			
+			
+			<div style="coear:both"></div>
+			</div>
+	
+
+	
+	<div style="clear: both; overflow: hidden; padding: 10px;">
+		
+		<!-- 复制部分开始 -->
+	<div id="copydivby">
+		<div id="bydiv">
+			<div id="ddd" style="float: left; width: 150px;">
+				<div class="row" id="rowsss">
+					<!--  <label for="yp_bypzwh">批准文号:</label>--><input id="yp_bypzwh" name="yp_bypzwh[]" type="text"  value="{$sel.ybgs_biaobenlx}" style="width: 100px;">
+					<div id="biaobenlxsubmit"></div>
+					
+				</div>
+			</div>
+			<div style="float: left; width: 150px;">
+				<div class="row">
+					<!-- <label for="yp_byspmc">商品名称:</label> --><input id="yp_byspmc" class="easyui-validatebox"  type="text" name="yp_byspmc[]" value="{$sel.ybgs_biaobengs}" style="width: 100px;">
+				</div>
+			</div>
+			<div style="float: left; width: 150px;">
+				<div class="row">
+					<!-- <label for="yp_bytymc">通用名称:</label> --><input id="yp_bytymc"  class="easyui-validatebox"   name="yp_bytymc[]" type="text" value="{$sel.ybgs_biaobenliang}" style="width: 100px;"><span id="danwei"></span>
+				</div>
+			</div>
+			<div style="float: left; width: 150px;">
+				<div class="row">
+					<!--  <label for="yp_bysccj">生产厂家:</label> --><input id="yp_bysccj" name="yp_bysccj[]"  type="text"  value="{$sel.ybgs_yunsongtj}" style="width: 100px;">
+					<div id="yunsongtjsubmit"></div>
+				</div>
+			</div>
+			<div style="float: left; width: 150px;">
+				<div class="row">
+					<!--  <label for="yp_byyaopinpihao">药品生产批号：</label> --><input id="yp_byyaopinpihao"name="yp_byyaopinpihao[]"  type="text" value="{$sel.ybgs_biaobenzt}" style="width:100px;">
+					<div id="biaobenztsubmit"></div>
+				</div>
+			</div>
+			<div style="float: left; width: 150px;">
+				<div class="row">
+					<!--  <label for="yp_byyaopinyongfaliang">药品用法用量：</label> --><input id="yp_byyaopinyongfaliang"  name="yp_byyaopinyongfaliang[]"  type="text" value="{$sel.ybgs_biaobenzt}" style="width: 100px;">
+					<div id="biaobenztsubmit"></div>
+				</div>
+			</div>
+			<div style="float: left; width: 150px;">
+				<div class="row">
+					<!--  <label for="yp_byyyqzsj">药品用药起止时间：</label> --><input id="yp_byyyqzsj" name="yp_byyyqzsj[]" type="text" value="{$sel.ybgs_biaobenzt}" style="width: 100px;">
+					<div id="biaobenztsubmit"></div>
+				</div>
+			</div>
+			<div style="float: left; width: 150px;">
+				<div class="row">
+					<!-- <label for="yp_byyyyuanyin">用药原因：</label> --><input id="yp_byyyyuanyin" name="yp_byyyyuanyin[]"   type="text" value="{$sel.ybgs_biaobenzt}" style="width: 100px;">
+					<div id="biaobenztsubmit"></div>
+				</div>
+			</div>
+			
+			<div style="float: left; width: 120px;" id="adddel">
+				<div class="row">
+					<a href="javascript:void(0);" class="easyui-linkbutton bydivadd" plain="true" id="btn1" onclick="bydivadd()" iconCls="icon-add">添加</a>
+					<a href="javascript:void(0);" class="easyui-linkbutton bydivdel" plain="true" id="" onclick="bydivdel(this)" iconCls="icon-remove">删除</a>
+				</div>
+			</div>
+			<div style="coear:both"></div>
+			</div>
+	</div>
+	<div id="aaaaaaaaaaaa"></div>
+	<!-- 复制部分结束 -->
+		
+	</div>
+	<hr color="#D4D4D4">
+	
+	
+	<div style="clear: both; overflow: hidden; padding: 10px;">
+
+		
+		<div style="float: left; width: 570px; margin-right: 20px;">
+			<div class="row">
+				<label  style="width:120px;"for="hz_blfyshijianmingcheng">不良反应/事件名称：</label><input id="hz_blfyshijianmingcheng" name="hz_blfyshijianmingcheng" placeholder="不良反应时间名称" class="input-xlarge"type="text">
+			</div>
+		</div>
+		
+		<div style="float: left; width: 500px; margin-right: 20px;">
+			<div class="row">
+				<label  style="width:150px;"for="hz_blfysjfssj">不良反应/事件发生时间：</label><input id="hz_blfysjfssj" name="hz_blfysjfssj" placeholder="不良反应/事件发生时间" class="input-xlarge" rel='datepicker' data-date-format="yyyy-mm-dd" type="text">
+			</div>
+		</div>
+	</div>
+	<hr color="#D4D4D4">
+	
+	<div style="clear: both; overflow: hidden; padding: 10px;">
+
+		
+		<div style="float: left; width: 570px; margin-right: 20px;">
+			<div class="row">
+				<label  style="width:150px;" for="hz_blfysjgcms">不良反应/事件过程描述：</label>
+				  <div class="controls">                     
+				    <textarea id="hz_blfysjgcms" name="hz_blfysjgcms" rows="10" cols="150"></textarea>
+				  </div>
+			</div>
+		</div>
+		
+	</div>
+	<hr color="#D4D4D4">
+	
+	
+	<div style="clear: both; overflow: hidden; padding: 10px;">
+		
+		<div style="float: left; width: 1100px; margin-right: 20px;">
+			<div class="row">
+				<label for="prependedcheckbox-11">相不良反应/事件的结果：</label>
+				<input name="hz_blfysjjg" id="hz_blfysjjg-0" value="0" required="required" type="radio">痊愈
+				<input name="hz_blfysjjg" id="hz_blfysjjg-1" value="1" required="required" type="radio">好转
+				<input name="hz_blfysjjg" id="hz_blfysjjg-2" value="2" required="required" type="radio">未好转
+				<input name="hz_blfysjjg" id="hz_blfysjjg-3" value="3" required="required" type="radio">不详
+				<input name="hz_blfysjjg" id="hz_blfysjjg-4" value="4" required="required" type="radio">有后遗症
+				表现：<input id="jieguobiaoxian" name="hz_jieguobiaoxian" class="input-xlarge"value=""required="required" placeholder="" type="text">
+				<input name="hz_blfysjjg" id="hz_blfysjjg-5" value="5" required="required" type="radio">死亡
+				直接死因：<input id="siwangyuanyin" name="hz_siwangyuanyin" class="input-xlarge"value=""required="required" placeholder="" type="text">
+				死亡时间：<input id="hz_blfysiwangshijian" name="hz_siwangshijian" placeholder="死亡时间" class="input-xlarge" type="text">
+			</div>
+		</div>
+		
+	</div>
+	<hr color="#D4D4D4">
+	
+	
+	<div style="clear: both; overflow: hidden; padding: 10px;">
+		
+		<div style="float: left; width: 1100px; margin-right: 20px;">
+			<div class="row">
+				<label style="width:250px"for="prependedcheckbox-11">停药或减量后，反应/事件是否消失或减轻？</label>
+				<input name="hz_jianyaofanyingisjianqing" id="hz_jianyaofanyingisjianqing-0" value="0" required="required" type="radio">是
+				<input name="hz_jianyaofanyingisjianqing" id="hz_jianyaofanyingisjianqing-1" value="1" required="required" type="radio">否
+				<input name="hz_jianyaofanyingisjianqing" id="hz_jianyaofanyingisjianqing-2" value="2" required="required" type="radio">不明
+				<input name="hz_jianyaofanyingisjianqing" id="hz_jianyaofanyingisjianqing-3" value="3" required="required" type="radio">未停药或未减量
+				
+			</div>
+		</div>
+		
+	</div>
+	<hr color="#D4D4D4">
+	
+	
+	<div style="clear: both; overflow: hidden; padding: 10px;">
+		
+		<div style="float: left; width: 1100px; margin-right: 20px;">
+			<div class="row">
+				<label style="width:250px"for="prependedcheckbox-11">再次使用可以药品后是否再次出现同样反应/事件?</label>
+				<input name="hz_zaicishiyongzaichuxian" id="hz_zaicishiyongzaichuxian-0" value="0" required="required" type="radio">是
+				<input name="hz_zaicishiyongzaichuxian" id="hz_zaicishiyongzaichuxian-1" value="1" required="required" type="radio">否
+				<input name="hz_zaicishiyongzaichuxian" id="hz_zaicishiyongzaichuxian-2" value="2" required="required" type="radio">不明
+				<input name="hz_zaicishiyongzaichuxian" id="hz_zaicishiyongzaichuxian-3" value="3" required="required" type="radio">未再使用
+				
+			</div>
+		</div>
+		
+	</div>
+	<hr color="#D4D4D4">
+	<div style="clear: both; overflow: hidden; padding: 10px;">
+		
+		<div style="float: left; width: 1100px; margin-right: 20px;">
+			<div class="row">
+				<label style="width:250px"for="prependedcheckbox-11">对原患疾病的影响</label>
+				<input name="hz_dyhjbdyx" id="hz_dyhjbdyx-0" value="0" required="required" type="radio">不明显
+				<input name="hz_dyhjbdyx" id="hz_dyhjbdyx-1" value="1" required="required" type="radio">病程延长
+				<input name="hz_dyhjbdyx" id="hz_dyhjbdyx-2" value="2" required="required" type="radio">病情加重
+				<input name="hz_dyhjbdyx" id="hz_dyhjbdyx-3" value="3" required="required" type="radio">导致后遗症
+				<input name="hz_dyhjbdyx" id="hz_dyhjbdyx-4" value="4" required="required" type="radio">导致死亡
+			</div>
+		</div>
+		
+	</div>
+	<hr color="#D4D4D4">
+	
+	
+	<div style="clear: both; overflow: hidden; padding: 10px;">
+		
+		<div style="float: left; width: 1100px; margin-right: 20px;">
+			<div class="row">
+				<label style="width:250px"for="hz_fanyingyuyaozhiliangxiangguan">药品不良反应/事件是否与药品质量（如未按要求保存药品等）相关：</label>
+				<input id="hz_fanyingyuyaozhiliangxiangguan" name="hz_fanyingyuyaozhiliangxiangguan" placeholder="药品不良反应/事件是否与药品质量（如未按要求保存药品等）相关：" class="input-xlarge" size="100"type="text">
+			</div>
+		</div>
+		
+	</div>
+	<hr color="#D4D4D4">
+	
+	
+	<div style="clear: both; overflow: hidden; padding: 10px;">
+		
+		<div style="float: left; width: 1100px; margin-right: 20px;">
+			<div class="row">
+				<label style="width:250px"for="hz_fyyubuheliyongyaoxiangguan">药品不良反应/事件是否与不合理用药（如超说明书、不合理药物配伍）相关：</label>
+				<input id="hz_fyyubuheliyongyaoxiangguan" name="hz_fyyubuheliyongyaoxiangguan" placeholder="药品不良反应/事件是否与不合理用药（如超说明书、不合理药物配伍）相关" class="input-xlarge" size="100" type="text">
+			</div>
+		</div>
+		
+	</div>
+	<hr color="#D4D4D4">
+	
+	
+	<div style="clear: both; overflow: hidden; padding: 10px;">
+		
+		<div style="float: left; width: 1100px; margin-right: 20px;">
+			<div class="row">
+				<label style="width:150px"for="hz_fyyubuheliyongyaoxiangguan">药品不良反应/事件是否与用药错误（如药品调剂错误、药品配置错误）相关：</label>
+				<input id="hz_fyyucuowuyongyaoxiangguan" name="hz_fyyucuowuyongyaoxiangguan" placeholder="药品不良反应/事件是否与用药错误（如药品调剂错误、药品配置错误）相关" class="input-xlarge" size="100" type="text">
+			</div>
+		</div>
+		
+	</div>
+	<hr color="#D4D4D4">
+	
+	
+	<div style="clear: both; overflow: hidden; padding: 10px;">
+		
+		<div style="float: left; width: 1100px; margin-right: 20px;">
+			<div class="row">
+				<label style="width:150px"for="">报告人评价：</label>
+				<input name="hz_baogaorenpingjia" id="hz_baogaorenpingjia-0" value="0" required="required" type="radio">肯定
+				<input name="hz_baogaorenpingjia" id="hz_baogaorenpingjia-1" value="1" required="required" type="radio">很可能
+				<input name="hz_baogaorenpingjia" id="hz_baogaorenpingjia-2" value="2" required="required" type="radio">可能
+				<input name="hz_baogaorenpingjia" id="hz_baogaorenpingjia-3" value="3" required="required" type="radio">可能无关
+				<input name="hz_baogaorenpingjia" id="hz_baogaorenpingjia-4" value="4" required="required" type="radio">待评价
+				<input name="hz_baogaorenpingjia" id="hz_baogaorenpingjia-5" value="5" required="required" type="radio">无法评价
+			</div>
+		</div>
+		<div style="float: left; width: 1100px; margin-right: 20px;">
+			<div class="row">
+				<label style="width:150px"for="">报告单位评价：</label>
+				<input name="hz_bgdwpingjia" id="hz_bgdwpingjia-0" value="0" required="required" type="radio">肯定
+				<input name="hz_bgdwpingjia" id="hz_bgdwpingjia-1" value="1" required="required" type="radio">很可能
+				<input name="hz_bgdwpingjia" id="hz_bgdwpingjia-2" value="2" required="required" type="radio">可能
+				<input name="hz_bgdwpingjia" id="hz_bgdwpingjia-3" value="3" required="required" type="radio">可能无关
+				<input name="hz_bgdwpingjia" id="hz_bgdwpingjia-4" value="4" required="required" type="radio">待评价
+				<input name="hz_bgdwpingjia" id="hz_bgdwpingjia-5" value="5" required="required" type="radio">无法评价
+			</div>
+		</div>
+		
+	</div>
+	<hr color="#D4D4D4">
+	<div style="clear: both; overflow: hidden; padding: 10px;">
+		
+		<div style="float: left; width: 1100px; margin-right: 20px;">
+			<div class="row">
+				<label style="width:150px" for="hz_beizhu">备注：</label>
+				<textarea rows="10" cols="150" id="hz_beizhu" name="hz_beizhu" ></textarea>
+			</div>
+		</div>
+		
+	</div>
+	
+	
+</form>
+
+<script>
+$(function(){
+	$("#baogaotype-1").change(function(){
+		if(!!$("#baogaotype-1").attr("checked")){
+			$("#baogaotype-2").attr("disabled","disabled");
+		}else{
+			$("#baogaotype-2").attr("disabled",false);
+		}
+	});
+	
+	$("#baogaotype-2").change(function(){
+		if(!!$("#baogaotype-2").attr("checked")){
+			$("#baogaotype-1").attr("disabled","disabled");
+		}else{
+			$("#baogaotype-1").attr("disabled",false);
+		}
+	});
+	
+});
+</script>

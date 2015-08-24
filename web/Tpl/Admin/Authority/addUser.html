@@ -1,0 +1,53 @@
+<script type="text/javascript" charset="utf-8">
+	$(function() {
+		var addTree = $('#role');
+		addTree.combotree({
+			multiple : true,
+			editable : false,
+			checkbox : true,
+			lines : false,
+			url : '{:U(GROUP_NAME.'/Authority/get_auth_group_Json')}'
+		});
+	});
+</script>
+<style type="text/css">
+<!--
+label {
+	float: left;
+	width: 80px;
+	text-align: right;
+	padding: 2px;
+	margin: 1px;
+}
+
+.row {
+	margin-top: 10px;
+}
+-->
+</style>
+<form id="rbac_user_addForm" method="post">
+	<div style="clear: both; overflow: hidden; padding: 10px;">
+		<div style="float: left; width: 270px; margin-right: 20px;">
+			<div class="row">
+				<label for="uid">用户ID:</label><input id="uid" type="text" name="uid" style="width: 150px;"><span style="color: red;">&nbsp;*</span>
+			</div>
+			<div class="row">
+				<label for="name">用户名:</label><input id="name" type="text" name="name" style="width: 150px;">
+			</div>
+		</div>
+		<div style="float: left; width: 270px;">
+			<div class="row">
+				<label for="status">状态:</label> <select id="status" class="easyui-combo" name="status">
+					<option value="1">开启</option>
+					<option value="0">关闭</option>
+				</select>
+			</div>
+			<div class="row">
+				<label for="status">用户组:</label><input id="role" name="auth_group[]">
+			</div>
+		</div>
+	</div>
+	<div class="row" style="padding-left: 10px;">
+		<label for="remark">描述:</label><input id="remark" type="text" name="remark" style="width: 400px;">
+	</div>
+</form>

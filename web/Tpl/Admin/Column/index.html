@@ -1,0 +1,155 @@
+<script type="text/javascript">
+	$(function() {
+		$('#column-index-treegrid').treegrid({
+			url : '{:U(GROUP_NAME.'/Column/getColumnJson')}',
+			fit : true,
+			border : false,
+			idField : 'id',
+			treeField : 'text',
+			rownumbers : true,
+			columns : [ [ {
+				field : 'id',
+				title : '序号',
+				width : 50,
+				checkbox : true
+			}, {
+				field : 'text',
+				title : '栏目名称',
+				width : 250
+			}, {
+				field : 'status',
+				title : '状态',
+				width : 60,
+				align : 'center'
+			}, {
+				field : 'sort',
+				title : '排序',
+				width : 60
+			}, {
+				field : 'url',
+				title : '链接地址',
+				width : 250
+			} ] ],
+			toolbar : [ {
+				iconCls : 'icon-add',
+				text : '新增',
+				handler : function() {
+					var addColumnDialog = $('<div/>').dialog({
+						href : '{:U(GROUP_NAME.'/Column/addColumnPanel')}',
+						title : '栏目新增',
+						width : 500,
+						height : 170,
+						modal : true,
+						onClose : function() {
+							addColumnDialog.dialog('destroy');
+						},
+						buttons : [ {
+							text : '保存',
+							handler : function() {
+								var text = $('#text').val();
+								var url = $('#url').val();
+								var pid = 0;
+								var row = $('#column-index-treegrid').treegrid('getSelected');
+								if (row != null) {
+									pid = row.id;
+								}
+								$.post('{:U(GROUP_NAME.'/Column/addColumnSubmit')}', {
+									text : text,
+									url : url,
+									pid : pid
+								}, function(data) {
+									if (data.status) {
+										msgBox(data.data, data.info);
+										addColumnDialog.dialog('destroy');
+										$('#column-index-treegrid').treegrid('reload');
+									} else {
+										$.messager.alert(data.data, data.info);
+									}
+								}, "json");
+							}
+						}, {
+							text : '取消',
+							handler : function() {
+								addColumnDialog.dialog('destroy');
+							}
+						} ]
+					});
+				}
+			}, {
+				iconCls : 'icon-edit',
+				text : '编辑',
+				handler : function() {
+					var row = $('#column-index-treegrid').treegrid('getSelected');
+					if (row == null) {
+						$.messager.alert('提示', '未选择所要编辑的数据！');
+					} else {
+						var editColumnDialog = $('<div/>').dialog({
+							href : '{:U(GROUP_NAME.'/Column/editColumnPanel')}?id=' + row.id,
+							title : '栏目编辑',
+							width : 500,
+							height : 220,
+							modal : true,
+							onClose : function() {
+								editColumnDialog.dialog('destroy');
+							},
+							buttons : [ {
+								text : '保存',
+								handler : function() {
+									var text = $('#text').val();
+									var url = $('#url').val();
+									var status = $('#status').val();
+									var sort = $('#sort').val();
+									if (row != null) {
+										pid = row.id;
+									}
+									$.post('{:U(GROUP_NAME.'/Column/editColumnSubmit')}', {
+										text : text,
+										url : url,
+										status : status,
+										sort : sort,
+										id : row.id
+									}, function(data) {
+										if (data.status) {
+											msgBox(data.data, data.info);
+											editColumnDialog.dialog('destroy');
+											$('#column-index-treegrid').treegrid('reload');
+										} else {
+											$.messager.alert(data.data, data.info);
+										}
+									}, "json");
+								}
+							}, {
+								text : '取消',
+								handler : function() {
+									editColumnDialog.dialog('destroy');
+								}
+							} ]
+						});
+					}
+				}
+			}, {
+				iconCls : 'icon-remove',
+				text : '删除',
+				handler : function() {
+					var row = $('#column-index-treegrid').treegrid('getSelected');
+					if(row==null){
+						$.messager.alert('提示','未选择要删除的数据！');
+					}else{
+						$.post('{:U(GROUP_NAME.'/Column/delColumnSubmit')}', {
+							id : row.id
+						}, function(data) {
+							if (data.status) {
+								msgBox(data.data, data.info);
+								$('#column-index-treegrid').treegrid('reload');
+							} else {
+								$.messager.alert(data.data, data.info);
+							}
+						}, "json");
+					}
+				}
+			} ]
+
+		});
+	});
+</script>
+<table id="column-index-treegrid"></table>

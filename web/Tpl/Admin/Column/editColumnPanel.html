@@ -1,0 +1,23 @@
+<div style="padding: 10px;">
+	<table>
+		<tr>
+			<th height="30">栏目标题：</th>
+			<td><input id="text" type="text" style="width: 350px;"
+				value="{$vo.text}"></td>
+		</tr>
+		<tr>
+			<th height="30">链接地址：</th>
+			<td><input id="url" type="text" style="width: 350px;"
+				value="{$vo.url}"></td>
+		</tr>
+		<tr>
+			<th>状态：</th>
+			<td><select id="status">{$vo.status}</select></td>
+		</tr>
+		<tr>
+			<th>排序：</th>
+			<td><input id="sort" type="text" value="{$vo.sort}"
+				class="easyui-numberbox" style="width: 60px;"></td>
+		</tr>
+	</table>
+</div>

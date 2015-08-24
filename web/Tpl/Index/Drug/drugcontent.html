@@ -1,0 +1,22 @@
+<include file="Public:header"/>
+
+<main role="main">
+	<table class="drug-table data-table table table-condensed table-bordered">
+		<tbody>
+			<foreach name="sel" item="loop">
+				<if condition="($loop neq null)">
+					<tr><th style="width:161px;"><php>echo C('DRUG_NAME.'.$key);/*上面的判断，因为有些字段是空的，判断一下有没有，有则显示，没有则不显示*/</php></th><td>{$loop}</td></tr>
+				</if>
+			</foreach>
+
+
+		</tbody>
+	</table>
+
+
+
+<div style="margin-top: 2em" id="drug-meta">Drug created on June 13, 2005 07:24 / Updated on October 08, 2013 14:21</div>
+</main>
+
+
+<include file="Public:footer"/>

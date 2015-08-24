@@ -1,0 +1,176 @@
+<script type="text/javascript" charset="utf-8">
+	$(function() {
+		$('#datalib_index_treegridyunsongtj').treegrid({
+			url : '{:U(GROUP_NAME.'/Datalib/getdatalibjson',array('action'=>ACTION_NAME))}',
+			animate : false,
+			fit : true,
+			border : false,
+			singleSelect : true,
+			rownumbers : true,						pagination : true,			pageSize : 15,			pageList : [ 15, 30, 45, 60 ],
+			idField : 'yunsongtj_id',
+			treeField : 'yunsongtj_name',
+			columns : [ [ {
+				field : 'yunsongtj_id',
+				title : 'yunsongtj_id',
+				checkbox : true,
+				width : 50
+			}, {
+				field : 'yunsongtj_name',
+				title : '名称',
+				align : 'right',
+				width : 150
+			}, {
+				field : 'yunsongtj_remark',
+				title : '描述',
+				width : 300
+			} ] ],
+			toolbar : [ {
+				text : '添加',
+				iconCls : 'icon-add',
+				handler : function() {
+					addDatalibyunsongtj();
+				}
+			}, {
+				text : '编辑',
+				iconCls : 'icon-edit',
+				handler : function() {
+					editDatalibyunsongtj();
+				}
+			}, {
+				text : '删除',
+				iconCls : 'icon-remove',
+				handler : function() {
+					delDatalibyunsongtj();
+				}
+			}, '-', {
+				iconCls : 'Checkerror',
+				text : '取消选择',
+				handler : function() {
+					$('#datalib_index_treegridyunsongtj').treegrid('unselectAll');
+				}
+			}, {
+				iconCls : 'icon-reload',
+				text : '刷新',
+				handler : function() {
+					$('#datalib_index_treegridyunsongtj').treegrid('reload');
+				}
+			}, '-', {
+				iconCls : 'Bulletarrowup',
+				text : '折叠所有',
+				handler : function() {
+					$('#datalib_index_treegridyunsongtj').treegrid('collapseAll');
+				}
+			} ],
+			onDblClickRow : function(row) {
+				if (row.state == 'closed') {
+					$('#datalib_index_treegridyunsongtj').treegrid('expand', [ row.id ]);
+				} else {
+					$('#datalib_index_treegridyunsongtj').treegrid('collapse', [ row.id ]);
+				}
+			}
+		});
+	});
+	//add
+	function addDatalibyunsongtj() {
+		var row = $('#datalib_index_treegridyunsongtj').treegrid('getSelections');
+		if (row.length <= 1) {
+			var pid = row.length == 0 ? 0 : row[0].yunsongtj_id;			
+			//弹出添加dialog对话框
+			var addDatalibDialog = $('<div/>').dialog({
+				href : '{:U(GROUP_NAME.'/Datalib/yunsongtjadd')}/pid/' + pid,
+				title : '添加数据字典',
+				width : 600,
+				height : 220,
+				modal : true,
+				buttons : [ {
+					iconCls : 'Bullettick',
+					text : '添加',
+					handler : function() {						if($('#yunsongtj_name').val()==''){							msgBox('失败', '名称不能为空，遇缓存时，请刷新页面重试。');						}else{
+							//作添加动作							
+							$.post("{:U(GROUP_NAME.'/Datalib/adddatalib',array('action'=>ACTION_NAME))}", $('#datalib_addDatalib_addFormyunsongtj').serialize(), function(data) {	
+								if (data.status) {	
+									addDatalibDialog.dialog('destroy');	
+									$('#datalib_index_treegridyunsongtj').treegrid('reload');	
+									$('#datalib_index_treegridyunsongtj').treegrid('unselectAll');	
+									msgBox(data.data, data.data);	
+								} else {	
+									msgBox(data.data, data.data);	
+								}	
+							}, "json");						}
+					}
+				}, {
+					iconCls : 'Bulletleft',
+					text : '重置',
+					handler : function() {
+						addDatalibDialog.dialog('refresh');
+					}
+				} ]
+			});			addDatalibDialog.dialog({			    onClose:function(){			    	addDatalibDialog.dialog('destroy');			    }			});
+		} else {
+			$.messager.alert('提示', '需要添加顶级栏目请不要选择行,向已有的栏目添加只需要选择对应的栏目且每次只能选择一行来做添加数据字典操作.');
+		}
+	}
+	//del
+	function delDatalibyunsongtj() {
+		var row = $('#datalib_index_treegridyunsongtj').treegrid('getSelections');
+		if (row.length == 0) {
+			$.messager.alert('提示', '您还没有选定要删除的行!');
+		} else {
+			$.messager.confirm('警告', '你确实要彻底删除此项吗?<br>删除之后会可能影响到其它模块的正常显示!', function(r) {
+				if (r) {
+					$.post("{:U(GROUP_NAME.'/Datalib/delDatalib',array('action'=>ACTION_NAME))}", {
+						id : row[0]['yunsongtj_id']
+					}, function(data) {
+						if (data.status) {
+							$('#datalib_index_treegridyunsongtj').treegrid('reload');
+							$('#datalib_index_treegridyunsongtj').treegrid('unselectAll');
+							msgBox('成功', data.info);
+						} else {
+							msgBox('失败', data.info);
+						}
+					}, "json");
+				}
+			});
+		}
+	}
+	//edit
+	function editDatalibyunsongtj() {
+		var row = $('#datalib_index_treegridyunsongtj').treegrid('getSelections');
+		if (row.length == 0) {
+			$.messager.alert('提示', '您还没有选定要编辑的行!');
+		} else {
+			//弹出添加dialog对话框
+			var editDatalibDialog = $('<div/>').dialog({
+				href : '{:U(GROUP_NAME.'/Datalib/editdatalib',array('action'=>ACTION_NAME))}/id/' + row[0]['yunsongtj_id'],
+				title : '编辑数据字典',
+				width : 600,
+				height : 220,
+				modal : true,
+				buttons : [ {
+					iconCls : 'Bullettick',
+					text : '编辑',
+					handler : function() {
+						//作编辑动作
+						$.post("{:U(GROUP_NAME.'/Datalib/editDatalibSubmit',array('action'=>ACTION_NAME))}", $('#datalib_addDatalib_addFormyunsongtj').serialize(), function(data) {
+							if (data.status) {
+								editDatalibDialog.dialog('destroy');
+								$('#datalib_index_treegridyunsongtj').treegrid('reload');
+								$('#datalib_index_treegridyunsongtj').treegrid('unselectAll');
+								msgBox('成功', data.info);
+							} else {								
+								msgBox('失败', data.info);
+							}
+						}, "json");
+					}
+				}, {
+					iconCls : 'Bulletleft',
+					text : '重置',
+					handler : function() {
+						editDatalibDialog.dialog('refresh');
+					}
+				} ]
+			});			editDatalibDialog.dialog({			    onClose:function(){			    editDatalibDialog.dialog('destroy');			    }			});
+		}
+	}
+</script>
+<table id="datalib_index_treegridyunsongtj"></table>

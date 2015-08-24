@@ -1,0 +1,411 @@
+<form class="form-horizontal" role="form"autocomplete="off" id="effectaddform" action="{:U(GROUP_NAME.'/DrugAdverseReaction/effectadd')}effectaddform">
+   <fieldset>
+       <legend>添加药物不良反应</legend>
+      <div class="form-group">
+         <label class="col-sm-1 control-label" for="ds_host">报告类型：</label>
+         <div class="col-sm-2">
+            <label class="checkbox-inline" for="baogaotype-0"><input name="hz_baogaotype[]" id="baogaotype-0" value="0" type="checkbox">新的</label>
+		    <label class="checkbox-inline" for="baogaotype-1"><input name="hz_baogaotype[]" id="baogaotype-1" value="1" type="checkbox">严重</label>
+		    <label class="checkbox-inline" for="baogaotype-2"><input name="hz_baogaotype[]" id="baogaotype-2" value="2" type="checkbox">一般</label>
+         </div>
+         <label class="col-sm-1 control-label" for="keshi">科室：</label>
+         <div class="col-sm-4">
+            <input id="keshi" name="hz_keshi" placeholder="请填写科室" class="form-control"  type="text">
+         </div>
+         
+         <label class="col-sm-1 control-label" for="baogaoren">报告人：</label>
+         <div class="col-sm-3">
+            <input id="baogaoren" name="hz_baogaoren" placeholder="请填写报告人" class="form-control" type="text">
+         </div>
+      </div>
+      
+      <div class="form-group">
+         <label class="col-sm-1 control-label" for="hz_name">患者姓名：</label>
+         <div class="col-sm-1">
+            <input id="hz_name" size="12" name="hz_name" placeholder="请输入患者姓名" class="form-control"  type="text">
+         </div>
+         <label class="col-sm-1 radio-inline" for="">患者性别：</label>
+         <div class="col-sm-1">
+            <input name="hz_sex" id="hz_sex-0" value="0" type="radio">男
+			<input name="hz_sex" id="hz_sex-1" value="1" type="radio">女
+         </div>
+         
+         <label class="col-sm-1 control-label input-append" for="hz_chushengtime">出生日期：</label>
+         <div class="col-sm-1">
+         	
+            <input id="hz_chushengtime" size="12" name="hz_chushengtime" placeholder="请输入出生日期" class="form-control form_date" data-link-format="yyyy-mm-dd"data-date-format="yyyy-mm-dd"  type="text" readonly>
+            
+         </div>
+         <label class="col-sm-1 control-label" for="hz_minzu">民族：</label>
+         <div class="col-sm-1">
+            <select id="hz_minzu" name="hz_minzu" class="form-control">
+				<volist name="minzu" id='v'>
+					<option value="{$v.minzu_id}">{$v.minzu_name}</option>
+				</volist>
+		    </select>
+         </div>
+         <label class="col-sm-1 control-label" for="hz_tizhong">体重(kg)：</label>
+         <div class="col-sm-1">
+            <input id="hz_tizhong" name="hz_tizhong" size="12" placeholder="请输入体重" class="form-control"  type="text">
+         </div>
+         <label class="col-sm-1 control-label" for="hz_lxfs">联系方式：</label>
+         <div class="col-sm-1">
+            <input id="hz_lxfs" name="hz_lxfs" size="12" placeholder="请输入联系方式" class="form-control"type="text">
+         </div>
+         
+      </div>
+      
+      <div class="form-group">
+         <label class="col-sm-1 control-label" for="hz_lastjibing">原患疾病：</label>
+         <div class="col-sm-4">
+            <input id="hz_lastjibing" name="hz_lastjibing" placeholder="请输入原患疾病" class="form-control"type="text">
+         </div>
+         <label class="col-sm-2 control-label" for="hz_blmzno">病历号/门诊号：</label>
+         <div class="col-sm-4">
+            <input id="hz_blmzno" name="hz_blmzno" placeholder="病历号/门诊号" class="form-control" type="text">
+         </div>
+      </div>
+      
+      <div class="form-group">
+         <label class="col-sm-1 control-label" for="hz_jiwangyaopinbuliangfanying">既往药品不良反应/事件：</label>
+         <div class="col-sm-10">
+            <label class="checkbox-inline"><input type="radio" id="hz_jiwangyaopinbuliangfanying-0" name="hz_jiwangyaopinbuliangfanying" value="1">有</label>
+            <label class="checkbox-inline"><input id="hz_jiwangyaopinbuliangfanying" name="hz_jiwangyaopinbuliangfanyingt" class="form-control"value="" type="text"></label>
+			<label class="checkbox-inline"><input name="hz_jiwangyaopinbuliangfanying" id="hz_jiwangyaopinbuliangfanying0" value="0" type="radio">无</label>
+			<label class="checkbox-inline"><input name="hz_jiwangyaopinbuliangfanying" id="hz_jiwangyaopinbuliangfanying2" value="2" type="radio">不详</label>
+            
+            
+         </div>
+      </div>
+      
+      <div class="form-group">
+         <label class="col-sm-1 control-label" for="name">家族药品不良反应/事件：</label>
+         <div>
+            <label class="checkbox-inline"><input type="radio" name="hz_jiazuyaopinbuliangfanying" value="1">有</label>
+			<label class="checkbox-inline"><input id="prependedcheckbox-11" name="hz_jiazuyaopinbuliangfanyingt" class="form-control"value=""type="text"></label>
+			<label class="checkbox-inline"><input name="hz_jiazuyaopinbuliangfanying" id="hz_jiazuyaopinbuliangfanying0" value="0" type="radio">无</label>
+			<label class="checkbox-inline"><input name="hz_jiazuyaopinbuliangfanying" id="hz_jiazuyaopinbuliangfanying2" value="2" type="radio">不详</label>
+         </div>
+      </div>
+      
+      
+      <div class="form-group">
+         <label class="col-sm-1 control-label" for="ds_host">相关重要信息：</label>
+         <div class="">
+         	<label class="checkbox-inline"><input name="hz_zhongyaoxinxi[]" id="hz_zhongyaoxinxi-0" value="0" type="checkbox">吸烟史</label>
+			<label class="checkbox-inline"><input name="hz_zhongyaoxinxi[]" id="hz_zhongyaoxinxi-1" value="1" type="checkbox">饮酒史</label>
+			<label class="checkbox-inline"><input name="hz_zhongyaoxinxi[]" id="hz_zhongyaoxinxi-2" value="2" type="checkbox">妊娠期</label>
+			<label class="checkbox-inline"><input name="hz_zhongyaoxinxi[]" id="hz_zhongyaoxinxi-3" value="3" type="checkbox">肝病史</label>
+			<label class="checkbox-inline"><input name="hz_zhongyaoxinxi[]" id="hz_zhongyaoxinxi-4" value="4" type="checkbox">肾病史</label>
+			<label class="checkbox-inline"><input type="checkbox" name="hz_zhongyaoxinxi[]" value="5">过敏史</label>
+			<label class="checkbox-inline"><input id="hz_zhongyaoxinxiguominshi" name="hz_zhongyaoxinxiguominshi" class="form-control"value="" placeholder="过敏史" type="text"></label>
+			<label class="checkbox-inline"><input type="checkbox" name="hz_zhongyaoxinxi[]" value="6">其它</label>
+			<label class="checkbox-inline"><input id="hz_zhongyaoxinxiqita" name="hz_zhongyaoxinxiqita" class="form-control"value="" placeholder="其它" type="text"></label>
+         </div>
+      </div>
+            
+   </fieldset>  
+   
+   <legend>怀疑药品</legend>
+   <fieldset id="huaiyiyaoping">
+      <div class="form-group" id="hytitle">
+         <label class="col-sm-1  text-center" for="hz_lastjibing">批准文号</label>
+         <label class="col-sm-1  text-center" for="hz_blmzno">商品名称</label>
+         <label class="col-sm-1  text-center" for="hz_blmzno">通用名称</label>
+         <label class="col-sm-1  text-center" for="hz_blmzno">生产厂家</label>
+         <label class="col-sm-1  text-center" for="hz_blmzno">药品生产批号</label>
+         <label class="col-sm-1  text-center" for="hz_blmzno">药品用法用量</label>
+         <label class="col-sm-2  text-center" for="hz_blmzno">药品用药起止时间</label>
+         <label class="col-sm-2  text-center" for="hz_blmzno">用药原因</label>
+         <label class="col-sm-2  text-center" for="hz_blmzno">操作</label>
+      </div>
+      
+      <div class="form-group content">
+         <div class="col-sm-1 control-label"><input id="yp_pzwh" class="autocompleteclass form-control" name="yp_hypzwh[]" type="text"  value="{$sel.ybgs_biaobenlx}" ></div>
+         <div class="col-sm-1 control-label"><input id="yp_spmc" class="form-control" name="yp_hyspmc[]" type="text"  value="{$sel.ybgs_biaobengs}"></div>
+         <div class="col-sm-1 control-label"><input id="yp_tymc"  class="form-control"   name="yp_hytymc[]" type="text" value="{$sel.ybgs_biaobenliang}"><span id="danwei"></span></div>
+         <div class="col-sm-1 control-label"><input id="yp_sccj"  class="autocompleteclass form-control" name="yp_hysccj[]"  type="text"  value="{$sel.ybgs_yunsongtj}"></div>
+         <div class="col-sm-1 control-label"><input class="form-control" id="yp_hyyaopinpihao" name="yp_hyyaopinpihao[]"  type="text" value="{$sel.ybgs_biaobenzt}"></div>
+         <div class="col-sm-1 control-label"><input id="yp_hyyaopinyongfaliang" class="form-control" name="yp_hyyaopinyongfaliang[]"   type="text" value="{$sel.ybgs_biaobenzt}"></div>
+         <div class="col-sm-2 control-label"><input id="yp_hyyyqzsj" class="form-control" name="yp_hyyyqzsj[]"  type="text" value="{$sel.ybgs_biaobenzt}"></div>
+         <div class="col-sm-2 control-label"><input id="yp_hyyyyuanyin" class="form-control" name="yp_hyyyyuanyin[]" type="text" value="{$sel.ybgs_biaobenzt}"></div>
+         <div class="col-sm-2 text-center">
+			<a href="javascript:void(0);" class="easyui-linkbutton bbfgdivadd" plain="true" id="btn1" onclick="bbfgdivadd()" iconCls="icon-add">添加</a>
+			<a href="javascript:void(0);" class="easyui-linkbutton hyyaopinivdel" plain="true"  onclick="hyyaopindivdel(this)" iconCls="icon-remove">删除</a>
+		 <div style="coear:both"></div>
+         </div>
+      </div>
+      
+   </fieldset>
+   <div id="aaaaaaaaaa"></div>
+   
+   
+   
+   
+   <legend>并用药品</legend>
+   <fieldset id="bingyongyaoping">
+      <div class="form-group" id="bytitle">
+         <label class="col-sm-1  text-center" for="hz_lastjibing">批准文号</label>
+         <label class="col-sm-1  text-center" for="hz_blmzno">商品名称</label>
+         <label class="col-sm-1  text-center" for="hz_blmzno">通用名称</label>
+         <label class="col-sm-1  text-center" for="hz_blmzno">生产厂家</label>
+         <label class="col-sm-1  text-center" for="hz_blmzno">药品生产批号</label>
+         <label class="col-sm-1  text-center" for="hz_blmzno">药品用法用量</label>
+         <label class="col-sm-2  text-center" for="hz_blmzno">药品用药起止时间</label>
+         <label class="col-sm-2  text-center" for="hz_blmzno">用药原因</label>
+         <label class="col-sm-2  text-center" for="hz_blmzno">操作</label>
+      </div>
+      
+      <div class="form-group content">
+         <div class="col-sm-1 control-label"><input id="yp_bypzwh" class="form-control" name="yp_bypzwh[]" type="text"  value="{$sel.ybgs_biaobenlx}"></div>
+         <div class="col-sm-1 control-label"><input id="yp_byspmc" class="form-control" type="text" name="yp_byspmc[]" value="{$sel.ybgs_biaobengs}"></div>
+         <div class="col-sm-1 control-label"><input id="yp_bytymc" class="form-control" name="yp_bytymc[]" type="text" value="{$sel.ybgs_biaobenliang}"><span id="danwei"></span></div>
+         <div class="col-sm-1 control-label"><input id="yp_bysccj" class="form-control" name="yp_bysccj[]"  type="text"  value="{$sel.ybgs_yunsongtj}"></div>
+         <div class="col-sm-1 control-label"><input id="yp_byyaopinpihao" class="form-control" name="yp_byyaopinpihao[]"  type="text" value="{$sel.ybgs_biaobenzt}"></div>
+         <div class="col-sm-1 control-label"><input id="yp_byyaopinyongfaliang" class="form-control"  name="yp_byyaopinyongfaliang[]"  type="text" value="{$sel.ybgs_biaobenzt}"></div>
+         <div class="col-sm-2 control-label"><input id="yp_byyyqzsj" class="form-control" type="text"  name="yp_byyyqzsj[]" value="{$sel.ybgs_biaobenzt}"></div>
+         <div class="col-sm-2 control-label"><input id="yp_byyyyuanyin" class="form-control" name="yp_byyyyuanyin[]"   type="text" value="{$sel.ybgs_biaobenzt}"></div>
+         <div class="col-sm-2 text-center">
+			<a href="javascript:void(0);" class="easyui-linkbutton bydivadd" plain="true" id="btn1" onclick="bydivadd()" iconCls="icon-add">添加</a>
+			<a href="javascript:void(0);" class="easyui-linkbutton bydivdel" plain="true" id="" onclick="bydivdel(this)" iconCls="icon-remove">删除</a>
+		 <div style="coear:both"></div>
+         </div>
+      </div>
+   </fieldset>   
+   <div id="bbbbbbbbbb"></div>
+   
+   <fieldset>
+   	   <div class="form-group">
+         <label class="col-sm-1 control-label" for="hz_blfyshijianmingcheng">不良反应/事件名称：</label>
+         <div class="col-sm-4">
+         	<input id="hz_blfyshijianmingcheng" name="hz_blfyshijianmingcheng" placeholder="不良反应时间名称" class="form-control"type="text">
+         </div>
+         <label class="col-sm-2 control-label" for="hz_blmzno">不良反应/事件发生时间：</label>
+         <div class="col-sm-4">
+         	<input id="hz_blfysjfssj" name="hz_blfysjfssj" placeholder="不良反应/事件发生时间" type="text" class="form-control form_date" data-link-format="yyyy-mm-dd"data-date-format="yyyy-mm-dd" readonly >
+         </div>
+      </div>
+      <div class="form-group">
+         <label class="col-sm-1 control-label text-left" for="hz_blfyshijianmingcheng">不良反应/事件过程描述：</label>
+         <div class="col-sm-12">
+         	<textarea id="hz_blfysjgcms" name="hz_blfysjgcms" class="form-control" rows="10" cols="150"></textarea>
+         </div>
+      </div>
+      
+      
+      <div class="form-group">
+         <label class="col-sm-1 control-label" for="ds_host">相不良反应/事件的结果：</label>
+         <div class="">
+         	<label class="radio-inline"><input name="hz_blfysjjg" id="hz_blfysjjg-0" value="0" type="radio">痊愈</label>
+			<label class="radio-inline"><input name="hz_blfysjjg" id="hz_blfysjjg-1" value="1" type="radio">好转</label>
+			<label class="radio-inline"><input name="hz_blfysjjg" id="hz_blfysjjg-2" value="2" type="radio">未好转</label>
+			<label class="radio-inline"><input name="hz_blfysjjg" id="hz_blfysjjg-3" value="3" type="radio">不详</label>
+			<label class="radio-inline"><input name="hz_blfysjjg" id="hz_blfysjjg-4" value="4" type="radio">有后遗症</label>
+			<label class="radio-inline"><input id="jieguobiaoxian" name="hz_jieguobiaoxian" class="form-control"value="" placeholder="表现" type="text"></label>
+			<label class="radio-inline"><input name="hz_blfysjjg" id="hz_blfysjjg-5" value="5" type="radio">死亡</label>
+			<label class="radio-inline"><input id="siwangyuanyin" name="hz_siwangyuanyin" class="form-control"value="" placeholder="直接死因" type="text"></label>
+			<label class="radio-inline"><input id="hz_blfysiwangshijian" name="hz_siwangshijian" placeholder="死亡时间"placeholder="死亡时间" type="text" class="form-control form_date" data-link-format="yyyy-mm-dd"data-date-format="yyyy-mm-dd" readonly ></label>
+         </div>
+      </div>
+      
+      <div class="form-group">
+         <label class="col-sm-2 control-label" for="ds_host">停药或减量后，反应/事件是否消失或减轻？</label>
+         <div class="">
+         	<label class="radio-inline"><input name="hz_jianyaofanyingisjianqing" id="hz_jianyaofanyingisjianqing-0" value="0" type="radio">是</label>
+			<label class="radio-inline"><input name="hz_jianyaofanyingisjianqing" id="hz_jianyaofanyingisjianqing-1" value="1" type="radio">否</label>
+			<label class="radio-inline"><input name="hz_jianyaofanyingisjianqing" id="hz_jianyaofanyingisjianqing-2" value="2" type="radio">不明</label>
+			<label class="radio-inline"><input name="hz_jianyaofanyingisjianqing" id="hz_jianyaofanyingisjianqing-3" value="3" type="radio">未停药或未减量</label>
+         </div>
+      </div>
+      
+      <div class="form-group">
+         <label class="col-sm-2 control-label" for="ds_host">再次使用可以药品后是否再次出现同样反应/事件?</label>
+         <div class="">
+         	<label class="radio-inline"><input name="hz_zaicishiyongzaichuxian" id="hz_zaicishiyongzaichuxian-0" value="0" type="radio">是</label>
+			<label class="radio-inline"><input name="hz_zaicishiyongzaichuxian" id="hz_zaicishiyongzaichuxian-1" value="1" type="radio">否</label>
+			<label class="radio-inline"><input name="hz_zaicishiyongzaichuxian" id="hz_zaicishiyongzaichuxian-2" value="2" type="radio">不明</label>
+			<label class="radio-inline"><input name="hz_zaicishiyongzaichuxian" id="hz_zaicishiyongzaichuxian-3" value="3" type="radio">未再使用</label>
+         </div>
+      </div>
+      <div class="form-group">
+         <label class="col-sm-1 control-label" for="ds_host">对原患疾病的影响</label>
+         <div class="">
+         	<label class="radio-inline"><input name="hz_dyhjbdyx" id="hz_dyhjbdyx-0" value="0" type="radio">不明显</label>
+			<label class="radio-inline"><input name="hz_dyhjbdyx" id="hz_dyhjbdyx-1" value="1" type="radio">病程延长</label>
+			<label class="radio-inline"><input name="hz_dyhjbdyx" id="hz_dyhjbdyx-2" value="2" type="radio">病情加重</label>
+			<label class="radio-inline"><input name="hz_dyhjbdyx" id="hz_dyhjbdyx-3" value="3" type="radio">导致后遗症</label>
+			<label class="radio-inline"><input name="hz_dyhjbdyx" id="hz_dyhjbdyx-4" value="4" type="radio">导致死亡</label>
+			
+         </div>
+      </div>
+      <div class="form-group">
+         <label class="col-sm-3 control-label" for="hz_lastjibing">药品不良反应/事件是否与药品质量（如未按要求保存药品等）相关：</label>
+         <div class="col-sm-8">
+            <input id="hz_fanyingyuyaozhiliangxiangguan" name="hz_fanyingyuyaozhiliangxiangguan" placeholder="药品不良反应/事件是否与药品质量（如未按要求保存药品等）相关：" class="form-control" size="100"type="text">
+         </div>
+      </div>
+      <div class="form-group">
+         <label class="col-sm-3 control-label" for="hz_lastjibing">药品不良反应/事件是否与不合理用药（如超说明书、不合理药物配伍）相关：</label>
+         <div class="col-sm-8">
+            <input id="hz_fyyubuheliyongyaoxiangguan" name="hz_fyyubuheliyongyaoxiangguan" placeholder="药品不良反应/事件是否与不合理用药（如超说明书、不合理药物配伍）相关" class="form-control" size="100" type="text">
+         </div>
+      </div>
+      <div class="form-group">
+         <label class="col-sm-3 control-label" for="hz_lastjibing">药品不良反应/事件是否与用药错误（如药品调剂错误、药品配置错误）相关：</label>
+         <div class="col-sm-8">
+            <input id="hz_fyyucuowuyongyaoxiangguan" name="hz_fyyucuowuyongyaoxiangguan" placeholder="药品不良反应/事件是否与用药错误（如药品调剂错误、药品配置错误）相关" class="form-control" size="100" type="text">
+         </div>
+      </div>
+      <div class="form-group">
+         <label class="col-sm-1 control-label" for="ds_host">报告人评价：</label>
+         <div class="">
+         	<label class="radio-inline"><input name="hz_baogaorenpingjia" id="hz_baogaorenpingjia-0" value="0" type="radio">肯定</label>
+         	<label class="radio-inline"><input name="hz_baogaorenpingjia" id="hz_baogaorenpingjia-1" value="1" type="radio">很可能</label>
+			<label class="radio-inline"><input name="hz_baogaorenpingjia" id="hz_baogaorenpingjia-2" value="2" type="radio">可能</label>
+			<label class="radio-inline"><input name="hz_baogaorenpingjia" id="hz_baogaorenpingjia-3" value="3" type="radio">可能无关</label>
+			<label class="radio-inline"><input name="hz_baogaorenpingjia" id="hz_baogaorenpingjia-4" value="4" type="radio">待评价</label>
+			<label class="radio-inline"><input name="hz_baogaorenpingjia" id="hz_baogaorenpingjia-5" value="5" type="radio">无法评价</label>
+         </div>
+      </div>
+      
+      <div class="form-group">
+         <label class="col-sm-1 control-label" for="ds_host">报告单位评价：</label>
+         <div class="">
+        	<label class="radio-inline"><input name="hz_bgdwpingjia" id="hz_bgdwpingjia-0" value="0" type="radio">肯定</label>
+			<label class="radio-inline"><input name="hz_bgdwpingjia" id="hz_bgdwpingjia-1" value="1" type="radio">很可能</label>
+			<label class="radio-inline"><input name="hz_bgdwpingjia" id="hz_bgdwpingjia-2" value="2" type="radio">可能</label>
+			<label class="radio-inline"><input name="hz_bgdwpingjia" id="hz_bgdwpingjia-3" value="3" type="radio">可能无关</label>
+			<label class="radio-inline"><input name="hz_bgdwpingjia" id="hz_bgdwpingjia-4" value="4" type="radio">待评价</label>
+			<label class="radio-inline"><input name="hz_bgdwpingjia" id="hz_bgdwpingjia-5" value="5" type="radio">无法评价</label>
+         </div>
+      </div>
+      
+      <div class="form-group">
+         <label class="col-sm-1 control-label text-left" for="hz_blfyshijianmingcheng">备注：</label>
+         <div class="col-sm-12">
+         	<textarea rows="10" cols="150" id="hz_blfysjgcms" name="hz_blfysjgcms" class="form-control" ></textarea>
+         </div>
+      </div>
+   </fieldset>
+   <div class="form-group">
+             <button type="submit" class="submit btn btn-large" >保存</button>
+</form>
+
+<script>
+/*添加和删除按钮*/
+var inputid=1;
+var inputbyid=1;
+function bbfgdivadd(){
+	var new_div = $("#huaiyiyaoping").clone(true);
+	new_div.find('#hytitle').empty();
+	new_div.find('.content').attr('id','hy'+inputid);
+	new_div.find('.content').find('div').find('.hyyaopinivdel').attr('id','hy'+inputid);
+	new_div.find('input').val('');
+	 $("#aaaaaaaaaa").append(new_div.html());
+	 inputid++;
+}
+function bydivadd(){
+	var new_div = $("#bingyongyaoping").clone(true);
+	new_div.find('#bytitle').empty();
+	new_div.find('.content').attr('id','by'+inputbyid);
+	new_div.find('.content').find('div').find('.bydivdel').attr('id','by'+inputbyid);
+	new_div.find('input').val('');
+	 $("#bbbbbbbbbb").append(new_div.html());
+	 inputbyid++;
+}
+
+
+
+function hyyaopindivdel(i){
+	var id= $(i).attr('id');
+	$('#'+id).remove();
+}
+function bydivdel(i){
+	var id= $(i).attr('id');
+	$('#'+id).remove();
+}
+
+$('.form_date').datetimepicker({
+    language:  'zh-CN',
+    weekStart: 1,
+    todayBtn:  1,
+	autoclose: 1,
+	todayHighlight: 1,
+	startView: 2,
+	minView: 2,
+	forceParse: 0
+});
+
+
+$(function(){
+	$("#baogaotype-1").change(function(){
+		if($("#baogaotype-1").is(":checked")){
+			$("#baogaotype-2").attr("disabled","disabled");
+		}else{
+			$("#baogaotype-2").attr("disabled",false);
+		}
+	});
+	
+	$("#baogaotype-2").change(function(){
+		if($("#baogaotype-2").is(":checked")){
+			$("#baogaotype-1").attr("disabled","disabled");
+		}else{
+			$("#baogaotype-1").attr("disabled",false);
+		}
+	});
+	
+	
+	
+	
+	
+	// Validation
+	$("#effectaddform").validate({
+		rules :{
+		},
+		messages : {
+		},
+		// Do not change code below
+		errorPlacement : function(error, element) {
+			//error.insertAfter(element.parent());
+			if (element.is(':radio') || element.is(':checkbox')) { //如果是radio或checkbox
+				error.appendTo( element.parent().next().next() );
+			} else {
+				error.insertAfter(element.parent());
+			}
+		},
+		submitHandler: function(form){
+			$.ajax({
+				url : "{:U(GROUP_NAME.'/DrugAdverseReaction/effectadd')}",
+				type : "post",
+				dataType : "json",
+				data: $("#effectaddform").serialize(),
+				success : function(result) {
+					if(result.status==true) {
+					    $.confirm({
+					        title: false,
+					        closeIcon:  result.info,
+					        content:  result.info,
+					        theme: 'hololight',
+					        columnClass: 'col-md-4 col-md-offset-4'
+					    });
+						//location.href='{:U(GROUP_NAME.'/Index/index')}';
+					    setTimeout("location.href='{:U(GROUP_NAME.'/DrugAdverseReaction/index')}'",3000); 
+					} else if(result.status==false){
+						$.confirm({
+					        title: '提示',
+					        cancelButton:  '关闭',
+					        confirmButton: '待会再试',
+					        closeIcon:  result.info,
+					        content:  result.info,
+					        theme: 'hololight',
+					        columnClass: 'col-md-4 col-md-offset-4',
+					        backgroundDismiss: false
+					    });
+					}
+				}
+			});
+		}
+	});
+	
+});
+</script>

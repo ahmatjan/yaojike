@@ -1,0 +1,333 @@
+<script>
+	$(function() {
+		//左边角色列表
+		$('#rbac_role_datagrid').datagrid({
+			url : '{:U(GROUP_NAME.'/Authority/get_auth_group')}',
+			border : false,
+			fit : true,
+			striped : true,
+			fitColumns : false,
+			singleSelect : true,
+			rownumbers : false,
+			selectOnCheck : true,
+			checkOnSelect : true,
+			animate : false,
+			idField : 'id',
+			checkbox : true,
+			frozenColumns : [ [ {
+				field : 'id',
+				title : 'id',
+				checkbox : true
+			}, {
+				field : 'title',
+				title : '角色名称',
+				width : 100
+			} ] ],
+			columns : [ [ {
+				field : 'status',
+				title : '状态',
+				width : 40,
+				formatter : function(value, row, index) {
+					if (value == 1) {
+						return '开启';
+					} else {
+						return '停用';
+					}
+				},
+				align : 'center'
+			}, {
+				field : 'remark',
+				title : '备注',
+				width : 400
+			} ] ],
+			toolbar : [ {
+				iconCls : 'icon-add',
+				text : '添加',
+				handler : function() {
+					addRole();
+				}
+			}, {
+				iconCls : 'icon-edit',
+				text : '编辑',
+				handler : function() {
+					editRole();
+				}
+			}, {
+				iconCls : 'icon-remove',
+				text : '删除',
+				handler : function() {
+					delRole();
+				}
+			}, '-', {
+				iconCls : 'icon-reload',
+				text : '刷新',
+				handler : function() {
+					$('#rbac_role_datagrid').datagrid('reload');
+				}
+			} ]
+		});
+		//右边用户列表
+		$('#rbac_role_user_datagrid').datagrid({
+			url : '{:U(GROUP_NAME.'/Authority/getUser')}',
+			border : false,
+			fit : true,
+			striped : true,
+			fitColumns : false,
+			singleSelect : false,
+			rownumbers : true,
+			selectOnCheck : true,
+			checkOnSelect : true,
+			animate : false,
+			idField : 'id',
+			checkbox : true,
+			pagination : true,
+			pageSize : 15,
+			pageList : [ 15, 30, 45, 60 ],
+			frozenColumns : [ [ {
+				field : 'id',
+				title : 'id',
+				checkbox : true
+			}, {
+				field : 'uid',
+				title : '用户ID',
+				width : 80
+			}, {
+				field : 'name',
+				title : '用户名',
+				width : 80
+			} ] ],
+			columns : [ [ {
+				field : 'groupName',
+				title : '分组信息',
+				width : 150
+			}, {				field : 'status',				title : '状态',				width : 150			}, {
+				field : 'remark',
+				title : '备注',
+				width : 150
+			} ] ],
+			toolbar : [ {
+				iconCls : 'Pagemagnify',
+				text : '未分组用户',
+				handler : function() {
+					$('#rbac_role_user_datagrid').datagrid({
+						url : '{:U(GROUP_NAME.'/Authority/getUn_auth_group_access_User')}'
+					});
+				}
+			}, {
+				iconCls : 'Pageportraitshot',
+				text : '所有用户',
+				handler : function() {
+					$('#rbac_role_user_datagrid').datagrid({
+						url : '{:U(GROUP_NAME.'/Authority/getAllUser')}'
+					});
+				}
+			}, {
+				iconCls : 'Chartorganisationadd',
+				text : '加入选中角色',
+				handler : function() {
+					addSelectRole();
+				}
+			}, {
+				iconCls : 'Chartorganisationdelete',
+				text : '移出选中角色',
+				handler : function() {
+					removeSelectRole();
+				}
+			}, '-', {
+				iconCls : 'icon-reload',
+				text : '刷新',
+				handler : function() {
+					$('#rbac_role_user_datagrid').datagrid('unselectAll');
+					$('#rbac_role_user_datagrid').datagrid('reload');
+				}
+			} ]
+		});
+		//左边组点击右边调用所属的用户列表
+		$('#rbac_role_datagrid').datagrid({
+			onClickRow : function(rowIndex, rowData) {
+				$('#rbac_role_user_datagrid').datagrid({
+					url : '{:U(GROUP_NAME.'/Authority/get_auth_group_IdUser')}/id/' + rowData.id
+				});
+			}
+		});
+
+	});
+	//将用户加入已选择角色
+	function addSelectRole() {
+		var role = $('#rbac_role_datagrid').datagrid('getSelected');
+		var user = $('#rbac_role_user_datagrid').datagrid('getChecked');
+		if (!role) {
+			$.messager.alert('提示', '您还没有选择要加入的角色!');
+		} else if (user.length == 0) {
+			$.messager.alert('提示', '您还没有选择所要加入选定角色的用户!');
+		} else {
+			var roleId = role.id;
+			var userId = '';
+			//输出所选中的用户id字串,如:1,2,3,4
+			for ( var i = 0; i < user.length; i++) {
+				if (i == user.length - 1) {
+					userId = userId + user[i]['id'];
+				} else {
+					userId = userId + user[i]['id'] + ',';
+				}
+			}
+			//用$.post调用后台做添加角色动作
+			$.post("{:U(GROUP_NAME.'/Authority/addSelect_auth_gorup_access')}", {
+				rid : roleId,
+				uid : userId
+			}, function(data) {
+				if (data.status) {
+					$('#rbac_role_datagrid').datagrid('reload');
+					$('#rbac_role_user_datagrid').datagrid('reload');
+					$('#rbac_role_user_datagrid').datagrid('unselectAll');
+					msgBox('成功', data.info);
+				} else {
+					msgBox('失败', data.info);
+				}
+			}, "json");
+		}
+	}
+	//将用户移出已选择角色
+	function removeSelectRole() {
+		var role = $('#rbac_role_datagrid').datagrid('getSelected');
+		var user = $('#rbac_role_user_datagrid').datagrid('getChecked');
+		if (!role) {
+			$.messager.alert('提示', '您还没有选择要移出的角色!');
+		} else if (user.length == 0) {
+			$.messager.alert('提示', '您还没有选择所要移出选定角色的用户!');
+		} else {
+			var roleId = role.id;
+			var userId = '';
+			//输出所选中的用户id字串,如:1,2,3,4
+			for ( var i = 0; i < user.length; i++) {
+				if (i == user.length - 1) {
+					userId = userId + user[i]['id'];
+				} else {
+					userId = userId + user[i]['id'] + ',';
+				}
+			}
+			//用$.post调用后台做添加角色动作
+			$.post("{:U(GROUP_NAME.'/Authority/removeSelectAuth_group_access')}", {
+				rid : roleId,
+				uid : userId
+			}, function(data) {
+				if (data.status) {
+					$('#rbac_role_datagrid').datagrid('reload');
+					$('#rbac_role_user_datagrid').datagrid('reload');
+					$('#rbac_role_user_datagrid').datagrid('unselectAll');
+					msgBox('成功', data.info);
+				} else {
+					msgBox('失败', data.info);
+				}
+			}, "json");
+		}
+	}
+	//删除用户角色
+	function delRole() {
+		var rbac_role_datagrid = $('#rbac_role_datagrid');
+		var row = rbac_role_datagrid.datagrid('getSelected');
+		if (row) {
+			$.messager.confirm('警告', '你确实要彻底删除所选的角色吗?', function(r) {
+				if (r) {
+					$.post("{:U(GROUP_NAME.'/Authority/del_auth_group')}", {
+						"id" : row.id
+					}, function(data) {
+						if (data.status) {
+							rbac_role_datagrid.datagrid('reload');
+							$('#rbac_role_user_datagrid').datagrid({
+								url : '{:U(GROUP_NAME.'/Authority/getAllUser')}'
+							});
+							rbac_role_datagrid.datagrid('unselectAll');
+							msgBox('成功', data.info);
+						} else {
+							msgBox('失败', data.info);
+						}
+					}, "json");
+				}
+			});
+
+		} else {
+			$.messager.alert('警告', '您还没有选中要删除的角色!');
+		}
+	}
+	function addRole() {
+		var addRoleDialog = $('<div/>').dialog({
+			title : '用户组添加',
+			width : 600,
+			height : 220,
+			modal : true,
+			href : '{:U(GROUP_NAME.'/Authority/add_auth_group')}',
+			buttons : [ {
+				iconCls : 'Bullettick',
+				text : '添加',
+				handler : function() {
+					$.post("{:U(GROUP_NAME.'/Authority/add_auth_group_Submit')}", $('#rbac_role_addForm').serialize(), function(data) {
+						if (data.status) {
+							addRoleDialog.dialog('destroy');
+							$('#rbac_role_datagrid').datagrid('reload');
+							msgBox('成功', data.info);
+						} else {
+							msgBox('失败', data.info);
+						}
+					}, "json");
+				}
+			}, {
+				iconCls : 'Bulletleft',
+				text : '重置',
+				handler : function() {
+					addRoleDialog.dialog('refresh');
+				}
+			} ],
+			onClose : function() {
+				addRoleDialog.dialog('destroy');
+			}
+		});
+	}
+	function editRole() {
+		var row = $('#rbac_role_datagrid').datagrid('getSelected');
+		if (row) {
+			var editRoleDialog = $('<div/>').dialog({
+				title : '角色编辑',
+				width : 600,
+				height : 220,
+				modal : true,
+				href : '{:U(GROUP_NAME.'/Authority/edit_auth_group')}/id/' + row.id,
+				buttons : [ {
+					iconCls : 'Bullettick',
+					text : '更新',
+					handler : function() {
+						$.post("{:U(GROUP_NAME.'/Authority/edit_auth_group_Submit')}", $('#rbac_role_editForm').serialize(), function(data) {
+							if (data.status) {
+								editRoleDialog.dialog('destroy');
+								$('#rbac_role_datagrid').datagrid('reload');
+								msgBox('成功', data.info);
+							} else {
+								msgBox('失败', data.info);
+							}
+						}, "json");
+					}
+				}, {
+					iconCls : 'Bulletleft',
+					text : '重置',
+					handler : function() {
+						editRoleDialog.dialog('refresh');
+					}
+				} ],
+				onClose : function() {
+					editRoleDialog.dialog('destroy');
+				}
+			});
+		} else {
+			$.messager.alert('提示', '您还没有选择所要编辑的角色!');
+		}
+	}
+</script>
+
+<div id="rbac_role_layout" class="easyui-layout" data-options="fit:true">
+	<div data-options="region:'west',title:'角色列表',border:false,split:true" style="width: 400px;">
+		<table id="rbac_role_datagrid"></table>
+	</div>
+	<div data-options="region:'center',title:'用户列表',border:false">
+		<table id="rbac_role_user_datagrid"></table>
+	</div>
+</div>

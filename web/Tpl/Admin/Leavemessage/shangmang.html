@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>客户</title>
+
+</head>
+<body>
+<style type="text/css">
+body {
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+}
+.STYLE1 {font-size: 12px;}
+.STYLE2 {font-size: 12px; color:#0039FF;}
+.STYLE3 {font-size: 12px; font-weight: bold; }
+.STYLE4 {
+	color: #03515d;
+	font-size: 12px;
+}
+.STYLE5 td{border-bottom:1px #CCCCCC dashed;}
+   .a{ color:#FFFFFF; text-decoration:none}
+   
+   .a2{ color:#000000; text-decoration:none}
+   
+   a:hover{ color:#FF0000}
+</style>
+
+<script language="javascript">
+function shenhe(id){
+	if (!confirm("确定认证通过吗？"))
+		return;
+	var tihuanobj		= '#renzhengzhizhao'+id;
+	$.post("__APP__/Customer/shenhe",{id:id},function(data){
+		//alert(data);
+		if(data.data == 1){
+       	    alert('已认证');
+       	 $(tihuanobj).replaceWith("<span class='STYLE2'>"+data.info+"</span>");
+       	}
+       	else{
+       		alert("未知原因认证失败，请刷新页面再试");
+       		location.reload()
+       	}
+	});
+	
+}
+</script>
+<div id="xianshi" style=" margin0">
+	<table width="100%" border="1" cellpadding="1" cellspacing="1" style="margin:0; padding:0">
+	          <tr >
+	            <td width="5%" height="22" >
+				  <div align="center"><span class="STYLE2">序号</span></div>
+				</td>
+	            <td width="5%" height="22"  >
+				   <div align="center"><span class="STYLE2">QQ</span></div>
+				</td>
+	            <td width="5%" height="22" >
+				  <div align="center"><span class="STYLE2">手机号</span></div>
+			    </td>
+	            <td width="8%">
+				   <div align="center"><span class="STYLE2">公司名</span></div>
+				</td>
+	            <td width="10%" height="22" >
+				    <div align="center"><span class="STYLE2">公司执照</span></div>
+			    </td>
+	            <td width="5%" height="22" >
+				  <div align="center"><span class="STYLE2">注册时间</span></div>
+			    </td>
+	            <td width="10%" height="22"  class="STYLE2">
+				  <div align="center">基本操作</div>
+				</td>
+	          </tr>
+	   <volist name='sel' id='loop'>
+	          <tr class="STYLE5">
+	            <td height="30" >
+				  <div align="center" class="STYLE2">
+	                <div align="center">{$i}</div>
+	              </div>
+				</td>
+	            <td height="30" >
+				   <div align="center"><span class="STYLE1">{$loop.uid}</span></div>
+				</td>
+	            <td height="30" >
+				    <div align="center"><span class="STYLE1">{$loop.mobile}</span></div>
+				</td>
+	            <td >
+				   <div align="center"><span class="STYLE1">{$loop.gongsqc}</span></div>
+				</td>
+	            <td height="30" >
+				     <div align="center"><span class="STYLE1"><img src='__ROOT__/WebPage/{$loop.imgfile}' style='width:80px;height:80px'></span></div>
+			    </td>
+	            <td height="30" >
+				    <div align="center"><span class="STYLE1">{$loop.createTime}</span></div>
+				</td>
+	            <td height="30" >
+				    <div align="center">
+					    <span id='renzheng{$loop.id}' class="STYLE2">
+					    	<if condition="$loop['renzhengzhizhao'] eq true">
+					    	已认证
+					    	<else />
+							<a href="javascript:void(0)" onclick="shenhe({$loop.id})"class="a2">审核</a>
+							</if>
+						</span>
+					</div>
+				</td>
+	          </tr>
+		</volist>
+	</table>
+	{$show}
+</div>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<style type="text/css">
+<!--
+label {
+	float: left;
+	width: 80px;
+	text-align: right;
+	padding: 2px;
+	margin: 1px;
+}
+
+.row {
+	margin-top: 10px;
+}
+-->
+</style>
+<form id="rbac_role_addForm" method="post">
+	<div style="clear: both; overflow: hidden; padding: 10px;">
+		<div style="float: left; width: 270px; margin-right: 20px;">
+			<div class="row">
+				<label for="title">角色名称:</label><input id="title" type="text" name="title" style="width: 150px;"><span
+					style="color: red;">&nbsp;*</span>
+			</div>
+		</div>
+		<div style="float: left; width: 270px;">
+			<div class="row">
+				<label for="status">状态:</label> <select id="status" class="easyui-combo" name="status">
+					<option value="1">开启</option>
+					<option value="0">关闭</option>
+				</select>
+			</div>
+		</div>
+	</div>
+	<div class="row" style="padding-left: 10px;">
+		<label for="remark">描述:</label><input id="remark" type="text" name="remark" style="width: 400px;">
+	</div>
+</form>

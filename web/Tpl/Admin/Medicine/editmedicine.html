@@ -1,0 +1,337 @@
+<script type="text/javascript">
+var ueditorurl="{$url}__ROOT__/web/Tpl/Admin/Public/ueditor1_4_3-utf8/";
+</script>
+<script type="text/javascript" charset="utf-8"  src="__PUBLIC__/ueditor1_4_3-utf8/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="__PUBLIC__/ueditor1_4_3-utf8/ueditor.all.js"></script>
+<script type="text/javascript" charset="utf-8" src="__PUBLIC__/ueditor1_4_3-utf8/lang/zh-cn/zh-cn.js"></script>
+
+
+
+<style type="text/css">
+input.error { border: 1px solid red; }
+label.checked {
+  background:url("./demo/images/checked.gif") no-repeat 0px 0px;
+}
+
+label {
+
+	float: left;
+	
+	text-align: right;
+
+	padding: 2px;
+
+	margin: 1px;
+
+}
+
+.row {
+
+	margin-top: 10px;
+
+}
+
+</style>
+
+<script typescripttype="text/javascript">  
+//window.UEDITOR_HOME_URL = '__PUBLIC__/ueditor1_4_3-utf8/'; //一定要用这句话，否则你需要去ueditor.config.js修改路径的配置信息  ，写了也没个毛用
+var ue=UE.getEditor('md_jingshi',{serverUrl: ueditorurl+'/php/controller.php'});
+var ue=UE.getEditor('md_chengfen');
+var ue=UE.getEditor('md_yaolifenllei');
+var ue=UE.getEditor('md_lcyingyong');
+var ue=UE.getEditor('md_yfyl');
+var ue=UE.getEditor('md_guowaiylck');
+var ue=UE.getEditor('md_geiyaoshuoming');
+var ue=UE.getEditor('md_jinjizheng');
+var ue=UE.getEditor('md_shenyong');
+var ue=UE.getEditor('md_tsrenqun');
+var ue=UE.getEditor('md_blfanying');
+var ue=UE.getEditor('md_ywxhzuoyong');
+var ue=UE.getEditor('md_zhuyishixiang');
+var ue=UE.getEditor('md_guowaizkyyxxck');
+var ue=UE.getEditor('md_ywguoliang');
+var ue=UE.getEditor('md_yaoli');
+var ue=UE.getEditor('md_zjgg');
+var ue=UE.getEditor('md_chucang');
+/*ue.ready(function(){
+    //阻止工具栏的点击向上冒泡
+    $(this.container).click(function(e){
+        e.stopPropagation()
+    })
+});
+$('.content').click(function(e){
+	var $target='';
+	var content='';
+	var currentParnet='';
+	var currentContent='';
+	
+	
+    $target = $(this);
+    content = $target.html();/*获取点击的这个html内容* /
+    
+    
+    currentParnet = ue.container.parentNode.parentNode;/*获取当前工具栏* /
+    currentContent = ue.getContent();/*当前编辑器里面的内容* /
+    $target.html('');/*清空点击的标签内容* /
+    $target.append(ue.container.parentNode);/*把工具栏添加进点击的这一项* /
+    ue.reset();//alert(content)
+    ue.setContent('');//清空
+    setTimeout(function(){/*延迟200毫秒，why?* /
+        ue.setContent(content);/*把点击内容放进此时的编辑器* /
+    },2000)
+    $(currentParnet).html(currentContent);/*当前工具栏里面的内容替换为编辑器里面 的内容。* /
+})*/
+ </script>
+
+<form id="medicine_editForm" method="post">
+<input type="hidden" id="md_id" name="md_id" value="{$data.md_id}">
+
+	<div style="clear: both; overflow: hidden; padding: 10px;">
+		<div style="float: left; width: 270px; margin-right: 20px;">
+			<div class="row">
+				<label for="md_name">药名：</label><input id="md_name" name="md_name" placeholder="药名" value="{$data.md_name}" class="input-xlarge"  type="text">
+			</div>
+		</div>
+		
+	</div>
+<hr color="#D4D4D4">
+	<div style="clear: both; overflow: hidden; padding: 10px;">
+		
+		<div style="float: left; width: 270px; margin-right: 20px;">
+			<div class="row">
+				<label for="md_sort">排序：</label><input id="md_sort" name="md_sort" placeholder="排序" value="{$data.md_sort}" class="input-xlarge"  type="text">
+			</div>
+		</div>
+		
+	</div>
+	
+
+
+
+<hr color="#D4D4D4">
+
+	<div style="clear: both; overflow: hidden; padding: 2px;">
+		<label for="md_jingshi">特别警示：</label>
+		<div style="float: left; width: 200px; margin-right: 2px;">
+			<div class="row">
+				
+				<script id="md_jingshi" class="content" type="text/plain" style="width:900px;height:350px;">{$data.md_jingshi}</script>
+				 
+			</div>
+		</div>
+		
+	</div>
+	
+	<hr color="#D4D4D4">
+		<div style="clear: both; overflow: hidden; padding: 2px;">
+		<label for="md_chengfen">组成成分：</label>
+		<div style="float: left; width: 200px; margin-right: 2px;">
+			<div class="row">
+				
+				<script id="md_chengfen" type="text/plain" class="content" style="width:900px;">{$data.md_chengfen}</script>
+			</div>
+		</div>
+		
+	</div>
+	
+	<hr color="#D4D4D4">
+		<div style="clear: both; overflow: hidden; padding: 2px;">
+		<label for="md_yaolifenllei">药理分类：</label>
+		<div style="float: left; width: 200px; margin-right: 2px;">
+			<div class="row">
+				
+				<script id="md_yaolifenllei" type="text/plain" class="content" style="width:900px;">{$data.md_yaolifenllei}</script>
+			</div>
+		</div>
+		
+	</div>
+	
+	<hr color="#D4D4D4">
+		<div style="clear: both; overflow: hidden; padding: 2px;">
+		<label for="md_lcyingyong">临床应用：</label>
+		<div style="float: left; width: 200px; margin-right: 2px;">
+			<div class="row">
+				
+				<script id="md_lcyingyong" type="text/plain" class="content" style="width:900px;">{$data.md_lcyingyong}</script>
+			</div>
+		</div>
+		
+	</div>
+	
+	<hr color="#D4D4D4">
+		<div style="clear: both; overflow: hidden; padding: 2px;">
+		<label for="md_yfyl">用法与用量：</label>
+		<div style="float: left; width: 200px; margin-right: 2px;">
+			<div class="row">
+				
+				<script id="md_yfyl" type="text/plain" class="content" style="width:900px;">{$data.md_yfyl}</script> 
+			</div>
+		</div>
+		
+	</div>
+	
+	<hr color="#D4D4D4">
+		<div style="clear: both; overflow: hidden; padding: 2px;">
+		<label for="md_guowaiylck">国外用法用量参考：</label>
+		<div style="float: left; width: 200px; margin-right: 2px;">
+			<div class="row">
+				
+				<script id="md_guowaiylck" type="text/plain" class="content" style="width:900px;">{$data.md_guowaiylck}</script> 
+			</div>
+		</div>
+		
+	</div>
+	
+	<hr color="#D4D4D4">
+		<div style="clear: both; overflow: hidden; padding: 2px;">
+		<label for="md_geiyaoshuoming">给药说明：</label>
+		<div style="float: left; width: 200px; margin-right: 2px;">
+			<div class="row">
+				
+				<script id="md_geiyaoshuoming" type="text/plain" class="content" style="width:900px;">{$data.md_geiyaoshuoming}</script> 
+			</div>
+		</div>
+		
+	</div>
+	
+	<hr color="#D4D4D4">
+		<div style="clear: both; overflow: hidden; padding: 2px;">
+		<label for="md_jinjizheng">禁忌症：</label>
+		<div style="float: left; width: 200px; margin-right: 2px;">
+			<div class="row">
+				
+				<script id="md_jinjizheng" type="text/plain"  class="content" style="width:900px;">{$data.md_jinjizheng}</script> 
+			</div>
+		</div>
+		
+	</div>
+	
+	<hr color="#D4D4D4">
+		<div style="clear: both; overflow: hidden; padding: 2px;">
+		<label for="md_shenyong">慎用：</label>
+		<div style="float: left; width: 200px; margin-right: 2px;">
+			<div class="row">
+				
+				<script id="md_shenyong" type="text/plain" class="content" style="width:900px;">{$data.md_shenyong}</script> 
+			</div>
+		</div>
+		
+	</div>
+	
+	<hr color="#D4D4D4">
+		<div style="clear: both; overflow: hidden; padding: 2px;">
+		<label for="md_tsrenqun">特殊人群：</label>
+		<div style="float: left; width: 200px; margin-right: 2px;">
+			<div class="row">
+				
+				<script id="md_tsrenqun" type="text/plain" class="content" style="width:900px;">{$data.md_tsrenqun}</script> 
+			</div>
+		</div>
+		
+	</div>
+	
+	<hr color="#D4D4D4">
+		<div style="clear: both; overflow: hidden; padding: 2px;">
+		<label for="md_blfanying">不良反应：</label>
+		<div style="float: left; width: 200px; margin-right: 2px;">
+			<div class="row">
+				
+				<script id="md_blfanying" type="text/plain" class="content" style="width:900px;">{$data.md_blfanying}</script> 
+			</div>
+		</div>
+		
+	</div>
+	
+	<hr color="#D4D4D4">
+		<div style="clear: both; overflow: hidden; padding: 2px;">
+		<label for="md_ywxhzuoyong">药物相互作用：</label>
+		<div style="float: left; width: 200px; margin-right: 2px;">
+			<div class="row">
+				
+				<script id="md_ywxhzuoyong" type="text/plain" class="content" style="width:900px;">{$data.md_ywxhzuoyong}</script> 
+			</div>
+		</div>
+		
+	</div>
+	
+	<hr color="#D4D4D4">
+		<div style="clear: both; overflow: hidden; padding: 2px;">
+		<label for="md_zhuyishixiang">注意事项：</label>
+		<div style="float: left; width: 200px; margin-right: 2px;">
+			<div class="row">
+				
+				<script id="md_zhuyishixiang" type="text/plain" class="content" style="width:900px;">{$data.md_zhuyishixiang}</script> 
+			</div>
+		</div>
+		
+	</div>
+	
+	<hr color="#D4D4D4">
+		<hr color="#D4D4D4">
+		<div style="clear: both; overflow: hidden; padding: 2px;">
+		<label for="md_guowaizkyyxxck">国外专科用药信息参考：</label>
+		<div style="float: left; width: 200px; margin-right: 2px;">
+			<div class="row">
+				
+				<script id="md_guowaizkyyxxck" type="text/plain" class="content" style="width:900px;">{$data.md_guowaizkyyxxck}</script> 
+			</div>
+		</div>
+		
+	</div>
+	
+	<hr color="#D4D4D4">
+		<hr color="#D4D4D4">
+		<div style="clear: both; overflow: hidden; padding: 2px;">
+		<label for="md_ywguoliang">药物过量：</label>
+		<div style="float: left; width: 200px; margin-right: 2px;">
+			<div class="row">
+				
+				<script id="md_ywguoliang" type="text/plain" class="content" style="width:900px;">{$data.md_ywguoliang}</script> 
+			</div>
+		</div>
+		
+	</div>
+	
+	<hr color="#D4D4D4">
+		<hr color="#D4D4D4">
+		<div style="clear: both; overflow: hidden; padding: 2px;">
+		<label for="md_yaoli">药理：</label>
+		<div style="float: left; width: 200px; margin-right: 2px;">
+			<div class="row">
+				
+				<script id="md_yaoli" type="text/plain" class="content" style="width:900px;">{$data.md_yaoli}</script> 
+			</div>
+		</div>
+		
+	</div>
+	
+	<hr color="#D4D4D4">
+		<hr color="#D4D4D4">
+		<div style="clear: both; overflow: hidden; padding: 2px;">
+		<label for="md_zjgg">制剂与规格：</label>
+		<div style="float: left; width: 200px; margin-right: 2px;">
+			<div class="row">
+				
+				<p id="md_zjgg" type="text/plain" class="content" style="width:900px;">{$data.md_zjgg}</script> 
+			</div>
+		</div>
+		
+	</div>
+	
+	<hr color="#D4D4D4">
+		<hr color="#D4D4D4">
+		<div style="clear: both; overflow: hidden; padding: 2px;">
+		<label for="md_chucang">贮藏：</label>
+		<div style="float: left; width: 200px; margin-right: 2px;">
+			<div class="row">
+				
+				<script id="md_chucang" type="text/plain" class="content" style="width:900px;">{$data.md_chucang}</script> 
+			</div>
+		</div>
+		
+	</div>
+
+
+	
+
+</form>

@@ -1,0 +1,198 @@
+<script>
+	$(function() {
+		//左边角色列表
+		$('#rbac_access_role_datagrid').datagrid({
+			url : '{:U(GROUP_NAME.'/Authority/get_auth_group')}',
+			border : false,
+			fit : true,
+			striped : true,
+			fitColumns : false,
+			singleSelect : true,
+			rownumbers : false,
+			selectOnCheck : true,
+			checkOnSelect : true,
+			animate : false,
+			idField : 'id',
+			checkbox : true,
+			frozenColumns : [ [ {
+				field : 'id',
+				title : 'id',
+				checkbox : true
+			}, {
+				field : 'title',
+				title : '角色名称',
+				width : 100
+			} ] ],
+			columns : [ [ {
+				field : 'status',
+				title : '状态',
+				width : 40,
+				formatter : function(value, row, index) {
+					if (value == 1) {
+						return '开启';
+					} else {
+						return '停用';
+					}
+				},
+				align : 'center'
+			}, {
+				field : 'remark',
+				title : '备注',
+				width : 400
+			} ] ],
+			toolbar : [ {
+				iconCls : 'icon-reload',
+				text : '刷新',
+				handler : function() {
+					$('#rbac_access_role_datagrid').datagrid('reload');
+				}
+			} ]
+		});
+		//左边组点击右边调用所属的用户列表
+		$('#rbac_access_role_datagrid').datagrid({
+			onClickRow : function(rowIndex, rowData) {
+				$('#rbac_access_node_datagrid').treegrid({
+					url : '{:U(GROUP_NAME.'/Authority/get_auth_rule')}/id/' + rowData.id
+				});
+			}
+		});
+		//右边节点列表
+		$('#rbac_access_node_datagrid').treegrid({
+			url : '{:U(GROUP_NAME.'/Authority/get_auth_rule')}',
+			border : false,
+			fit : true,
+			selectOnCheck : true,
+			checkOnSelect : true,
+			selectOnCheck : true,
+			singleSelect : false,
+			cascadeCheck : true,
+			fitColumns : false,
+			rownumbers : true,
+			idField : 'id',
+			treeField : 'name',
+			onLoadSuccess : function() {
+				//关闭所有父节点,然后展开根节点
+				$('#rbac_access_node_datagrid').treegrid('collapseAll', [ 1 ]);
+				$('#rbac_access_node_datagrid').treegrid('expand', [ 1 ]);
+				//获取当前左边角色已选中的组节点:role.id
+				var role = $('#rbac_access_role_datagrid').datagrid('getSelected');
+				if (role) {
+					//通过当前组ID获取资源节点					
+					$.post("{:U(GROUP_NAME.'/Authority/get_auth_rule_Id')}", {
+						id : role.id
+					}, function(data) {
+						if (data!=0) {
+							//根据后台返回当前组对应的资源数组循环选中已拥有的资源节点
+							for ( var i = 0; i < data.length; i++) {
+								$('#rbac_access_node_datagrid').treegrid('select', data[i]);
+							}
+						}
+					}, "json");
+				}
+
+			},
+			frozenColumns : [ [ {
+				field : 'id',
+				title : 'id',
+				checkbox : true
+			}, {
+				field : 'action',
+				title : 'Action',
+				width : 100
+			}, {
+				field : 'title',
+				title : '标题',
+				width : 100
+			} ] ],
+			columns : [ [ {
+				field : 'remark',
+				title : '备注',
+				width : 200
+			}, {
+				field : 'name',
+				title : '链接地址',
+				width : 200
+			}, {
+				field : 'status',
+				title : '状态',
+				width : 40,
+				formatter : function(value, row, index) {
+					if (value == 1) {
+						return '开启';
+					} else {
+						return '停用';
+					}
+				},
+				align : 'center'
+			} ] ],
+			toolbar : [ {
+				iconCls : 'icon-reload',
+				text : '刷新',
+				handler : function() {
+					$('#rbac_access_node_datagrid').treegrid('unselectAll');
+					$('#rbac_access_node_datagrid').treegrid('reload');
+				}
+			}, {
+				iconCls : 'icon-reload',
+				text : '展开所有节点',
+				handler : function() {
+					$('#rbac_access_node_datagrid').treegrid('expandAll');
+				}
+			}, {
+				iconCls : 'icon-reload',
+				text : '更新角色资源节点',
+				handler : function() {
+					updateAccess();
+				}
+			} ]
+		});
+
+	});
+	//更新角色权限
+	function updateAccess() {
+		var role = $('#rbac_access_role_datagrid').datagrid('getSelected');
+		var node = $('#rbac_access_node_datagrid').treegrid('getSelections');
+		//console.info(role);
+		//console.info(node);
+		if (!role) {
+			$.messager.alert('提示', '请选中要操作的角色!');
+		} else {
+			var roleId = role.id;
+			var nodeId = '';
+			var level = '';
+			//输出所选中的用户id字串,如:1,2,3,4
+			for ( var i = 0; i < node.length; i++) {
+				if (i == node.length - 1) {
+					nodeId = nodeId + node[i]['id'];
+					level = level + node[i]['level'];
+				} else {
+					nodeId = nodeId + node[i]['id'] + ',';
+					level = level + node[i]['level'] + ',';
+				}
+			}
+			//console.info(nodeId);
+			//用$.post调用后台做添加角色动作
+			$.post("{:U(GROUP_NAME.'/Authority/update_auth_group')}", {
+				rid : roleId,
+				nid : nodeId,
+				lv : level
+			}, function(data) {
+				if (data.status) {
+					$('#rbac_access_node_datagrid').treegrid('reload');
+					msgBox('成功', data.info);
+				} else {
+					msgBox('失败', data.info);
+				}
+			}, "json");
+		}
+	}
+</script>
+
+<div id="rbac_access_layout" class="easyui-layout" data-options="fit:true">
+	<div data-options="region:'west',title:'角色列表',border:false,split:true" style="width: 400px;">
+		<table id="rbac_access_role_datagrid"></table>
+	</div>
+	<div data-options="region:'center',title:'资源列表',border:false">
+		<table id="rbac_access_node_datagrid"></table>
+	</div>
+</div>

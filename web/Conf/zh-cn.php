@@ -1,0 +1,24 @@
+<?php
+return array(
+	'zh-cn'=>array(
+			'denglutishi'=>'系统登录',
+			'zhanghao'=>'帐号',
+			'mima'=>'密码',
+			'yanzhengma'=>'验证码',
+			'menuname'=>'功能导航',
+			'center'=>'操作面板',
+			'msg'=>'提示信息',
+			'tuichuxunwen'=>'你确实要安全退出系统吗??',
+			'ninhao'=>'您好!',
+			'scip'=>'上次登录IP:',
+			'scsj'=>'上次登录时间',
+			'tuichuanniu'=>'安全退出',
+			'mianbanguanbi'=>'首页面板不能被关闭!',
+			'xiugaimorenmima'=>'检测到您的登录密码或删除密码为默认，请先修改',
+			'genggaianniu'=>'更改',
+			'successzuo'=>'成功',
+			'errorzuo'=>'失败',
+			'biaodanshibai'=>'表单验证失败，请重试！',
+			'shouye'=>'首页',
+	)
+);

@@ -1,0 +1,15 @@
+<include file="Public:header"/>
+
+<main role="main">
+	<div class="page-header"><h1>{$columnname}</h1></div>
+	<table class="table-standard">
+		<colgroup span="2"><col class="field"><col class="value"></colgroup>
+		<tbody>
+			<volist name="select" id="lp">
+			<tr><td><a href="{:U(GROUP_NAME.'/Article/content',array('id'=>$lp['id']))}">{$lp.title}</a></td><td>{$lp.title|html_entity_decode|clearHtmlLen='350'}</td></tr>
+			</volist>
+		</tbody>
+	</table>
+</main>
+
+<include file="Public:footer"/>

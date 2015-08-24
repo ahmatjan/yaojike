@@ -1,0 +1,58 @@
+<include file="Public:header"/>
+
+<main role="main">
+	<!-- <div class="search-info well well-sm" id="filter-container">
+		<form class="form-inline" action="" accept-charset="UTF-8" method="get">
+			<input name="utf8" type="hidden" value="✓">
+			<input type="hidden" name="type" id="type" value="biotech">
+			<h6 class="filter-title">Filter by group:</h6>
+			<div class="filter-controls clearfix" id="group-filter">
+				<div class="checkbox"><label><input type="checkbox" name="approved" id="approved" value="1" class="checkbox-filter" checked="checked">Approved</label></div>
+				<div class="checkbox"><label><input type="checkbox" name="nutraceutical" id="nutraceutical" value="1" class="checkbox-filter">Nutraceutical</label></div>
+				<div class="checkbox"><label><input type="checkbox" name="illicit" id="illicit" value="1" class="checkbox-filter">Illicit</label></div>
+				<div class="checkbox"><label><input type="checkbox" name="investigational" id="investigational" value="1" class="checkbox-filter">Investigational</label></div>
+				<div class="checkbox"><label><input type="checkbox" name="withdrawn" id="withdrawn" value="1" class="checkbox-filter">Withdrawn</label></div>
+				<div class="checkbox"><label><input type="checkbox" name="experimental" id="experimental" value="1" class="checkbox-filter">Experimental</label></div>
+			</div>
+			<div class="pull-right">
+				<button name="filter" type="submit" class="btn btn-default btn-xs filter-clear" value="false">Clear</button>
+				<button name="filter" type="submit" class="btn btn-primary btn-xs" value="true">Apply Filter</button>
+			</div>
+		</form>
+	</div>-->
+	<div class="pagination-holder">
+		<div class="page_info">显示： <b>{$rowstart}&nbsp;-&nbsp;{$rowend}条</b> 共 <b>{$count}</b></div>
+		<ul class="pagination pagination-sm">
+			{$page}
+		</ul>
+	</div>
+	<table class="drugs-table table table-striped table-condensed table-hover">
+		<thead>
+			<tr>
+				<th class="id-head">药名</th>
+				<th class="categories-head">特别警示</th>
+				<th class="categories-head">成分</th>
+				<th class="categories-head">药理分类</th>
+			</tr>
+		</thead>
+		<tbody>
+			<volist name="sel" id="lp">
+				<tr>
+					<td class="id-value"><a class="btn-card" href="{:U(GROUP_NAME.'/Drug/drugcontent',array('id'=>$lp['md_id']))}">{$lp.md_name}</a></td>
+					<td class="structure-value">{$lp.md_jingshi|html_entity_decode|clearHtmlLen='150'}</td>
+					<td class="structure-value">{$lp.md_chengfen|html_entity_decode|clearHtmlLen='150'}</td>
+					<td class="structure-value">{$lp.md_yaolifenllei|html_entity_decode|clearHtmlLen='150'}</td>
+				</tr>
+			</volist>
+
+		</tbody>
+	</table>
+	<div class="pagination-holder">
+		<div class="page_info">显示： <b>{$rowstart}&nbsp;-&nbsp;{$rowend}条</b> 共 <b>{$count}</b></div>
+		<ul class="pagination pagination-sm">
+			{$page}
+		</ul>
+	</div>
+</main>
+
+<include file="Public:footer"/>

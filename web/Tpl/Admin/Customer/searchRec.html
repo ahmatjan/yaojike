@@ -1,0 +1,79 @@
+<html>
+<script type="text/javascript">
+	$(function() {
+		$('#searchRecDatagrid').datagrid(
+				{
+					url : '__URL__/getSearchRecJson/',
+					pagination : true,
+					fit : true,
+					border : false,
+					rownumbers : true,
+					pageNumber : 1,
+					idField : 'sl_id',
+					pageSize : 15,
+					pageList : [ 15, 30, 45, 60 ],
+					columns : [ [ {
+						field : 'sl_id',
+						title : 'id',
+						checkbox : true
+					}, {
+						field : 'uid',
+						title : 'QQ号码',
+						width : 120
+					}, {
+						field : 'sl_tel',
+						title : '手机号',
+						width : 120
+					}, {
+						field : 'sl_selname',
+						title : '查询名称',
+						width : 150
+					}, {
+						field : 'sl_seltime',
+						title : '查询时间',
+						width : 120
+					}, {
+						field : 'sl_province',
+						title : '省份',
+						width : 60
+					}, {
+						field : 'sl_city',
+						title : '城市',
+						width : 60
+					}, {
+						field : 'sl_ip',
+						title : '查询IP',
+						width : 120
+					}, {
+						field : 'sl_tmorxs',
+						title : '查询方式',
+						width : 60
+					}, {
+						field : 'sl_type',
+						title : '查询类别',
+						width : 250
+					} ] ],
+					toolbar : [
+							{
+								iconCls : 'icon-remove',
+								text : '删除',
+								handler : function() {
+									delOperation();
+								}
+							},
+							'-',
+							{
+								iconCls : 'icon-reload',
+								text : '刷新',
+								handler : function() {
+									$('#searchRecDatagrid')
+											.datagrid('clearSelections');
+									$('#searchRecDatagrid')
+											.datagrid('reload');
+								}
+							} ]
+				});
+	});
+</script>
+<table id="searchRecDatagrid"></table>
+</html>

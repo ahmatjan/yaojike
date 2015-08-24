@@ -1,0 +1,91 @@
+<style type="text/css">
+
+<!--
+
+label {
+
+	float: left;
+
+	width: 80px;
+
+	text-align: right;
+
+	padding: 2px;
+
+	margin: 1px;
+
+}
+
+
+
+.row {
+
+	margin-top: 10px;
+
+}
+
+-->
+
+</style>
+
+<form id="datalib_addDatalib_addFormbiaobenlx" method="post">
+
+	<div style="clear: both; overflow: hidden; padding: 10px;">
+
+		<div style="float: left; width: 270px; margin-right: 20px;">
+
+			<div class="row">
+
+				<label for="biaobenlxu_text">名称:</label><input id="biaobenlx_name" type="text" name="biaobenlx_name" value="{$sel.biaobenlx_name}" style="width: 150px;"><span style="color: red;">&nbsp;*</span>
+
+			</div>
+
+		</div>
+		<div style="float: left; width: 270px; margin-right: 20px;">
+
+			<div class="row">
+
+				<label for="yblx_text">单位:</label><input id="biaobenlx_danwei" type="text" name="biaobenlx_danwei" value="{$sel.biaobenlx_danwei}" style="width: 150px;"><span style="color: red;">&nbsp;*</span>
+
+			</div>
+
+		</div>
+		<div style="float: left; width: 270px; margin-right: 20px;">
+
+			<div class="row">
+
+				<label for="biaobenlx_guanno">管数:</label><input id="biaobenlx_guanno" type="text" name="biaobenlx_guanno" value="{$sel.biaobenlx_guanno}" style="width: 150px;"><span style="color: red;">&nbsp;*</span>
+
+			</div>
+
+		</div>
+		
+
+		<div style="float: left; width: 270px;">
+
+			<div class="row">
+
+				<label for="biaobenlxu_sort">排序:</label><input id="biaobenlxu_sort" type="text" name="biaobenlx_sort" value="{$sel.biaobenlx_sort}" style="width: 110px;">
+
+			</div>
+
+		</div>
+
+	</div>
+
+	<div class="row" style="padding-left: 10px;">
+
+		<label for="biaobenlx_remark">描述:</label><input id="biaobenlx_remark" type="text" name="biaobenlx_remark" value="{$sel.biaobenlx_remark}" style="width: 400px;">
+		<input id="biaobenlx_pid" name="biaobenlx_pid" type="hidden" value="<?php if($_GET['pid']){echo $_GET['pid'];}else{echo $sel['biaobenlx_pid'];}?>">
+		<php>
+		if(isset($sel)){
+			echo "<input id='biaobenlx_id' name='biaobenlx_id' type='hidden' value='$sel[biaobenlx_id]'>";
+		}
+		</php>
+
+		
+
+	</div>
+
+</form>
+

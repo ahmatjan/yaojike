@@ -1,0 +1,59 @@
+<html>
+<script type="text/javascript">
+	$(function() {
+		$('#searchRecDatagrids').datagrid(
+				{
+					url : '__URL__/getSel/',
+					pagination : true,
+					fit : true,
+					border : false,
+					rownumbers : true,
+					pageNumber : 1,
+					idField : 'm_id',
+					pageSize : 15,
+					pageList : [ 15, 30, 45, 60 ],
+					columns : [ [ {
+						field : 'm_id',
+						title : 'id',
+						checkbox : true
+					}, {
+						field : 'm_sbname',
+						title : '查询商标名称',
+						width : 120
+					}, {
+						field : 'm_hangye',
+						title : '查询行业',
+						width : 120
+					}, {
+						field : 'm_qq',
+						title : 'QQ',
+						width : 150
+					}, {
+						field : 'm_phone',
+						title : '电话',
+						width : 120
+					}] ],
+					toolbar : [
+							/*{
+								iconCls : 'icon-remove',
+								text : '删除',
+								handler : function() {
+									delOperation();
+								}
+							},
+							'-',*/
+							{
+								iconCls : 'icon-reload',
+								text : '刷新',
+								handler : function() {
+									$('#searchRecDatagrids')
+											.datagrid('clearSelections');
+									$('#searchRecDatagrids')
+											.datagrid('reload');
+								}
+							} ]
+				});
+	});
+</script>
+<table id="searchRecDatagrids"></table>
+</html>

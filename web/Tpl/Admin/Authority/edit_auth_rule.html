@@ -1,0 +1,52 @@
+<style type="text/css">
+<!--
+label {
+	float: left;
+	width: 80px;
+	text-align: right;
+	padding: 2px;
+	margin: 1px;
+}
+
+.row {
+	margin-top: 10px;
+}
+-->
+</style>
+
+<form id="rbac_node_editForm" method="post">
+	<div style="clear: both; overflow: hidden; padding: 10px;">
+		<div style="float: left; width: 270px; margin-right: 20px;">
+			<div class="row">
+				<label for="action">Action:</label><input id="action" type="text" name="action" value="{$action}" style="width: 120px;">
+			</div>
+			<div class="row">
+				<label for="title">标题:</label><input id="title" type="text" name="title" value="{$title}" style="width: 120px;">
+			</div>
+			<div class="row">
+				<label for="iconCls">图标:</label><input id="iconCls" type="text" name="iconCls" value="{$iconCls}"
+					style="width: 120px;">
+			</div>						<div class="row">				<label for="whetherclick">是否可点击:</label>{$whetherclick|getClick}			</div>
+		</div>
+		<div style="float: left; width: 270px;">
+			<div class="row">
+				<label for="status">状态:</label>{$status|getStatus}
+			</div>
+			<div class="row">
+				<label for="tree">Tree显示:</label>{$tree|getTree}
+			</div>
+			<div class="row">
+				<label for="sort">排序:</label> <input id="sort" name="sort" type="text" value="{$sort}" style="width: 48px;">
+			</div>
+		</div>
+	</div>
+	<div class="row" style="padding-left: 10px;">
+		<label for="name">URL:</label><input id="name" type="text" name="name" value="{$name}" style="width: 400px;">
+	</div>
+	<div class="row" style="padding-left: 10px;">
+		<label for="condition">规则:</label><input id="condition" type="text" name="condition" value="{$condition}" style="width: 400px;">
+		<input id="pid" name="pid" type="text" style="display: none;" value="{$pid}"> <input id="level" name="level"
+			type="text" style="display: none;" value="{$level}"><input id="id" name="id" type="text"
+			style="display: none;" value="{$id}">
+	</div>
+</form>

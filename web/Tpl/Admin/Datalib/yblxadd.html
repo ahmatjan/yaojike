@@ -1,0 +1,92 @@
+<style type="text/css">
+
+<!--
+
+label {
+
+	float: left;
+
+	width: 80px;
+
+	text-align: right;
+
+	padding: 2px;
+
+	margin: 1px;
+
+}
+
+
+
+.row {
+
+	margin-top: 10px;
+
+}
+
+-->
+
+</style>
+<script type="text/javascript" src="__PUBLIC__/js/ajaxfileupload.js"></script>
+<form id="datalib_addDatalib_addFormyblx" method="post" enctype="multipart/form-data">
+
+	<div style="clear: both; overflow: hidden; padding: 10px;">
+
+		<div style="float: left; width: 270px; margin-right: 20px;">
+
+			<div class="row">
+
+				<label for="yblx_text">名称:</label><input id="yblx_name" type="text" name="yblx_name" value="{$sel.yblx_name}" style="width: 150px;"><span style="color: red;">&nbsp;*</span>
+
+			</div>
+
+		</div>
+		<div style="float: left; width: 270px;">
+
+			<div class="row">
+
+				<label for="yblx_img">图片:</label><input id="yblx_img" type="file"name="yblx_img"  class="input">
+
+			</div>
+
+		</div>
+		
+		<div style="float: left; width: 270px; margin-right: 20px;">
+
+			<div class="row">
+
+				<label for="yblx_text">单位:</label><input id="yblx_danwei" type="text" name="yblx_danwei" value="{$sel.yblx_danwei}" style="width: 150px;"><span style="color: red;">&nbsp;*</span>
+
+			</div>
+
+		</div>
+		
+
+		<div style="float: left; width: 270px;">
+
+			<div class="row">
+
+				<label for="yblxu_sort">排序:</label><input id="yblxu_sort" type="text" name="yblx_sort" value="{$sel.yblx_sort}" style="width: 110px;">
+
+			</div>
+
+		</div>
+
+	</div>
+
+	<div class="row" style="padding-left: 10px;">
+
+		<label for="yblx_remark">描述:</label><input id="yblx_remark" type="text" name="yblx_remark" value="{$sel.yblx_remark}" style="width: 400px;">
+		<input id="yblx_pid" name="yblx_pid" type="hidden" value="<?php if($_GET['pid']){echo $_GET['pid'];}else{echo $sel['yblx_pid'];}?>">
+		<php>
+		if(isset($sel)){
+			echo "<input id='yblx_id' name='yblx_id' type='hidden' value='$sel[yblx_id]'>";
+		}
+		</php>
+
+		
+
+	</div>
+
+</form>
+

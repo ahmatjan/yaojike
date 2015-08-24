@@ -1,0 +1,76 @@
+<script type="text/javascript" charset="utf-8">
+	$(function() {
+		//添加内容页选项卡
+		addTab = function(option) {
+			var t = $('#center_tab');
+			if (t.tabs('exists', option.title)) {
+				t.tabs('select', option.title);
+			} else {
+				t.tabs('add', option);
+			}
+		}
+		//二级模块添加内容页选项卡
+		addTabs = function(title,href) {
+			var t = $('#center_tab');
+			if (t.tabs('exists', title)) {
+				t.tabs('select', title);
+			} else {
+				t.tabs('add', {
+					title : title,
+					href : href,
+					closable : true
+				});
+			}
+		}
+		//删除内容页选项卡
+		delTabs = function(title) {
+			var tab = $('#center_tab').tabs('getTab',title);
+			var tabIndex = $('#center_tab').tabs('getTabIndex', tab);
+			if (tabIndex == 0) {
+				msgBox('{:C(session('language').'.msg')}', '{:C(session('language').'.mianbanguanbi')}');
+			} else {
+				$('#center_tab').tabs('close', tabIndex);
+			}
+		}
+		$('#center_tab').tabs({
+			tools : [ {
+				iconCls : 'icon-cancel',
+				handler : function() {
+					var tab = $('#center_tab').tabs('getSelected');
+					var tabIndex = $('#center_tab').tabs('getTabIndex', tab);
+					if (tabIndex == 0) {
+						msgBox('{:C(session('language').'.msg')}', '{:C(session('language').'.mianbanguanbi')}');
+					} else {
+						$('#center_tab').tabs('close', tabIndex);
+					}
+				}
+			} ]
+		});
+		//检查用户密码是否还是初始状态
+		$.post('{:U(GROUP_NAME.'/Main/checkPwd')}', function(data) {
+			if (data) {
+				var cPwd = $('<div/>').dialog({
+					href : '{:U(GROUP_NAME.'/Main/pwdChange')}',
+					title : '{:C(session('language').'.xiugaimorenmima')}',
+					width : 450,
+					height : 250,
+					modal : true,
+					closable : false,
+					onClose : function() {
+						cPwd.dialog('destroy');
+					},
+					buttons : [ {
+						iconCls : 'icon-ok',
+						text : '{:C(session('language').'.genggaianniu')}',
+						handler : function() {														if($("#main_pwdchange_form").form('validate')){																$.post('{:U(GROUP_NAME.'/Main/pwdChangeSubmit')}', $("#main_pwdchange_form").serialize(), function(data) {									if (data.status) {										msgBox('{:C(session('language').'.successzuo')}', data.info);										cPwd.dialog('destroy');									} else {										msgBox('{:C(session('language').'.errorzuo')}', data.info);									}								});															}else{																msgBox('{:C(session('language').'.errorzuo')}', '{:C(session('language').'.biaodanshibai')}');															}
+							
+						}
+					} ]
+				});
+			}
+		});
+	});
+</script>
+<div id="center_tab" class="easyui-tabs" data-options="border:false,fit:true">
+	<div title="{:C(session('language').'.shouye')}" style="padding: 20px;"></div>
+</div>

@@ -1,0 +1,72 @@
+<style type="text/css">
+
+<!--
+
+label {
+
+	float: left;
+
+	width: 80px;
+
+	text-align: right;
+
+	padding: 2px;
+
+	margin: 1px;
+
+}
+
+
+
+.row {
+
+	margin-top: 10px;
+
+}
+
+-->
+
+</style>
+
+<form id="datalib_addDatalib_addFormxiangmu" method="post">
+
+	<div style="clear: both; overflow: hidden; padding: 10px;">
+
+		<div style="float: left; width: 270px; margin-right: 20px;">
+
+			<div class="row">
+
+				<label for="text">名称:</label><input id="xiangmu_name" type="text" name="xiangmu_name" value="{$sel.xiangmu_name}" style="width: 150px;"><span style="color: red;">&nbsp;*</span>
+
+			</div>
+
+		</div>
+
+		<div style="float: left; width: 270px;">
+
+			<div class="row">
+
+				<label for="sort">排序:</label><input id="xiangmu_sort" type="text" name="xiangmu_sort" value="{$sel.xiangmu_sort}" style="width: 110px;">
+
+			</div>
+
+		</div>
+
+	</div>
+
+	<div class="row" style="padding-left: 10px;">
+
+		<label for="remark">描述:</label><input id="xiangmu_remark" type="text" name="xiangmu_remark" value="{$sel.xiangmu_remark}" style="width: 400px;">
+		<input id="xiangmu_pid" name="xiangmu_pid" type="hidden" value="<?php if($_GET['pid']){echo $_GET['pid'];}else{echo $sel['xiangmu_pid'];}?>">
+		<php>
+		if(isset($sel)){
+			echo "<input id='xiangmue_id' name='xiangmu_id' type='hidden' value='$sel[xiangmu_id]'>";
+		}
+		</php>
+
+		
+
+	</div>
+
+</form>
+

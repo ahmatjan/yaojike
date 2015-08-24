@@ -1,0 +1,25 @@
+<include file="Public:header"/>
+	<main role="main">
+		<div class="home-intro">
+			<div class="row">
+				<div class="col-md-8 intro">
+					<div class="lead">
+						<p class="text-success"><strong>药剂科信息系统</strong></p>
+						{$project.ms_content} 
+					</div>
+				</div>
+			</div>
+		</div>
+		<hr><h2>每天学习一个药</h2>
+		
+	<hr>
+	<div class="alert alert-info" id="cite">
+	<hr><h4>今天你学习了吗？</h4>
+	<foreach name="find" item="loop">
+		<if condition="($loop neq null)">
+			<p><php>echo C('DRUG_NAME.'.$key);/*上面的判断，因为有些字段是空的，判断一下有没有，有则显示，没有则不显示*/</php>{$loop|html_entity_decode|clearHtmlLen='350'}</p>
+		</if>
+	</foreach>
+</div>
+</main>
+<include file="Public:footer"/>

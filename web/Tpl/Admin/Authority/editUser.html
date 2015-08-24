@@ -1,0 +1,56 @@
+<script type="text/javascript" charset="utf-8">
+	$(function() {
+		//通过get过来的用户id得到下面combotree所要的数据并添加
+		$.post("{:U(GROUP_NAME.'/Authority/getauth_groupEditJson')}", {
+			"id" : {$user.id}
+		}, function(data) {
+			//初始化combotree
+			$('#role').combotree({
+				multiple : true,
+				editable : false,
+				checkbox : false,
+				lines : false
+			});
+			//动态向combotree添加组数据
+			$('#role').combotree('loadData',data);
+		}, "json");
+	});
+</script>
+<style type="text/css">
+<!--
+label {
+	float: left;
+	width: 80px;
+	text-align: right;
+	padding: 2px;
+	margin: 1px;
+}
+
+.row {
+	margin-top: 10px;
+}
+-->
+</style>
+<form id="rbac_user_editForm" method="post">
+	<div style="clear: both; overflow: hidden; padding: 10px;">
+		<div style="float: left; width: 270px; margin-right: 20px;">
+			<div class="row">
+				<label for="uid">用户ID:</label><input id="uid" type="text" name="uid" style="width: 150px;" value="{$user.uid}" disabled="disabled"><span style="color: red;">&nbsp;*</span>
+			</div>
+			<div class="row">
+				<label for="name">用户名:</label><input id="name" type="text" name="name" style="width: 150px;" value="{$user.name}">
+			</div>
+		</div>
+		<div style="float: left; width: 270px;">
+			<div class="row">
+				<label for="status">状态:</label>{$user.status|getStatus}
+			</div>
+			<div class="row">
+				<label for="status">用户组:</label><input id="role" name="role[]">
+			</div>
+		</div>
+	</div>
+	<div class="row" style="padding-left: 10px;">
+		<label for="remark">描述:</label><input id="remark" type="text" name="remark" style="width: 400px;" value="{$user.remark}"> <input type="text" id="id" name="id" value="{$user.id}" style="display: none;">
+	</div>
+</form>

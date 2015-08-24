@@ -1,0 +1,16 @@
+<div style="padding: 10px;"><volist name='sel' id='v'>
+	<table width="100%">
+		<tr>
+			<th width="80" align="right">文章标题:</th><input type='hidden' name='id' id='id' value='{$id}'>
+			<td><input id="title" type="text" style="width: 600px;" value='{$v.title}'></td>
+		</tr>
+		<tr>
+			<th width="80" align="right">来源:</th>
+			<td><input id="source" type="text" style="width: 600px;" value='{$v.source}'></td>
+		</tr>
+		<tr>
+			<td colspan="2" align="center">
+			<iframe id="editor" name="editor" frameborder="0" width="680" height="440" scrolling="no" src="__URL__/editor/con/{$v.id}"></iframe></td>
+		</tr>
+	</table></volist>
+</div>

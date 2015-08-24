@@ -1,0 +1,39 @@
+<style type="text/css">
+<!--
+label {
+	float: left;
+	width: 80px;
+	text-align: right;
+	padding: 2px;
+	margin: 1px;
+}
+
+.row {
+	margin-top: 10px;
+}
+-->
+</style>
+<form id="datalib_editDatalib_editForm" method="post">
+	<div style="clear: both; overflow: hidden; padding: 10px;">
+		<div style="float: left; width: 270px; margin-right: 20px;">
+			<div class="row">
+				<label for="text">名称:</label><input id="text" type="text" name="text" style="width: 150px;" value="{$vo.text}"><span style="color: red;">&nbsp;*</span>
+			</div>
+			<div class="row">
+				<label for="code">编码:</label><input id="code" type="text" style="width: 150px;" value="{$vo.code}" disabled="disabled">
+			</div>
+		</div>
+		<div style="float: left; width: 270px;">
+			<div class="row">
+				<label for="iconCls">图标:</label><input id="iconCls" type="text" name="iconCls" style="width: 110px;" value="{$vo.iconCls}">
+			</div>
+			<div class="row">
+				<label for="sort">排序:</label><input id="sort" type="text" name="sort" style="width: 110px;" value="{$vo.sort}">
+			</div>
+		</div>
+	</div>
+	<div class="row" style="padding-left: 10px;">
+		<label for="remark">描述:</label><input id="remark" type="text" name="remark" style="width: 400px;" value="{$vo.remark}"> <input id="id" name="id" type="hidden" value="{$vo.id}"><input
+			id="code" type="hidden" name="code" style="width: 150px;" value="{$vo.code}"><input id="pid" name="pid" type="hidden" value="{$vo.pid}">
+	</div>
+</form>

@@ -1,0 +1,145 @@
+<include file="Public:header"/>
+<main>
+
+<php>
+if($checklogin == 'isnot'){
+</php>
+
+
+<script >
+var verImg;
+$(function() {
+	verImg = $("#verImg");
+});
+function reloadVerify() {
+	var timenow = new Date().getTime();
+	
+	verImg.attr("src", "{:U(GROUP_NAME.'/DrugAdverseReaction/verify')}?t=" + timenow);
+	
+}
+
+$(document).ready(function(){
+	// Validation
+	$("#loginform").validate({
+		rules :{
+			uid : {
+				required :true,
+				minlength:3
+			},
+			pwd : {
+				required :true,
+				minlength:5
+			},
+			verify : {
+				required :true,
+				maxlength:4
+			}
+		},
+		messages : {
+			uid : {
+				required: '请输入用户名',
+				minlength:jQuery.format("用户名不能小于{0}个字 符")
+			},
+			pwd : {
+				required: '请输入密码',
+				minlength:jQuery.format("密码不能小于{0}个字 符")
+			},
+			verify : {
+				required: '请输入验证码',
+				maxlength:jQuery.format("验证码不能大于{0}个字 符")
+			}
+		},
+		// Do not change code below
+		errorPlacement : function(error, element) {
+			//error.insertAfter(element.parent());
+			if (element.is(':radio') || element.is(':checkbox')) { //如果是radio或checkbox
+				error.appendTo( element.parent().next().next() );
+			} else {
+				error.insertAfter(element.parent());
+			}
+		},
+		submitHandler: function(form){
+			$.ajax({
+				url : "{:U(GROUP_NAME.'/DrugAdverseReaction/checkLogin')}",
+				type : "post",
+				dataType : "json",
+				data: $("#loginform").serialize(),
+				success : function(result) {
+					if(result.status==true) {
+					    $.confirm({
+					        title: false,
+					        closeIcon:  result.info,
+					        content:  result.info,
+					        theme: 'hololight',
+					        columnClass: 'col-md-4 col-md-offset-4'
+					    });
+						//location.href='{:U(GROUP_NAME.'/Index/index')}';
+					    setTimeout("location.href='{:U(GROUP_NAME.'/DrugAdverseReaction/index')}'",3000); 
+					} else if(result.status==false){
+						$.confirm({
+					        title: '提示',
+					        cancelButton:  '关闭',
+					        confirmButton: '待会再试',
+					        closeIcon:  result.info,
+					        content:  result.info,
+					        theme: 'hololight',
+					        columnClass: 'col-md-4 col-md-offset-4',
+					        backgroundDismiss: false
+					    });
+					}
+				}
+			});
+		}
+	});
+	
+})
+</script>
+<form class="form-horizontal" role="form" id="loginform" autocomplete="off">
+    <fieldset>
+        <legend>请登录系统</legend>
+       <div class="form-group">
+          <label class="col-sm-2 control-label" for="ds_host">用户名：</label>
+          <div class="col-sm-4">
+             <input class="form-control" name="uid" id="uid" type="text" placeholder="输入您的用户名"/>
+          </div>
+       </div>
+       <div class="form-group">
+          <label class="col-sm-2 control-label" for="ds_username">密码：</label>
+          <div class="col-sm-4">
+             <input class="form-control" id="pwd" name="pwd" type="password" placeholder="输入您的密码"/>
+          </div>
+       </div>
+       <div class="form-group">
+          <label class="col-sm-2 control-label" for="ds_username">验证码</label>
+          <div class="col-sm-4">
+             <input class="form-control" id="verify" name="verify" type="text" placeholder="输入验证码"/>
+          </div>
+       </div>
+       <div class="form-group">
+          <label class="col-sm-2 control-label" for="ds_username">验证码</label>
+          <div class="col-sm-4">
+             <img src="{:U(GROUP_NAME.'/DrugAdverseReaction/verify')}" id="verImg">&nbsp;<a href="javascript:reloadVerify();">看不清，点击更换！</a>
+          </div>
+       </div>
+       <div class="form-group">
+       <label class="col-sm-2 control-label" for="ds_username"></label>
+          <div class="col-sm-4">
+             <button type="submit" class="submit btn btn-large" >登陆</button>
+          </div>
+       </div>
+       
+       
+    </fieldset>     
+    
+</form>
+
+<php>
+}else{
+</php>
+<include file="DrugAdverseReaction:drugadversereactionadd"/>
+<php>
+}
+</php>
+</main>
+
+<include file="Public:footer"/>

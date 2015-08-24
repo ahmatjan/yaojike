@@ -1,0 +1,60 @@
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style type="text/css">
+body {
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+}
+.STYLE1 {font-size: 12px;}
+.STYLE2 {font-size: 12px; color:#0039FF;}
+.STYLE3 {font-size: 12px; font-weight: bold; }
+.STYLE4 {
+	color: #03515d;
+	font-size: 12px;
+}
+.STYLE5 td{border-bottom:1px #CCCCCC dashed;}
+   .a{ color:#FFFFFF; text-decoration:none}
+   
+   .a2{ color:#000000; text-decoration:none}
+   
+   a:hover{ color:#FF0000}
+</style>
+<a href='__APP__' target='aa'>返回后台管理</a>
+<div id="xianshi" style=" margin0">
+	<table width="100%" border="1" cellpadding="1" cellspacing="1" style="margin:0; padding:0">
+	          <tr >
+	            <td width="5%" height="22" >
+				  <div align="center"><span class="STYLE2">序号</span></div>
+				</td>
+	            <td width="5%" height="22"  >
+				   <div align="center"><span class="STYLE2">QQ</span></div>
+				</td>
+	            <td width="5%" height="22" >
+				  <div align="center"><span class="STYLE2">手机号</span></div>
+			    </td>
+	            <td width="5%" height="22" >
+				  <div align="center"><span class="STYLE2">注册时间</span></div>
+			    </td>
+	          </tr>
+	   <volist name='sel' id='loop'>
+	          <tr class="STYLE5">
+	            <td height="30" >
+				  <div align="center" class="STYLE2">
+	                <div align="center">{$i}</div>
+	              </div>
+				</td>
+	            <td height="30" >
+				   <div align="center"><span class="STYLE1">{$loop.uid}</span></div>
+				</td>
+	            <td height="30" >
+				    <div align="center"><span class="STYLE1">{$loop.mobile}</span></div>
+				</td>
+	            <td height="30" >
+				    <div align="center"><span class="STYLE1">{$loop.createTime}</span></div>
+				</td>
+	          </tr>
+		</volist>
+	</table>
+	{$show}
+</div>

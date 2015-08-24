@@ -1,0 +1,7 @@
+{
+  "name" : "yaojike",
+  "repositories" : [ {
+    "type" : "composer",
+    "url" : "https://packagist.org/"
+  } ]
+}

@@ -1,0 +1,74 @@
+<script type="text/javascript">
+	$(function() {
+		$('#editBtn').bind('click', function() {
+			var editDialog = $('<div/>').dialog({
+				href : "{:U(GROUP_NAME.'/Message/editbaseinfo')}",
+				title : '基本信息编辑',
+				modal : true,
+				width : 1100,
+				height : 500,
+				buttons : [ {
+					text : '保存',
+					iconCls : 'icon-ok',
+					handler : function() {
+						var formData = $('#editbaseinfo_form').serialize();
+						
+						$.post("{:U(GROUP_NAME.'/Message/editbaseinfo')}", $('#editbaseinfo_form').serialize(), function(data) {
+							if (data.status) {
+								msgBox('成功', data.info);
+								var thisTab = $('#center_tab').tabs('getSelected');
+								$('#center_tab').tabs('update', {
+									tab : thisTab,
+									options : {}
+								});
+								editDialog.dialog('destroy');
+								
+							} else {
+								msgBox('失败', data.info);
+							}
+						}, "json");
+						
+					}
+				}, {
+					text : '取消',
+					iconCls : 'icon-cancel',
+					handler : function() {
+						editDialog.dialog('destroy');
+					}
+				} ],
+				onClose : function() {
+					editDialog.dialog('destroy');
+				}
+			});
+		});
+		$('#refBaseBtn').bind('click', function() {
+			var thisTab = $('#center_tab').tabs('getSelected');
+			$('#center_tab').tabs('update', {
+				tab : thisTab,
+				options : {}
+			});
+		});
+	});
+</script>
+<div id="selfpanel_baseinfo_layout" class="easyui-layout" data-options="fit:true" style="margin: 5px;">
+	<div data-options="region:'west',border:false" style="width: 180px; border-right: dotted 1px #CCCCCC;">
+		<div style="padding: 5px;">
+			<a href="javascript:void(0);" id="editBtn" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true">编辑信息</a>
+			<a id="refBaseBtn" href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-reload',plain:true">刷新</a>
+		</div>
+		
+	</div>
+	<div id="selfpanel_baseinfo_layout_right" data-options="region:'center',border:false">
+
+		<div class="list">
+
+			<div class="k" style="float:left;width:5%">系统介绍:</div><div style="float:left;width:90%;">{$sel.ms_content}</div><div style="clear:both"></div>
+
+		</div>
+		
+		<div class="list">
+		
+			<div class="k" style="float:left;width:5%">项目介绍:</div><div style="float:left;width:90%;">{$sel.ms_project}</div><div style="clear:both"></div>
+		</div>
+	</div>
+</div>

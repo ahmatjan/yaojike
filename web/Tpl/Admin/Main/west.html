@@ -1,0 +1,34 @@
+<script type="text/javascript">$('#west_navContent').accordion();</script>
+<div id="west_navContent" class="easyui-accordion" data-options="fit:true,border:false">
+	<volist name="menu" id="v">		<div title="{$v.text}"
+			data-options="selected:true,iconCls:'icon-blank',tools : [ {
+					iconCls : 'icon-reload',
+					handler : function() {
+						main_west_menu{$i}.tree('reload');
+					}
+				}, {
+					iconCls : 'icon-redo',
+					handler : function() {
+						var node = main_west_menu{$i}.tree('getSelected');
+						if (node) {
+							main_west_menu{$i}.tree('expandAll', node.target);
+						} else {
+							main_west_menu{$i}.tree('expandAll');
+						}
+					}
+				}, {
+					iconCls : 'icon-undo',
+					handler : function() {
+						var node = main_west_menu{$i}.tree('getSelected');
+						if (node) {
+							main_west_menu{$i}.tree('collapseAll', node.target);
+						} else {
+							main_west_menu{$i}.tree('collapseAll');
+						}
+					}
+				} ]"
+			style="padding: 5px;">
+			<ul id="main_west_menu{$i}" class="easyui-tree" data-options="url:'{:U(GROUP_NAME.'/Main/menuData/',array('id'=>$v[id]))}',lines:true"></ul>
+		</div>
+		<script type="text/javascript" charset="utf-8">					var main_west_menu{$i};					$(function() {						main_west_menu{$i} = $('#main_west_menu{$i}');						main_west_menu{$i}.tree({							onLoadSuccess : function(node, data) {												//main_west_menu.tree('expandAll');								main_west_menu{$i}.tree('expandAll');							},							onClick : function(node) {												if (1==node.attributes.whetherclick) {														var url = '__APP__/Admin/' + node.attributes.name;														addTab({										title : node.text,										href : url,										tools : [ {											iconCls : 'icon-reload',											handler : function() {																				reloadTab();											}										} ],										closable : true									});								}							},						});							});				</script>	</volist>
+</div>
