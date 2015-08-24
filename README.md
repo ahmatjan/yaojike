@@ -14,3 +14,4 @@ UPDATE user SET Password=PASSWORD('yaojikea') where User='root';
 =======
 ueditor 获取路径有问题，直接在ueditor.config.js第23行写死
 >>>>>>> 3bbdbb306b9aa0c5636cf724bc487c73bc6779a8
+测试一下
