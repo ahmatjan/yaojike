@@ -17,7 +17,10 @@ return array (
 		'NOT_AUTH_MODULE'=>'Index,Main',
 		'NOT_AUTH_ACTION'=>'checkPwd,center,west,south,north,menuData,pwdChangeSubmit',
 		'SUPER_ADMIN'=> 1,
+<<<<<<< HEAD
         'TITLE'=>'药剂科',
+=======
+>>>>>>> 3bbdbb306b9aa0c5636cf724bc487c73bc6779a8
 		
 		
 		/**
@@ -39,8 +42,13 @@ return array (
 
 
 		'URL_HTML_SUFFIX'	=>	'',//url伪静态后缀为空
+<<<<<<< HEAD
 		'APP_GROUP_LIST'			=> 'Admin,Index', //项目分组设定
 		'DEFAULT_GROUP'				=> 'Index', //默认分组
+=======
+		'APP_GROUP_LIST'			=> 'Admin,Share', //项目分组设定
+		'DEFAULT_GROUP'				=> 'Share', //默认分组
+>>>>>>> 3bbdbb306b9aa0c5636cf724bc487c73bc6779a8
 		'DB_TYPE' => 'mysql',
 		'DB_NAME' => 'yaojike',
 		'DB_HOST' => 'localhost',

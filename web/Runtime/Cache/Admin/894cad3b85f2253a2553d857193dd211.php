@@ -1,4 +1,4 @@
-
+<?php if (!defined('THINK_PATH')) exit();?>
 <script type="text/javascript" charset="utf-8">
 var medicinedatagrid;
 var editIndex = undefined;
@@ -10,7 +10,7 @@ var editIndex = undefined;
 		
 		medicinedatagrid=$('#medicine_index_treegrid').datagrid({
 			
-			url : "{:U(GROUP_NAME.'/Medicine/index',array('getdatajson'=>'do'))}",
+			url : "<?php echo U(GROUP_NAME.'/Medicine/index',array('getdatajson'=>'do'));?>",
 
 			animate : false,
 
@@ -125,11 +125,7 @@ var editIndex = undefined;
 
 				handler : function() {
 
-<<<<<<< HEAD
-					delmedicine();
-=======
 					delDatalibbiaobenlx();
->>>>>>> 3bbdbb306b9aa0c5636cf724bc487c73bc6779a8
 
 				}
 
@@ -199,11 +195,7 @@ var editIndex = undefined;
             	alert(rowData['md_name'])
             },*/
 			onAfterEdit: function (rowIndex, rowData, changes) {
-<<<<<<< HEAD
-                /*$.post("{:U('Medicine/editmedicine',array('sort'=>'yes'))}", {md_id : rowData['md_id'],md_sort:rowData['md_sort'],md_name:rowData['md_name']}, function(data) {
-=======
-                $.post("{:U('Medicine/editmedicine',array('sort'=>'yes'))}", {md_id : rowData['md_id'],md_sort:rowData['md_sort'],md_name:rowData['md_name']}, function(data) {
->>>>>>> 3bbdbb306b9aa0c5636cf724bc487c73bc6779a8
+                $.post("<?php echo U('Medicine/editmedicine',array('sort'=>'yes'));?>", {md_id : rowData['md_id'],md_sort:rowData['md_sort'],md_name:rowData['md_name']}, function(data) {
 					if (data.status) {
 						$('#medicine_index_treegrid').datagrid('reload');
 						$('#medicine_index_treegrid').datagrid('unselectAll');
@@ -213,11 +205,7 @@ var editIndex = undefined;
 					}
 				}, "json");
                 console.info(rowData);
-<<<<<<< HEAD
-                editRow = undefined;*/
-=======
                 editRow = undefined;
->>>>>>> 3bbdbb306b9aa0c5636cf724bc487c73bc6779a8
             },
             saveRow : function(index){
             	medicinedatagrid.datagrid('endEdit', index);
@@ -234,11 +222,8 @@ var editIndex = undefined;
             },
             onClickRow : function(rowIndex, rowData) {
 
-<<<<<<< HEAD
-
-=======
             	var medicineDialog = $('<div/>').dialog({
-					href : "{:U(GROUP_NAME.'/Medicine/get_medicine_content')}?id="+rowData.md_id,
+					href : "<?php echo U(GROUP_NAME.'/Medicine/get_medicine_content');?>?id="+rowData.md_id,
 					title : '药品查看修改',
 					modal : true,
 					width : 750,
@@ -271,7 +256,6 @@ var editIndex = undefined;
 						}
 					} ]
 				});
->>>>>>> 3bbdbb306b9aa0c5636cf724bc487c73bc6779a8
 
 			}
 		});
@@ -294,7 +278,7 @@ var editIndex = undefined;
 	function addmedicineword(){
 		var addmedicinewordDialog = $('<div/>').dialog({
 
-			href : '{:U(GROUP_NAME.'/Medicine/medicineaddword')}',
+			href : '<?php echo U(GROUP_NAME.'/Medicine/medicineaddword');?>',
 
 			title : '导入药品word',
 
@@ -313,7 +297,7 @@ var editIndex = undefined;
 				handler : function() {
 					if($("#medicine_add_form").form('validate')){
 					    $.ajaxFileUpload ({
-						    url :"{:U(GROUP_NAME.'/Medicine/medicineaddword')}",
+						    url :"<?php echo U(GROUP_NAME.'/Medicine/medicineaddword');?>",
 						    secureuri :false,
 						    fileElementId :'yaopinword',
 						    dataType : 'json',
@@ -368,7 +352,7 @@ var editIndex = undefined;
 
 			var addDatalibDialog = $('<div/>').dialog({
 
-				href : '{:U(GROUP_NAME.'/Medicine/medicineadd')}',
+				href : '<?php echo U(GROUP_NAME.'/Medicine/medicineadd');?>',
 
 				title : '添加药物不良反应',
 
@@ -390,7 +374,7 @@ var editIndex = undefined;
 						}else{
 							//作添加动作
 							
-							$.post("{:U(GROUP_NAME.'/Medicine/medicineadd',array('doit'=>'do'))}", $('#medicine_addForm').serialize(), function(data) {
+							$.post("<?php echo U(GROUP_NAME.'/Medicine/medicineadd',array('doit'=>'do'));?>", $('#medicine_addForm').serialize(), function(data) {
 	
 								if (data.status) {
 	
@@ -443,29 +427,12 @@ var editIndex = undefined;
 
 	//del
 
-<<<<<<< HEAD
-	function delmedicine() {
-=======
 	function delDatalibbiaobenlx() {
->>>>>>> 3bbdbb306b9aa0c5636cf724bc487c73bc6779a8
 
 		var row = $('#medicine_index_treegrid').datagrid('getSelections');
 
 		if (row.length == 0) {
 
-<<<<<<< HEAD
-			$.messager.alert('提示', '您还没有选定要删除的药品!');
-
-		} else {
-
-			$.messager.confirm('警告', '你确实要彻底删除此药品吗?请三思！！！', function(r) {
-
-				if (r) {
-
-					$.post("{:U(GROUP_NAME.'/Medicine/delmedicine')}", {
-
-						id : row[0]['md_id']
-=======
 			$.messager.alert('提示', '您还没有选定要删除的行!');
 
 		} else {
@@ -474,10 +441,9 @@ var editIndex = undefined;
 
 				if (r) {
 
-					$.post("{:U(GROUP_NAME.'/Datalib/delDatalib',array('action'=>ACTION_NAME))}", {
+					$.post("<?php echo U(GROUP_NAME.'/Datalib/delDatalib',array('action'=>ACTION_NAME));?>", {
 
 						id : row[0]['biaobenlx_id']
->>>>>>> 3bbdbb306b9aa0c5636cf724bc487c73bc6779a8
 
 					}, function(data) {
 
@@ -508,60 +474,6 @@ var editIndex = undefined;
 	//edit
 
 	function editmedicine() {
-<<<<<<< HEAD
-		var rowData = $('#medicine_index_treegrid').datagrid('getSelected');
-    	var medicineDialog = $('<div/>').dialog({
-			href : "{:U(GROUP_NAME.'/Medicine/get_medicine_content')}?id="+rowData.md_id,
-			title : '药品查看修改',
-			modal : true,
-			width : 1100,
-			height : 800,
-			onClose : function() {
-				medicineDialog.dialog('destroy');
-			},
-			buttons : [ {
-				text : '保存',
-				handler : function() {
-					$.post("{:U(GROUP_NAME.'/Medicine/editmedicine')}", {
-						md_sort : $('#md_sort').val(),
-						md_name : $('#md_name').val(),
-						md_id : $('#md_id').val(),
-						md_jingshi:UE.getEditor('md_jingshi').getPlainTxt(),/*$("#md_jingshi").html()?$("#md_jingshi").html():*/
-						md_chengfen:UE.getEditor('md_chengfen').getPlainTxt(),/*$("#md_chengfen").html()?$("#md_chengfen").html():*/
-						md_yaolifenllei:UE.getEditor('md_yaolifenllei').getPlainTxt(),/*$("#md_yaolifenllei").html()?$("#md_yaolifenllei").html():*/
-						md_lcyingyong:UE.getEditor('md_lcyingyong').getPlainTxt(),/*$("#md_lcyingyong").html()?$("#md_lcyingyong").html():*/
-						md_yfyl:UE.getEditor('md_yfyl').getPlainTxt(),/*$("#md_yfyl").html()?$("#md_yfyl").html():*/
-						md_guowaiylck:UE.getEditor('md_guowaiylck').getPlainTxt(),/*$("#md_guowaiylck").html()?$("#md_guowaiylck").html():*/
-						md_geiyaoshuoming:UE.getEditor('md_geiyaoshuoming').getPlainTxt(),/*$("#md_geiyaoshuoming").html()?$("#md_geiyaoshuoming").html():*/
-						md_jinjizheng:UE.getEditor('md_jinjizheng').getPlainTxt(),/*$("#md_jinjizheng").html()?$("#md_jinjizheng").html():*/
-						md_shenyong:UE.getEditor('md_shenyong').getPlainTxt(),/*$("#md_shenyong").html()?$("#md_shenyong").html():*/
-						md_tsrenqun:UE.getEditor('md_tsrenqun').getPlainTxt(),/*$("#md_tsrenqun").html()?$("#md_tsrenqun").html():*/
-						md_blfanying:UE.getEditor('md_blfanying').getPlainTxt(),/*$("#md_blfanying").html()?$("#md_blfanying").html():*/
-						md_ywxhzuoyong:UE.getEditor('md_ywxhzuoyong').getPlainTxt(),/*$("#md_ywxhzuoyong").html()?$("#md_ywxhzuoyong").html():*/
-						md_zhuyishixiang:UE.getEditor('md_zhuyishixiang').getPlainTxt(),/*$("#md_zhuyishixiang").html()?$("#md_zhuyishixiang").html():*/
-						md_guowaizkyyxxck:UE.getEditor('md_guowaizkyyxxck').getPlainTxt(),/*$("#md_guowaizkyyxxck").html()?$("#md_guowaizkyyxxck").html():*/
-						md_ywguoliang:UE.getEditor('md_ywguoliang').getPlainTxt(),/*$("#md_ywguoliang").html()?$("#md_ywguoliang").html():*/
-						md_yaoli:UE.getEditor('md_yaoli').getPlainTxt(),/*$("#md_yaoli").html()?$("#md_yaoli").html():*/
-						md_zjgg:UE.getEditor('md_zjgg').getPlainTxt(),/*$("#md_zjgg").html()?$("#md_zjgg").html():*/
-						md_chucang:UE.getEditor('md_chucang').getPlainTxt()/*$("#md_chucang").html()?$("#md_chucang").html():*/
-					}, function(data) {
-						if (data.status) {
-							medicineDialog.dialog('destroy');
-							$('#medicine_index_treegrid').datagrid('reload');
-							msgBox('成功', data.info);
-						} else {
-							msgBox('失败', data.info);
-						}
-					}, "json");
-				}
-			}, {
-				text : '取消',
-				handler : function() {
-					medicineDialog.dialog('destroy');
-				}
-			} ]
-		});
-=======
 
 		var row = $('#medicine_index_treegrid').datagrid('getSelections');
 
@@ -575,7 +487,7 @@ var editIndex = undefined;
 
 			var editmedicineDialog = $('<div/>').dialog({
 
-				href : '{:U(GROUP_NAME.'/Medicine/editmedicine')}?id=' + row[0]['md_id'],
+				href : '<?php echo U(GROUP_NAME.'/Medicine/editmedicine');?>?id=' + row[0]['md_id'],
 
 				title : '编辑药品',
 
@@ -595,7 +507,7 @@ var editIndex = undefined;
 
 						//作编辑动作
 
-						$.post("{:U(GROUP_NAME.'/Datalib/editDatalibSubmit',array('action'=>ACTION_NAME))}", $('#datalib_addDatalib_addFormbiaobenlx').serialize(), function(data) {
+						$.post("<?php echo U(GROUP_NAME.'/Datalib/editDatalibSubmit',array('action'=>ACTION_NAME));?>", $('#datalib_addDatalib_addFormbiaobenlx').serialize(), function(data) {
 
 							if (data.status) {
 
@@ -640,7 +552,6 @@ var editIndex = undefined;
 
 		}
 
->>>>>>> 3bbdbb306b9aa0c5636cf724bc487c73bc6779a8
 	}
 
 </script>
@@ -652,14 +563,10 @@ var editIndex = undefined;
 
 	</div>
 
-<<<<<<< HEAD
-	
-=======
 	<div data-options="region:'center',title:'药品详细',border:false">
 
 		<table id="medicine_content"></table>
 
 	</div>
->>>>>>> 3bbdbb306b9aa0c5636cf724bc487c73bc6779a8
 
 </div>

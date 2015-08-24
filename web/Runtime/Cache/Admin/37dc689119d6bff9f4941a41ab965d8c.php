@@ -1,10 +1,10 @@
-<script type="text/javascript" charset="utf-8">
+<?php if (!defined('THINK_PATH')) exit();?><script type="text/javascript" charset="utf-8">
 
 	$(function() {
 
 		$('#effect_index_treegrid').datagrid({
 			
-			url : "{:U(GROUP_NAME.'/Effect/index',array('getdatajson'=>'do'))}",
+			url : "<?php echo U(GROUP_NAME.'/Effect/index',array('getdatajson'=>'do'));?>",
 
 			animate : false,
 
@@ -105,11 +105,7 @@
 
 				}
 
-<<<<<<< HEAD
-			}/*, {
-=======
 			}, {
->>>>>>> 3bbdbb306b9aa0c5636cf724bc487c73bc6779a8
 
 				text : '编辑',
 
@@ -133,11 +129,7 @@
 
 				}
 
-<<<<<<< HEAD
-			}*/, '-', {
-=======
 			}, '-', {
->>>>>>> 3bbdbb306b9aa0c5636cf724bc487c73bc6779a8
 
 				iconCls : 'Checkerror',
 
@@ -161,9 +153,6 @@
 
 				}
 
-<<<<<<< HEAD
-			}],
-=======
 			}, '-', {
 
 				iconCls : 'Bulletarrowup',
@@ -177,7 +166,6 @@
 				}
 
 			} ],
->>>>>>> 3bbdbb306b9aa0c5636cf724bc487c73bc6779a8
 
 			onDblClickRow : function(row) {
 
@@ -223,7 +211,7 @@
 
 			var addDatalibDialog = $('<div/>').dialog({
 
-				href : '{:U(GROUP_NAME.'/Effect/effectadd')}',
+				href : '<?php echo U(GROUP_NAME.'/Effect/effectadd');?>',
 
 				title : '添加药物不良反应',
 
@@ -245,7 +233,7 @@
 						}else{
 							//作添加动作
 							
-							$.post("{:U(GROUP_NAME.'/Effect/effectadd',array('doit'=>'do'))}", $('#effect_addForm').serialize(), function(data) {
+							$.post("<?php echo U(GROUP_NAME.'/Effect/effectadd',array('doit'=>'do'));?>", $('#effect_addForm').serialize(), function(data) {
 	
 								if (data.status) {
 	
@@ -312,7 +300,7 @@
 
 				if (r) {
 
-					$.post("{:U(GROUP_NAME.'/Datalib/delDatalib',array('action'=>ACTION_NAME))}", {
+					$.post("<?php echo U(GROUP_NAME.'/Datalib/delDatalib',array('action'=>ACTION_NAME));?>", {
 
 						id : row[0]['biaobenlx_id']
 
@@ -358,7 +346,7 @@
 
 			var editDatalibDialog = $('<div/>').dialog({
 
-				href : '{:U(GROUP_NAME.'/Datalib/editdatalib',array('action'=>ACTION_NAME))}/id/' + row[0]['biaobenlx_id'],
+				href : '<?php echo U(GROUP_NAME.'/Datalib/editdatalib',array('action'=>ACTION_NAME));?>/id/' + row[0]['biaobenlx_id'],
 
 				title : '编辑数据字典',
 
@@ -378,7 +366,7 @@
 
 						//作编辑动作
 
-						$.post("{:U(GROUP_NAME.'/Datalib/editDatalibSubmit',array('action'=>ACTION_NAME))}", $('#datalib_addDatalib_addFormbiaobenlx').serialize(), function(data) {
+						$.post("<?php echo U(GROUP_NAME.'/Datalib/editDatalibSubmit',array('action'=>ACTION_NAME));?>", $('#datalib_addDatalib_addFormbiaobenlx').serialize(), function(data) {
 
 							if (data.status) {
 

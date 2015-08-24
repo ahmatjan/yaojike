@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-<title>{$site_title}</title>
+<title><?php echo ($site_title); ?></title>
 <script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.0.min.js">
 </script>
 <script type="text/javascript" src="__PUBLIC__/jquery-easyui-1.3.4/jquery.easyui.min.js"></script>
@@ -47,7 +47,7 @@ $(function() {
 function reloadVerify() {
 	var timenow = new Date().getTime();
 		
-	verImg.attr("src", "{:U(GROUP_NAME.'/Login/verify/t')}" + timenow);
+	verImg.attr("src", "<?php echo U(GROUP_NAME.'/Login/verify/t');?>" + timenow);
 	
 }
 
@@ -57,16 +57,16 @@ function resetForm() {
 
 	var timenow = new Date().getTime();
 
-	verImg.attr('src', "{:U(GROUP_NAME.'/Login/verify/t')}" + timenow);
+	verImg.attr('src', "<?php echo U(GROUP_NAME.'/Login/verify/t');?>" + timenow);
 }
 
 	
 function loginForm() {
 	if (index_index_loginForm.form('validate')) {
-		$.post("{:U(GROUP_NAME.'/Login/checkLogin')}", index_index_loginForm.serialize(),function(data) {
+		$.post("<?php echo U(GROUP_NAME.'/Login/checkLogin');?>", index_index_loginForm.serialize(),function(data) {
 			if (data.status) {
 				msgBox(data.data, data.info);
-				location.href = "{:U(GROUP_NAME.'/Main/index')}";
+				location.href = "<?php echo U(GROUP_NAME.'/Main/index');?>";
 			} else {
 				$.messager.alert(data.data, data.info);
 			}
@@ -85,11 +85,7 @@ function loginForm() {
 	<div data-options="region:'center'" style="padding: 5px; background: #fff;">
 		<div id="index_index_window" class="easyui-window" data-options="draggable:false,modal:true,title:'系统登录',iconCls:'icon-tip',resizable:false,closable:false,minimizable:false,maximizable:false" style="width: 600px; height: 380px; padding: 5px; overflow: hidden;">
 			<div style="height: 110px; background-color: #fff;">
-<<<<<<< HEAD
-<img src="__PUBLIC__/img/biglogo.png" border="0" width="576" height="110">
-=======
 <img src="__PUBLIC__/img/loginImg.jpg" border="0" width="576" height="110">
->>>>>>> 3bbdbb306b9aa0c5636cf724bc487c73bc6779a8
 </div>
 			<div style="margin-left: 70px; padding: 10px;">
 				<form id="index_index_loginForm" method="post">
