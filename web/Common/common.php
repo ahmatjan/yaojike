@@ -568,8 +568,10 @@ function writeOperationLog($str,$path,$destination='',$extra='') {
 	$data ['fl_ip'] = '请求ip：'.get_client_ip ();
 
 	$data ['fl_loginname'] = '登录名'.session('username')?session('username'):'null';
+	
+	$data['jieshoutype']	= IS_GET?'GET ':'POST';
+	$data['jieshoutype']	= '请求方式：'.$data['jieshoutype'];
 	$data ['fl_do'] = '请求地址：'.$str;
-	$data['jieshoutype']	= '请求方式：'.IS_GET?'GET':'POST';
 	$data['visibletype']	= '客户端信息：'.$_SERVER['HTTP_USER_AGENT'];
 
 	$type=3;
@@ -599,8 +601,9 @@ function writeOperationLogadmin($str,$path,$destination='',$extra='') {
 	$data ['fl_ip'] = '请求ip：'.get_client_ip ();
 
 	$data ['fl_loginname'] = '登录名'.session('username')?session('username'):'null';
+	
+	$data['jieshoutype']	= '请求方式：'.IS_GET?'GET ':'POST';
 	$data ['fl_do'] = '请求地址：'.$str;
-	$data['jieshoutype']	= '请求方式：'.IS_GET?'GET':'POST';
 	$data['visibletype']	= '客户端信息：'.$_SERVER['HTTP_USER_AGENT'];
 	$type=3;
 	if(empty($destination))

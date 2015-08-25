@@ -8,7 +8,5 @@ ueditor 获取路径有问题，直接在ueditor.config.js第23行写死
 
 服务器mysql密码，xingqiyiayaojike
 
-
-UPDATE user SET Password=PASSWORD('yaojikea') where User='root';
 测试一下
 在测试一下
