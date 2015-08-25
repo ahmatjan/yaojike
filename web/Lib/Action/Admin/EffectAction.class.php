@@ -19,11 +19,8 @@ class EffectAction extends CommonAction {
 		    $p								                      = ($page - 1) * $rows;
 		    $result                                                  = $db->limit($p,$rows)->where(array('hz_isdel'=>1))->select();
 		    
-<<<<<<< HEAD
 		    $data ['rows']                                        = $result!=null?$result:array();
-=======
-		    $data ['rows']                                        = $result!=null?$result:[];
->>>>>>> 3bbdbb306b9aa0c5636cf724bc487c73bc6779a8
+
 		    $data ['total']                                       = $db->where(array('hz_isdel'=>1))->count('hz_id');
 			$this->ajaxReturn($data);
 		}else {

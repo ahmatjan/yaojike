@@ -20,19 +20,11 @@
      * window.UEDITOR_HOME_URL = "/xxxx/xxxx/";
      */
 	
-<<<<<<< HEAD
     var URL = ueditorurl;//'http://localhost/company/yaojike/web/Tpl/Admin/Public/ueditor1_4_3-utf8/';//window.UEDITOR_HOME_URL || getUEBasePath();alert(window.UEDITOR_HOME_URL);
 
     /**
      * 配置项主体。注意，此处所有涉及到路径的配置别遗漏URL变量。
      */
-=======
-    var URL = 'http://localhost/company/yaojike/web/Tpl/Admin/Public/ueditor1_4_3-utf8/';//window.UEDITOR_HOME_URL || getUEBasePath();alert(window.UEDITOR_HOME_URL);
-
-    /**
-     * 配置项主体。注意，此处所有涉及到路径的配置别遗漏URL变量。
-     */alert(URL);
->>>>>>> 3bbdbb306b9aa0c5636cf724bc487c73bc6779a8
     window.UEDITOR_CONFIG = {
 
         //为编辑器实例添加一个路径，这个不能被注释
@@ -106,11 +98,7 @@
         //,autoClearEmptyNode : true //getContent时，是否删除空的inlineElement节点（包括嵌套的情况）
 
         //启用自动保存
-<<<<<<< HEAD
         ,enableAutoSave: false
-=======
-        //,enableAutoSave: true
->>>>>>> 3bbdbb306b9aa0c5636cf724bc487c73bc6779a8
         //自动保存间隔时间， 单位ms
         //,saveInterval: 500
 

@@ -125,12 +125,7 @@ var editIndex = undefined;
 
 				handler : function() {
 
-<<<<<<< HEAD
 					delmedicine();
-=======
-					delDatalibbiaobenlx();
->>>>>>> 3bbdbb306b9aa0c5636cf724bc487c73bc6779a8
-
 				}
 
 			}, '-', {
@@ -199,11 +194,7 @@ var editIndex = undefined;
             	alert(rowData['md_name'])
             },*/
 			onAfterEdit: function (rowIndex, rowData, changes) {
-<<<<<<< HEAD
                 /*$.post("{:U('Medicine/editmedicine',array('sort'=>'yes'))}", {md_id : rowData['md_id'],md_sort:rowData['md_sort'],md_name:rowData['md_name']}, function(data) {
-=======
-                $.post("{:U('Medicine/editmedicine',array('sort'=>'yes'))}", {md_id : rowData['md_id'],md_sort:rowData['md_sort'],md_name:rowData['md_name']}, function(data) {
->>>>>>> 3bbdbb306b9aa0c5636cf724bc487c73bc6779a8
 					if (data.status) {
 						$('#medicine_index_treegrid').datagrid('reload');
 						$('#medicine_index_treegrid').datagrid('unselectAll');
@@ -213,11 +204,7 @@ var editIndex = undefined;
 					}
 				}, "json");
                 console.info(rowData);
-<<<<<<< HEAD
                 editRow = undefined;*/
-=======
-                editRow = undefined;
->>>>>>> 3bbdbb306b9aa0c5636cf724bc487c73bc6779a8
             },
             saveRow : function(index){
             	medicinedatagrid.datagrid('endEdit', index);
@@ -234,44 +221,6 @@ var editIndex = undefined;
             },
             onClickRow : function(rowIndex, rowData) {
 
-<<<<<<< HEAD
-
-=======
-            	var medicineDialog = $('<div/>').dialog({
-					href : "{:U(GROUP_NAME.'/Medicine/get_medicine_content')}?id="+rowData.md_id,
-					title : '药品查看修改',
-					modal : true,
-					width : 750,
-					height : 600,
-					onClose : function() {
-						medicineDialog.dialog('destroy');
-					},
-					buttons : [ {
-						text : '保存',
-						handler : function() {
-							$.post("__URL__/changeArticleSubmit/", {
-								title : $('#title').val(),
-								source : $('#source').val(),
-								id : $('#id').val(),
-								content : $(window.frames[0].frames[0].document.body).html()
-							}, function(data) {
-								if (data.status) {
-									medicineDialog.dialog('destroy');
-									$('#article-article-tree').datagrid('reload');
-									msgBox('成功', data.info);
-								} else {
-									msgBox('失败', data.info);
-								}
-							}, "json");
-						}
-					}, {
-						text : '取消',
-						handler : function() {
-							medicineDialog.dialog('destroy');
-						}
-					} ]
-				});
->>>>>>> 3bbdbb306b9aa0c5636cf724bc487c73bc6779a8
 
 			}
 		});
@@ -443,17 +392,12 @@ var editIndex = undefined;
 
 	//del
 
-<<<<<<< HEAD
 	function delmedicine() {
-=======
-	function delDatalibbiaobenlx() {
->>>>>>> 3bbdbb306b9aa0c5636cf724bc487c73bc6779a8
 
 		var row = $('#medicine_index_treegrid').datagrid('getSelections');
 
 		if (row.length == 0) {
 
-<<<<<<< HEAD
 			$.messager.alert('提示', '您还没有选定要删除的药品!');
 
 		} else {
@@ -465,19 +409,6 @@ var editIndex = undefined;
 					$.post("{:U(GROUP_NAME.'/Medicine/delmedicine')}", {
 
 						id : row[0]['md_id']
-=======
-			$.messager.alert('提示', '您还没有选定要删除的行!');
-
-		} else {
-
-			$.messager.confirm('警告', '你确实要彻底删除此项吗?<br>删除之后会可能影响到其它模块的正常显示!', function(r) {
-
-				if (r) {
-
-					$.post("{:U(GROUP_NAME.'/Datalib/delDatalib',array('action'=>ACTION_NAME))}", {
-
-						id : row[0]['biaobenlx_id']
->>>>>>> 3bbdbb306b9aa0c5636cf724bc487c73bc6779a8
 
 					}, function(data) {
 
@@ -508,7 +439,6 @@ var editIndex = undefined;
 	//edit
 
 	function editmedicine() {
-<<<<<<< HEAD
 		var rowData = $('#medicine_index_treegrid').datagrid('getSelected');
     	var medicineDialog = $('<div/>').dialog({
 			href : "{:U(GROUP_NAME.'/Medicine/get_medicine_content')}?id="+rowData.md_id,
@@ -561,86 +491,6 @@ var editIndex = undefined;
 				}
 			} ]
 		});
-=======
-
-		var row = $('#medicine_index_treegrid').datagrid('getSelections');
-
-		if (row.length == 0) {
-
-			$.messager.alert('提示', '您还没有选定要编辑的药品!');
-
-		} else {
-
-			//弹出添加dialog对话框
-
-			var editmedicineDialog = $('<div/>').dialog({
-
-				href : '{:U(GROUP_NAME.'/Medicine/editmedicine')}?id=' + row[0]['md_id'],
-
-				title : '编辑药品',
-
-				width : 600,
-
-				height : 220,
-
-				modal : true,
-
-				buttons : [ {
-
-					iconCls : 'Bullettick',
-
-					text : '编辑',
-
-					handler : function() {
-
-						//作编辑动作
-
-						$.post("{:U(GROUP_NAME.'/Datalib/editDatalibSubmit',array('action'=>ACTION_NAME))}", $('#datalib_addDatalib_addFormbiaobenlx').serialize(), function(data) {
-
-							if (data.status) {
-
-								editmedicineDialog.dialog('destroy');
-
-								$('#medicine_index_treegrid').datagrid('reload');
-
-								$('#medicine_index_treegrid').datagrid('unselectAll');
-
-								msgBox('成功', data.info);
-
-							} else {
-								
-								msgBox('失败', data.info);
-
-							}
-
-						}, "json");
-
-					}
-
-				}, {
-
-					iconCls : 'Bulletleft',
-
-					text : '重置',
-
-					handler : function() {
-
-						editmedicineDialog.dialog('refresh');
-
-					}
-
-				} ]
-
-			});
-			editmedicineDialog.dialog({
-			    onClose:function(){
-			    	editmedicineDialog.dialog('destroy');
-			    }
-			});
-
-		}
-
->>>>>>> 3bbdbb306b9aa0c5636cf724bc487c73bc6779a8
 	}
 
 </script>
@@ -652,14 +502,6 @@ var editIndex = undefined;
 
 	</div>
 
-<<<<<<< HEAD
-	
-=======
-	<div data-options="region:'center',title:'药品详细',border:false">
 
-		<table id="medicine_content"></table>
-
-	</div>
->>>>>>> 3bbdbb306b9aa0c5636cf724bc487c73bc6779a8
 
 </div>

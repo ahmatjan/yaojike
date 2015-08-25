@@ -23917,14 +23917,11 @@ UE.plugin.register('autosave', function (){
             },
 
             'contentchange': function () {
-<<<<<<< HEAD
             	
             	//新增加的代码
                 if (!me.getOpt('enableAutoSave')) {
                     return;
                 }
-=======
->>>>>>> 3bbdbb306b9aa0c5636cf724bc487c73bc6779a8
 
                 if ( !saveKey ) {
                     return;

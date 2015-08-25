@@ -16,46 +16,7 @@ function toDate($time, $format = 'Y-m-d H:i:s') {
 }
 
 
-<<<<<<< HEAD
-=======
-/**
- * 生成二维码
- */
 
-function erweima($id,$type,$url){
-	require APP_PATH.'Class/phpqrcode/phpqrcode.php';
-
-
-	// 二维码数据
-
-	$data = $url;
-	// 生成的文件名
-
-	$imgname= $id.'.png';
-
-	$filename = 'userqrcode/'.$imgname;
-
-	// 纠错级别：L、M、Q、H
-
-	$errorCorrectionLevel = 'L';
-
-	// 点的大小：1到10
-
-	$matrixPointSize = 4;
-
-	//创建一个二维码文件
-
-	QRcode::png($data, $filename, $errorCorrectionLevel, $matrixPointSize, 2);
-
-	//输入二维码到浏览器
-
-	//QRcode::png($data);
-
-	return $filename;
-}
-
-
->>>>>>> 3bbdbb306b9aa0c5636cf724bc487c73bc6779a8
 
 /**
  * 输出用户组
@@ -572,11 +533,7 @@ function clearUserInfo($uid) {
  */
 function ifChildren($id) {
 	$m = M ();
-<<<<<<< HEAD
 	$sql = 'SELECT * FROM `dr_column` a WHERE a.pid=' . $id . ' ORDER BY `sort`';
-=======
-	$sql = 'SELECT * FROM ip_web_column a WHERE a.pid=' . $id . ' ORDER BY sort';
->>>>>>> 3bbdbb306b9aa0c5636cf724bc487c73bc6779a8
 	$result = $m->query ( $sql );
 	return count ( $result ) == 0 ? false : true;
 }
@@ -585,12 +542,7 @@ function ifChildren($id) {
  */
 function childrenRows($id) {
 	$m = M ();
-<<<<<<< HEAD
 	$sql = 'SELECT a.id,a.pid,a.text,a.state,a.sort,a.url FROM `dr_column` a WHERE a.pid=' . $id . ' ORDER BY `sort`';
-=======
-	$sql = 'SELECT a.id,a.pid,a.text,a.state,a.sort,a.url 
-			FROM ip_web_column a WHERE a.pid=' . $id . ' ORDER BY sort';
->>>>>>> 3bbdbb306b9aa0c5636cf724bc487c73bc6779a8
 	$result = $m->query ( $sql );
 	return $result;
 }
@@ -912,7 +864,6 @@ function object_array($array) {
     }
     return $array;
 }
-<<<<<<< HEAD
 /*
  * 清除Html标签后取设定长度
  */
@@ -951,9 +902,7 @@ function clearHtmlLen($str, $length) {
     }
     return $result;
 }
-=======
 
->>>>>>> 3bbdbb306b9aa0c5636cf724bc487c73bc6779a8
 
 
 ?>

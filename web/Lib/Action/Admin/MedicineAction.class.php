@@ -19,11 +19,7 @@ class MedicineAction extends CommonAction {
 		    $p								                      = ($page - 1) * $rows;
 		    $result                                               = $db->field('md_id,md_name,md_sort')->limit($p,$rows)->where(array('md_isdelete'=>1))->order('md_sort asc,md_id asc')->select();
 		    //echo $db->getLastSql();
-<<<<<<< HEAD
 		    $data ['rows']                                        = $result!=null?$result:array();
-=======
-		    $data ['rows']                                        = $result!=null?$result:[];
->>>>>>> 3bbdbb306b9aa0c5636cf724bc487c73bc6779a8
 		    $data ['total']                                       = $db->where(array('md_isdelete'=>1))->count('md_id');
 		    $this->ajaxReturn($data);
 		}else {
@@ -104,21 +100,14 @@ class MedicineAction extends CommonAction {
 	    if (!empty($id)){
 	        $db                                                            = M('medicine');
 	        $select                                                        = $db->where(array('md_id'=>$id))->find();
-<<<<<<< HEAD
 	        $this->assign(array('data'=>$select,'url'=>'http://'.$_SERVER['HTTP_HOST']))->display('editmedicine');
-=======
-	        $this->assign(array('data'=>$select))->display('editmedicine');
->>>>>>> 3bbdbb306b9aa0c5636cf724bc487c73bc6779a8
 	        
 	    }else {
 	        $this->ajaxReturn('错误','没有获取到药品id',false);
 	    }
 	}
 	
-<<<<<<< HEAD
-	
-=======
->>>>>>> 3bbdbb306b9aa0c5636cf724bc487c73bc6779a8
+
 	/**
 	 * 手动填写药品
 	 */
@@ -131,7 +120,6 @@ class MedicineAction extends CommonAction {
 	 * 药品修改
 	 */
 	public function editmedicine(){
-<<<<<<< HEAD
 	    if (IS_AJAX && IS_POST){
 	        //dump($_POST);
 	        $M                                                                 = M('medicine');
@@ -165,12 +153,10 @@ class MedicineAction extends CommonAction {
 	    }
 	}
 	
-=======
-	    dump($_POST);
-	}
+
 	
 	
->>>>>>> 3bbdbb306b9aa0c5636cf724bc487c73bc6779a8
+
 	
 	
 }
