@@ -18,7 +18,7 @@ return array (
 		'NOT_AUTH_ACTION'=>'checkPwd,center,west,south,north,menuData,pwdChangeSubmit',
 		'SUPER_ADMIN'=> 1,
         'TITLE'=>'药剂科',
-		
+        
 		
 		/**
 		 * session、cookie部分
@@ -48,7 +48,7 @@ return array (
 		'DB_PWD' => 'xingqiyi223',
 		'DB_PORT' => 3306,
 		'DB_PREFIX' => 'dr_',
-
+        'LIMIT_ROBOT_VISIT'=>true,/*禁止机器人访问*/
 		'LOAD_EXT_CONFIG' => 'tishiyu,zh-cn,en-us',
 		
 		'SITE_TITLE' => '后台管理',/* */

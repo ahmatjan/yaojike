@@ -3,6 +3,7 @@
 class LoginAction extends Action {
 	function _initialize() {
 		header ( "Content-Type:text/html;charset=utf-8" );
+		writeOperationLogadmin(get_url(),GROUP_NAME);
 	}
 	
 	public function index(){

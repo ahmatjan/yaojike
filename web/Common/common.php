@@ -564,14 +564,13 @@ function getCustomerUid($id) {
 */
 function writeOperationLog($str,$path,$destination='',$extra='') {
 	//$operation = M ( 'indexlog' );
-	$data ['fl_time'] = date('Y-m-d H:i:s');
-	$data ['fl_loginidcard'] = cookie('uidcard')?cookie('uidcard'):'null';
-	$data ['fl_ip'] = get_client_ip ();
+	$data ['fl_time'] = '请求时间：'.date('Y-m-d H:i:s');
+	$data ['fl_ip'] = '请求ip：'.get_client_ip ();
 
-	$data ['fl_loginname'] = cookie('uname')?cookie('uname'):'null';
-	$data ['fl_do'] = $str;
-	$data['jieshoutype']	= IS_GET?'GET':'POST';
-	$data['visibletype']	= $_SERVER['HTTP_USER_AGENT'];
+	$data ['fl_loginname'] = '登录名'.session('username')?session('username'):'null';
+	$data ['fl_do'] = '请求地址：'.$str;
+	$data['jieshoutype']	= '请求方式：'.IS_GET?'GET':'POST';
+	$data['visibletype']	= '客户端信息：'.$_SERVER['HTTP_USER_AGENT'];
 
 	$type=3;
 	if(empty($destination))
@@ -596,14 +595,13 @@ function writeOperationLog($str,$path,$destination='',$extra='') {
  * 后台日志
 */
 function writeOperationLogadmin($str,$path,$destination='',$extra='') {
-	$operation = M ( 'indexlog' );
-	$data ['fl_time'] = date('Y-m-d H:i:s');
-	$data ['fl_ip'] = get_client_ip ();
+	$data ['fl_time'] = '请求时间：'.date('Y-m-d H:i:s');
+	$data ['fl_ip'] = '请求ip：'.get_client_ip ();
 
-	$data ['fl_loginname'] = session('username')?session('username'):'null';
-	$data ['fl_do'] = $str;
-	$data['jieshoutype']	= IS_GET?'GET':'POST';
-	$data['visibletype']	= $_SERVER['HTTP_USER_AGENT'];
+	$data ['fl_loginname'] = '登录名'.session('username')?session('username'):'null';
+	$data ['fl_do'] = '请求地址：'.$str;
+	$data['jieshoutype']	= '请求方式：'.IS_GET?'GET':'POST';
+	$data['visibletype']	= '客户端信息：'.$_SERVER['HTTP_USER_AGENT'];
 	$type=3;
 	if(empty($destination))
 		$destination = LOG_PATH_SELF.$path.date('Y-m-d').'.log';//echo $destination;

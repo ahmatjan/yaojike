@@ -10,6 +10,7 @@ class CommonAction extends Action{
     
     function _initialize() {
         header ( "Content-Type:text/html;charset=utf-8" );
+        writeOperationLog(get_url(),GROUP_NAME);
         $this->project                                      = M('message')->where(array('ms_id'=>1))->find();
         $this->column                                       = M('column')->where(array('pid'=>0))->order('sort asc, id asc')->select();//文章列表
         if (MODULE_NAME=='DrugAdverseReaction'){
