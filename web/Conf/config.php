@@ -20,7 +20,7 @@ return array (
         'TITLE'=>'药剂科',
         
 		
-		/**
+		/**adfasfsadf
 		 * session、cookie部分
 		 */
 		'SESSION_PREFIX'			=> 'yaojike',
