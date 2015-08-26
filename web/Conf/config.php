@@ -42,14 +42,8 @@ return array (
 		'APP_GROUP_LIST'			=> 'Admin,Index', //项目分组设定
 		'DEFAULT_GROUP'				=> 'Index', //默认分组
 		'DB_TYPE' => 'mysql',
-		'DB_NAME' => 'yaojike',
-		'DB_HOST' => 'localhost',
-		'DB_USER' => 'root',
-		'DB_PWD' => 'xingqiyi223',
-		'DB_PORT' => 3306,
-		'DB_PREFIX' => 'dr_',
         'LIMIT_ROBOT_VISIT'=>true,/*禁止机器人访问*/
-		'LOAD_EXT_CONFIG' => 'tishiyu,zh-cn,en-us',
+		'LOAD_EXT_CONFIG' => 'tishiyu,zh-cn,en-us,db',
 		
 		'SITE_TITLE' => '后台管理',/* */
 		'SITE_COPYRIGHT' => 'Copyright &copy 2015 儿童医院药剂科  技术支持-- 北京儿童医童缘网络科技发展有限公司' 
