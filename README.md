@@ -7,6 +7,4 @@ ueditor 获取路径有问题，直接在ueditor.config.js第23行写死
 愚蠢的人类还在用svn
 
 服务器mysql密码，xingqiyiayaojike
-
-测试一下
-在测试一下
+数据库配置文件不上传
