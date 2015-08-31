@@ -3,3 +3,5 @@
 .project
 web/Runtime
 web/Conf/db.php
+*.rar
+*.zip

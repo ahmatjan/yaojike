@@ -12,7 +12,10 @@ return array (
 				'AUTH_RULE' => 'dr_auth_rule', //权限规则表
 				'AUTH_USER' => 'dr_user'//用户信息表
 		),
+        'VAR_FILTERS'				=>'htmlspecialchars',
+    
 		//不用判断的分组、模块等
+        
 		
 		'NOT_AUTH_MODULE'=>'Index,Main',
 		'NOT_AUTH_ACTION'=>'checkPwd,center,west,south,north,menuData,pwdChangeSubmit',

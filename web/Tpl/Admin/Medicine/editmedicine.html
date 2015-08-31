@@ -1,9 +1,9 @@
 <script type="text/javascript">
 var ueditorurl="{$url}__ROOT__/web/Tpl/Admin/Public/ueditor1_4_3-utf8/";
 </script>
-<script type="text/javascript" charset="utf-8"  src="__PUBLIC__/ueditor1_4_3-utf8/ueditor.config.js"></script>
-<script type="text/javascript" charset="utf-8" src="__PUBLIC__/ueditor1_4_3-utf8/ueditor.all.js"></script>
-<script type="text/javascript" charset="utf-8" src="__PUBLIC__/ueditor1_4_3-utf8/lang/zh-cn/zh-cn.js"></script>
+<script type="text/javascript" charset="utf-8"  src="__PUBLIC__/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="__PUBLIC__/ueditor/ueditor.all.js"></script>
+<script type="text/javascript" charset="utf-8" src="__PUBLIC__/ueditor/lang/zh-cn/zh-cn.js"></script>
 <style type="text/css">
 input.error { border: 1px solid red; }
 label.checked {
@@ -33,23 +33,7 @@ label {
 <script typescripttype="text/javascript">
 //window.UEDITOR_HOME_URL = '__PUBLIC__/ueditor1_4_3-utf8/'; //一定要用这句话，否则你需要去ueditor.config.js修改路径的配置信息  ，写了也没个毛用
 var ue=UE.getEditor('md_jingshi',{serverUrl: ueditorurl+'/php/controller.php'});
-var ue=UE.getEditor('md_chengfen');
-var ue=UE.getEditor('md_yaolifenllei');
-var ue=UE.getEditor('md_lcyingyong');
-var ue=UE.getEditor('md_yfyl');
-var ue=UE.getEditor('md_guowaiylck');
-var ue=UE.getEditor('md_geiyaoshuoming');
-var ue=UE.getEditor('md_jinjizheng');
-var ue=UE.getEditor('md_shenyong');
-var ue=UE.getEditor('md_tsrenqun');
-var ue=UE.getEditor('md_blfanying');
-var ue=UE.getEditor('md_ywxhzuoyong');
-var ue=UE.getEditor('md_zhuyishixiang');
-var ue=UE.getEditor('md_guowaizkyyxxck');
-var ue=UE.getEditor('md_ywguoliang');
-var ue=UE.getEditor('md_yaoli');
-var ue=UE.getEditor('md_zjgg');
-var ue=UE.getEditor('md_chucang');
+
 /*ue.ready(function(){
     //阻止工具栏的点击向上冒泡
     $(this.container).click(function(e){
@@ -110,9 +94,12 @@ $('.content').click(function(e){
 		<label for="md_jingshi">特别警示：</label>
 		<div style="float: left; width: 200px; margin-right: 2px;">
 			<div class="row">
+				<textarea id='md_jingshi' name="md_jingshi" style="width:800px;height:300px;">{$data.md_jingshi|stripslashes|html_entity_decode}</textarea>  
+				<script type="text/javascript">
+			    	UE.getEditor('md_jingshi')
+				</script>
 				
-				<script id="md_jingshi" class="content" type="text/plain" style="width:900px;height:350px;">{$data.md_jingshi}</script>
-				 
+				
 			</div>
 		</div>
 		
@@ -123,8 +110,11 @@ $('.content').click(function(e){
 		<label for="md_chengfen">组成成分：</label>
 		<div style="float: left; width: 200px; margin-right: 2px;">
 			<div class="row">
+				<textarea id='md_chengfen' name="md_chengfen" style="width:800px;height:300px;">{$data.md_chengfen|stripslashes|html_entity_decode}</textarea>  
+				<script type="text/javascript">
+			    	UE.getEditor('md_chengfen')
+				</script>
 				
-				<script id="md_chengfen" type="text/plain" class="content" style="width:900px;">{$data.md_chengfen}</script>
 			</div>
 		</div>
 		
@@ -135,8 +125,11 @@ $('.content').click(function(e){
 		<label for="md_yaolifenllei">药理分类：</label>
 		<div style="float: left; width: 200px; margin-right: 2px;">
 			<div class="row">
+				<textarea id='md_yaolifenllei' name="md_yaolifenllei" style="width:800px;height:300px;">{$data.md_yaolifenllei|stripslashes|html_entity_decode}</textarea>  
+				<script type="text/javascript">
+			    	UE.getEditor('md_yaolifenllei')
+				</script>
 				
-				<script id="md_yaolifenllei" type="text/plain" class="content" style="width:900px;">{$data.md_yaolifenllei}</script>
 			</div>
 		</div>
 		
@@ -147,8 +140,11 @@ $('.content').click(function(e){
 		<label for="md_lcyingyong">临床应用：</label>
 		<div style="float: left; width: 200px; margin-right: 2px;">
 			<div class="row">
+				<textarea id='md_lcyingyong' name="md_lcyingyong" style="width:800px;height:300px;">{$data.md_lcyingyong|stripslashes|html_entity_decode}</textarea>  
+				<script type="text/javascript">
+			    	UE.getEditor('md_lcyingyong')
+				</script>
 				
-				<script id="md_lcyingyong" type="text/plain" class="content" style="width:900px;">{$data.md_lcyingyong}</script>
 			</div>
 		</div>
 		
@@ -159,8 +155,11 @@ $('.content').click(function(e){
 		<label for="md_yfyl">用法与用量：</label>
 		<div style="float: left; width: 200px; margin-right: 2px;">
 			<div class="row">
+				<textarea id='md_yfyl' name="md_yfyl" style="width:800px;height:300px;">{$data.md_yfyl|stripslashes|html_entity_decode}</textarea>  
+				<script type="text/javascript">
+			    	UE.getEditor('md_yfyl')
+				</script>
 				
-				<script id="md_yfyl" type="text/plain" class="content" style="width:900px;">{$data.md_yfyl}</script> 
 			</div>
 		</div>
 		
@@ -171,8 +170,11 @@ $('.content').click(function(e){
 		<label for="md_guowaiylck">国外用法用量参考：</label>
 		<div style="float: left; width: 200px; margin-right: 2px;">
 			<div class="row">
+				<textarea id='md_guowaiylck' name="md_guowaiylck" style="width:800px;height:300px;">{$data.md_guowaiylck|stripslashes|html_entity_decode}</textarea>  
+				<script type="text/javascript">
+			    	UE.getEditor('md_guowaiylck')
+				</script>
 				
-				<script id="md_guowaiylck" type="text/plain" class="content" style="width:900px;">{$data.md_guowaiylck}</script> 
 			</div>
 		</div>
 		
@@ -183,8 +185,11 @@ $('.content').click(function(e){
 		<label for="md_geiyaoshuoming">给药说明：</label>
 		<div style="float: left; width: 200px; margin-right: 2px;">
 			<div class="row">
+				<textarea id='md_geiyaoshuoming' name="md_geiyaoshuoming" style="width:800px;height:300px;">{$data.md_geiyaoshuoming|stripslashes|html_entity_decode}</textarea>  
+				<script type="text/javascript">
+			    	UE.getEditor('md_geiyaoshuoming')
+				</script>
 				
-				<script id="md_geiyaoshuoming" type="text/plain" class="content" style="width:900px;">{$data.md_geiyaoshuoming}</script> 
 			</div>
 		</div>
 		
@@ -195,8 +200,11 @@ $('.content').click(function(e){
 		<label for="md_jinjizheng">禁忌症：</label>
 		<div style="float: left; width: 200px; margin-right: 2px;">
 			<div class="row">
+				<textarea id='md_jinjizheng' name="md_jinjizheng" style="width:800px;height:300px;">{$data.md_jinjizheng|stripslashes|html_entity_decode}</textarea>  
+				<script type="text/javascript">
+			    	UE.getEditor('md_jinjizheng')
+				</script>
 				
-				<script id="md_jinjizheng" type="text/plain"  class="content" style="width:900px;">{$data.md_jinjizheng}</script> 
 			</div>
 		</div>
 		
@@ -207,8 +215,11 @@ $('.content').click(function(e){
 		<label for="md_shenyong">慎用：</label>
 		<div style="float: left; width: 200px; margin-right: 2px;">
 			<div class="row">
+				<textarea id='md_shenyong' name="md_shenyong" style="width:800px;height:300px;">{$data.md_shenyong|stripslashes|html_entity_decode}</textarea>  
+				<script type="text/javascript">
+			    	UE.getEditor('md_shenyong')
+				</script>
 				
-				<script id="md_shenyong" type="text/plain" class="content" style="width:900px;">{$data.md_shenyong}</script> 
 			</div>
 		</div>
 		
@@ -219,8 +230,11 @@ $('.content').click(function(e){
 		<label for="md_tsrenqun">特殊人群：</label>
 		<div style="float: left; width: 200px; margin-right: 2px;">
 			<div class="row">
+				<textarea id='md_tsrenqun' name="md_tsrenqun" style="width:800px;height:300px;">{$data.md_tsrenqun|stripslashes|html_entity_decode}</textarea>  
+				<script type="text/javascript">
+			    	UE.getEditor('md_tsrenqun')
+				</script>
 				
-				<script id="md_tsrenqun" type="text/plain" class="content" style="width:900px;">{$data.md_tsrenqun}</script> 
 			</div>
 		</div>
 		
@@ -231,8 +245,11 @@ $('.content').click(function(e){
 		<label for="md_blfanying">不良反应：</label>
 		<div style="float: left; width: 200px; margin-right: 2px;">
 			<div class="row">
+				<textarea id='md_blfanying' name="md_blfanying" style="width:800px;height:300px;">{$data.md_blfanying|stripslashes|html_entity_decode}</textarea>  
+				<script type="text/javascript">
+			    	UE.getEditor('md_blfanying')
+				</script>
 				
-				<script id="md_blfanying" type="text/plain" class="content" style="width:900px;">{$data.md_blfanying}</script> 
 			</div>
 		</div>
 		
@@ -243,8 +260,11 @@ $('.content').click(function(e){
 		<label for="md_ywxhzuoyong">药物相互作用：</label>
 		<div style="float: left; width: 200px; margin-right: 2px;">
 			<div class="row">
+				<textarea id='md_ywxhzuoyong' name="md_ywxhzuoyong" style="width:800px;height:300px;">{$data.md_ywxhzuoyong|stripslashes|html_entity_decode}</textarea>  
+				<script type="text/javascript">
+			    	UE.getEditor('md_ywxhzuoyong')
+				</script>
 				
-				<script id="md_ywxhzuoyong" type="text/plain" class="content" style="width:900px;">{$data.md_ywxhzuoyong}</script> 
 			</div>
 		</div>
 		
@@ -255,8 +275,11 @@ $('.content').click(function(e){
 		<label for="md_zhuyishixiang">注意事项：</label>
 		<div style="float: left; width: 200px; margin-right: 2px;">
 			<div class="row">
+				<textarea id='md_zhuyishixiang' name="md_zhuyishixiang" style="width:800px;height:300px;">{$data.md_zhuyishixiang|stripslashes|html_entity_decode}</textarea>  
+				<script type="text/javascript">
+			    	UE.getEditor('md_zhuyishixiang')
+				</script>
 				
-				<script id="md_zhuyishixiang" type="text/plain" class="content" style="width:900px;">{$data.md_zhuyishixiang}</script> 
 			</div>
 		</div>
 		
@@ -268,8 +291,11 @@ $('.content').click(function(e){
 		<label for="md_guowaizkyyxxck">国外专科用药信息参考：</label>
 		<div style="float: left; width: 200px; margin-right: 2px;">
 			<div class="row">
+				<textarea id='md_guowaizkyyxxck' name="md_guowaizkyyxxck" style="width:800px;height:300px;">{$data.md_guowaizkyyxxck|stripslashes|html_entity_decode}</textarea>  
+				<script type="text/javascript">
+			    	UE.getEditor('md_guowaizkyyxxck')
+				</script>
 				
-				<script id="md_guowaizkyyxxck" type="text/plain" class="content" style="width:900px;">{$data.md_guowaizkyyxxck}</script> 
 			</div>
 		</div>
 		
@@ -281,8 +307,11 @@ $('.content').click(function(e){
 		<label for="md_ywguoliang">药物过量：</label>
 		<div style="float: left; width: 200px; margin-right: 2px;">
 			<div class="row">
+				<textarea id='md_ywguoliang' name="md_ywguoliang" style="width:800px;height:300px;">{$data.md_ywguoliang|stripslashes|html_entity_decode}</textarea>  
+				<script type="text/javascript">
+			    	UE.getEditor('md_ywguoliang')
+				</script>
 				
-				<script id="md_ywguoliang" type="text/plain" class="content" style="width:900px;">{$data.md_ywguoliang}</script> 
 			</div>
 		</div>
 		
@@ -294,8 +323,11 @@ $('.content').click(function(e){
 		<label for="md_yaoli">药理：</label>
 		<div style="float: left; width: 200px; margin-right: 2px;">
 			<div class="row">
+				<textarea id='md_yaoli' name="md_yaoli" style="width:800px;height:300px;">{$data.md_yaoli|stripslashes|html_entity_decode}</textarea>  
+				<script type="text/javascript">
+			    	UE.getEditor('md_yaoli')
+				</script>
 				
-				<script id="md_yaoli" type="text/plain" class="content" style="width:900px;">{$data.md_yaoli}</script> 
 			</div>
 		</div>
 		
@@ -307,8 +339,11 @@ $('.content').click(function(e){
 		<label for="md_zjgg">制剂与规格：</label>
 		<div style="float: left; width: 200px; margin-right: 2px;">
 			<div class="row">
+				<textarea id='md_zjgg' name="md_zjgg" style="width:800px;height:300px;">{$data.md_zjgg|stripslashes|html_entity_decode}</textarea>  
+				<script type="text/javascript">
+			    	UE.getEditor('md_zjgg')
+				</script>
 				
-				<p id="md_zjgg" type="text/plain" class="content" style="width:900px;">{$data.md_zjgg}</script> 
 			</div>
 		</div>
 		
@@ -320,8 +355,11 @@ $('.content').click(function(e){
 		<label for="md_chucang">贮藏：</label>
 		<div style="float: left; width: 200px; margin-right: 2px;">
 			<div class="row">
+				<textarea id='md_chucang' name="md_chucang" style="width:800px;height:300px;">{$data.md_chucang|stripslashes|html_entity_decode}</textarea>  
+				<script type="text/javascript">
+			    	UE.getEditor('md_chucang')
+				</script>
 				
-				<script id="md_chucang" type="text/plain" class="content" style="width:900px;">{$data.md_chucang}</script> 
 			</div>
 		</div>
 		

@@ -452,37 +452,21 @@ var editIndex = undefined;
 			buttons : [ {
 				text : '保存',
 				handler : function() {
-					$.post("{:U(GROUP_NAME.'/Medicine/editmedicine')}", {
-						md_sort : $('#md_sort').val(),
-						md_name : $('#md_name').val(),
-						md_id : $('#md_id').val(),
-						md_jingshi:UE.getEditor('md_jingshi').getPlainTxt(),/*$("#md_jingshi").html()?$("#md_jingshi").html():*/
-						md_chengfen:UE.getEditor('md_chengfen').getPlainTxt(),/*$("#md_chengfen").html()?$("#md_chengfen").html():*/
-						md_yaolifenllei:UE.getEditor('md_yaolifenllei').getPlainTxt(),/*$("#md_yaolifenllei").html()?$("#md_yaolifenllei").html():*/
-						md_lcyingyong:UE.getEditor('md_lcyingyong').getPlainTxt(),/*$("#md_lcyingyong").html()?$("#md_lcyingyong").html():*/
-						md_yfyl:UE.getEditor('md_yfyl').getPlainTxt(),/*$("#md_yfyl").html()?$("#md_yfyl").html():*/
-						md_guowaiylck:UE.getEditor('md_guowaiylck').getPlainTxt(),/*$("#md_guowaiylck").html()?$("#md_guowaiylck").html():*/
-						md_geiyaoshuoming:UE.getEditor('md_geiyaoshuoming').getPlainTxt(),/*$("#md_geiyaoshuoming").html()?$("#md_geiyaoshuoming").html():*/
-						md_jinjizheng:UE.getEditor('md_jinjizheng').getPlainTxt(),/*$("#md_jinjizheng").html()?$("#md_jinjizheng").html():*/
-						md_shenyong:UE.getEditor('md_shenyong').getPlainTxt(),/*$("#md_shenyong").html()?$("#md_shenyong").html():*/
-						md_tsrenqun:UE.getEditor('md_tsrenqun').getPlainTxt(),/*$("#md_tsrenqun").html()?$("#md_tsrenqun").html():*/
-						md_blfanying:UE.getEditor('md_blfanying').getPlainTxt(),/*$("#md_blfanying").html()?$("#md_blfanying").html():*/
-						md_ywxhzuoyong:UE.getEditor('md_ywxhzuoyong').getPlainTxt(),/*$("#md_ywxhzuoyong").html()?$("#md_ywxhzuoyong").html():*/
-						md_zhuyishixiang:UE.getEditor('md_zhuyishixiang').getPlainTxt(),/*$("#md_zhuyishixiang").html()?$("#md_zhuyishixiang").html():*/
-						md_guowaizkyyxxck:UE.getEditor('md_guowaizkyyxxck').getPlainTxt(),/*$("#md_guowaizkyyxxck").html()?$("#md_guowaizkyyxxck").html():*/
-						md_ywguoliang:UE.getEditor('md_ywguoliang').getPlainTxt(),/*$("#md_ywguoliang").html()?$("#md_ywguoliang").html():*/
-						md_yaoli:UE.getEditor('md_yaoli').getPlainTxt(),/*$("#md_yaoli").html()?$("#md_yaoli").html():*/
-						md_zjgg:UE.getEditor('md_zjgg').getPlainTxt(),/*$("#md_zjgg").html()?$("#md_zjgg").html():*/
-						md_chucang:UE.getEditor('md_chucang').getPlainTxt()/*$("#md_chucang").html()?$("#md_chucang").html():*/
-					}, function(data) {
-						if (data.status) {
-							medicineDialog.dialog('destroy');
-							$('#medicine_index_treegrid').datagrid('reload');
-							msgBox('成功', data.info);
-						} else {
-							msgBox('失败', data.info);
+					$.ajax({
+						url : "{:U(GROUP_NAME.'/Medicine/editmedicine')}",
+						type : "post",
+						dataType : "json",
+						data: $("#medicine_editForm").serialize(),
+						success : function(data) {
+							if (data.status) {
+								medicineDialog.dialog('destroy');
+								$('#medicine_index_treegrid').datagrid('reload');
+								msgBox('成功', data.info);
+							} else {
+								msgBox('失败', data.info);
+							}
 						}
-					}, "json");
+					});
 				}
 			}, {
 				text : '取消',
