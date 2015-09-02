@@ -38,7 +38,7 @@
 		<tbody>
 			<volist name="sel" id="lp">
 				<tr>
-					<td class="id-value"><a class="btn-card" href="{:U(GROUP_NAME.'/Drug/drugcontent',array('id'=>$lp['md_id']))}">{$lp.md_name}</a></td>
+					<td class="structure-value"><a class="btn-card" href="{:U(GROUP_NAME.'/Drug/drugcontent',array('id'=>$lp['md_id']))}">{$lp.md_name}</a></td>
 					<td class="structure-value">{$lp.md_jingshi|html_entity_decode|clearHtmlLen='150'}</td>
 					<td class="structure-value">{$lp.md_chengfen|html_entity_decode|clearHtmlLen='150'}</td>
 					<td class="structure-value">{$lp.md_yaolifenllei|html_entity_decode|clearHtmlLen='150'}</td>
