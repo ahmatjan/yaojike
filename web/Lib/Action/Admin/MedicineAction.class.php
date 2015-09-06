@@ -52,7 +52,7 @@ class MedicineAction extends CommonAction {
                 //将字符串分割
                 require_once APP_PATH.'Class/getstr.php';
                 $get_c_str = new get_c_str();
-                $data['md_name']                                    = $get_c_str->get_str_char($str,'&lt;','&gt;');//药品名
+                $data['md_name']                                    = $get_c_str->get_str_char($str,'[',']');//药品名
                 //查询数据库有没有此药品
                 $find                                               = $db->where(array('md_name'=>$data['md_name']))->find();
 				
