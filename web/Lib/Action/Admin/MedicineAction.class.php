@@ -29,7 +29,7 @@ class MedicineAction extends CommonAction {
 	}
 	
 	/**
-	 * 导入药品word文档,暂时没测试Linux，Windows下可以用com口，但传说中效率不高且成功率全靠拼人品。所以用的phpword插件。
+	 * 导入药品word文档,兼容Linux，Windows。
 	 */
 	public function medicineaddword() {
 	    if ($_FILES) {
@@ -55,31 +55,33 @@ class MedicineAction extends CommonAction {
                 $data['md_name']                                    = $get_c_str->get_str_char($str,'&lt;','&gt;');//药品名
                 //查询数据库有没有此药品
                 $find                                               = $db->where(array('md_name'=>$data['md_name']))->find();
+				
+				//echo $get_c_str->get_str($str,'【组成成分】', '【');die;
                 if (count($find)>0){
                     $this->ajaxReturn('失败','药品已经存在',false);exit();
                 }else {
-                    $data['md_jingshi']                                 = $get_c_str->get_str($str,'【特别警示】', '【');
-                    $data['md_chengfen']                                = $get_c_str->get_str($str,'【组成成分】', '【');
-                    $data['md_yaolifenllei']                            = $get_c_str->get_str($str,'【药理分类】', '【');
-                    $data['md_lcyingyong']                              = $get_c_str->get_str($str, '【临床应用】', '【');
-                    $data['md_yfyl']                                    = $get_c_str->get_str($str, '【用法与用量】', '【');
-                    $data['md_guowaiylck']                              = $get_c_str->get_str($str, '【国外用法用量参考】', '【');
-                    $data['md_geiyaoshuoming']                          = $get_c_str->get_str($str, '【给药说明】', '【');
-                    $data['md_jinjizheng']                              = $get_c_str->get_str($str, '【禁忌症】', '【');
-                    $data['md_shenyong']                                = $get_c_str->get_str($str, '【慎用】', '【');
-                    $data['md_tsrenqun']                                = $get_c_str->get_str($str, '【特殊人群】', '【');
-                    $data['md_blfanying']                               = $get_c_str->get_str($str, '【不良反应】', '【');
-                    $data['md_ywxhzuoyong']                             = $get_c_str->get_str($str, '【药物相互作用】', '【');
-                    $data['md_zhuyishixiang']                           = $get_c_str->get_str($str, '【注意事项】', '【');
-                    $data['md_guowaizkyyxxck']                          = $get_c_str->get_str($str, '【国外专科用药信息参考】', '【');
-                    $data['md_ywguoliang']                              = $get_c_str->get_str($str, '【药物过量】', '【');
-                    $data['md_yaoli']                                   = $get_c_str->get_str($str, '【药理】', '【');
-                    $data['md_zjgg']                                    = $get_c_str->get_str($str, '【制剂与规格】', '【');
-                    $data['md_chucang']                                 = $get_c_str->get_str($str, '【贮藏】', '【');
+                    $data['md_jingshi']                                 = $get_c_str->jiequstr($str,'【特别警示】', '【');
+                    $data['md_chengfen']                                = $get_c_str->jiequstr($str,'【组成成分】', '【');
+                    $data['md_yaolifenllei']                            = $get_c_str->jiequstr($str,'【药理分类】', '【');
+                    $data['md_lcyingyong']                              = $get_c_str->jiequstr($str, '【临床应用】', '【');
+                    $data['md_yfyl']                                    = $get_c_str->jiequstr($str, '【用法与用量】', '【');
+                    $data['md_guowaiylck']                              = $get_c_str->jiequstr($str, '【国外用法用量参考】', '【');
+                    $data['md_geiyaoshuoming']                          = $get_c_str->jiequstr($str, '【给药说明】', '【');
+                    $data['md_jinjizheng']                              = $get_c_str->jiequstr($str, '【禁忌症】', '【');
+                    $data['md_shenyong']                                = $get_c_str->jiequstr($str, '【慎用】', '【');
+                    $data['md_tsrenqun']                                = $get_c_str->jiequstr($str, '【特殊人群】', '【');
+                    $data['md_blfanying']                               = $get_c_str->jiequstr($str, '【不良反应】', '【');
+                    $data['md_ywxhzuoyong']                             = $get_c_str->jiequstr($str, '【药物相互作用】', '【');
+                    $data['md_zhuyishixiang']                           = $get_c_str->jiequstr($str, '【注意事项】', '【');
+                    $data['md_guowaizkyyxxck']                          = $get_c_str->jiequstr($str, '【国外专科用药信息参考】', '【');
+                    $data['md_ywguoliang']                              = $get_c_str->jiequstr($str, '【药物过量】', '【');
+                    $data['md_yaoli']                                   = $get_c_str->jiequstr($str, '【药理】', '【');
+                    $data['md_zjgg']                                    = $get_c_str->jiequstr($str, '【制剂与规格】', '【');
+                    $data['md_chucang']                                 = $get_c_str->jiequstr($str, '【贮藏】', '【');
                     //操作字符串数组，将其插入到数据库
-                    
+//                     dump($data);
+//                     die;
                     $add                                                = $db->add($data);
-                    //echo $db->_sql();
                     if ($add){
                         $this->ajaxReturn('成功','药品上传成功',true);
                     }else {

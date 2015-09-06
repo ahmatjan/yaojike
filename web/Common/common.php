@@ -105,27 +105,6 @@ function getXbSelect($num) {
 	return $data;
 }
 /**
- * 返回所属学院部门Select选择框
- *
- * @param unknown_type $num        	
- * @return string
- */
-function getDepSelect($num) {
-	$m = M ( 'Datalib' );
-	$rs1 = $m->where ( 'code="dep"' )->find ();
-	$rs2 = $m->field ( 'code,text' )->where ( 'pid=' . $rs1 ['id'] )->select ();
-	// 初始选择框
-	$data = $data . '<option value="">--</option>';
-	for($i = 0; $i < count ( $rs2 ); $i ++) {
-		if ($rs2 [$i] ['code'] == $num) {
-			$data = $data . '<option value="' . $rs2 [$i] ['code'] . '" selected="selected">' . $rs2 [$i] ['text'] . '</option>';
-		} else {
-			$data = $data . '<option value="' . $rs2 [$i] ['code'] . '">' . $rs2 [$i] ['text'] . '</option>';
-		}
-	}
-	return $data;
-}
-/**
  * 返回民族Select选择框
  *
  * @param unknown_type $num        	
@@ -134,22 +113,6 @@ function getDepSelect($num) {
 function getMzSelect($num) {
 	$m = M ( 'Datalib' );
 	$rs1 = $m->where ( 'code="mzm"' )->find ();
-	$rs2 = $m->field ( 'code,text' )->where ( 'pid=' . $rs1 ['id'] )->select ();
-	// 初始选择框
-	$data = $data . '<option value="">--</option>';
-	for($i = 0; $i < count ( $rs2 ); $i ++) {
-		if ($rs2 [$i] ['code'] == $num) {
-			$data = $data . '<option value="' . $rs2 [$i] ['code'] . '" selected="selected">' . $rs2 [$i] ['text'] . '</option>';
-		} else {
-			$data = $data . '<option value="' . $rs2 [$i] ['code'] . '">' . $rs2 [$i] ['text'] . '</option>';
-		}
-	}
-	return $data;
-}
-// 返回政治面貌Select选择框
-function getZzmmSelect($num) {
-	$m = M ( 'Datalib' );
-	$rs1 = $m->where ( 'code="zzmm"' )->find ();
 	$rs2 = $m->field ( 'code,text' )->where ( 'pid=' . $rs1 ['id'] )->select ();
 	// 初始选择框
 	$data = $data . '<option value="">--</option>';
